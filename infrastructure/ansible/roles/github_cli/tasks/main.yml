@@ -1,0 +1,22 @@
+---
+- name: Install GitHub CLI
+  apt:
+    name: gh
+    state: present
+    update_cache: yes
+
+- name: Authenticate with GitHub token
+  shell: echo "{{ github_token }}" | gh auth login --with-token
+  no_log: true
+  become: false
+  when: github_token is defined and github_token != ""
+
+- name: Verify authentication
+  command: gh auth status
+  register: gh_status
+  changed_when: false
+  become: false
+  failed_when: false
+
+- debug:
+    msg: "{{ gh_status.stdout }}"

@@ -1,5 +1,13 @@
 ---
-- import_playbook: install_prereqs.yml
-- import_playbook: install_docker.yml
-- import_playbook: setup_app_dir.yml
-- import_playbook: install_gh.yml
+- name: Setup VM
+  hosts: all
+  become: true
+  
+  vars:
+    github_token: "{{ lookup('env', 'GITHUB_TOKEN') }}"
+  
+  roles:
+    - prerequisites
+    - docker
+    - app_directory
+    - github_cli
