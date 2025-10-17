@@ -1,26 +1,9 @@
 ---
-- name: Install Docker and create application directory
+- name: Install Docker
   hosts: all
   become: true
-  vars:
-    app_directory: /application
 
   tasks:
-    - name: Update apt cache
-      apt:
-        update_cache: yes
-        cache_valid_time: 3600
-
-    - name: Install prerequisite packages
-      apt:
-        name:
-          - apt-transport-https
-          - ca-certificates
-          - curl
-          - software-properties-common
-        state: present
-        update_cache: yes
-
     - name: Download Docker's GPG key and dearmor it
       shell: |
         curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
@@ -60,14 +43,6 @@
         groups: docker
         append: true
       when: ansible_user is defined
-
-    - name: Create application directory
-      file:
-        path: "{{ app_directory }}"
-        state: directory
-        mode: "0755"
-        owner: "{{ ansible_user | default('root') }}"
-        group: "{{ ansible_user | default('root') }}"
 
     - name: Check docker version
       command: docker --version
