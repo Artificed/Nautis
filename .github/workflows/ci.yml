@@ -49,22 +49,16 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    - name: Pull latest changes
-      run: |
-        cd /application/Astdev-Presentation
-        git pull origin main
-    
     - name: Build and restart containers
       run: |
-        cd /application/Astdev-Presentation
-        docker-compose down
-        docker-compose up -d --build
+        docker compose down || true
+        docker compose up -d --build
     
     - name: Verify deployment
       run: |
         echo "Waiting for containers to be ready"
         sleep 10
-        docker-compose ps
+        docker compose ps
     
     - name: Health check
       run: |
