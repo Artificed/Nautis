@@ -1,0 +1,10 @@
+services:
+  presentation-frontend:
+    container_name: presentation-frontend
+    image: presentation-frontend
+    restart: unless-stopped
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
