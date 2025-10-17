@@ -1,4 +1,4 @@
-name: CI
+name: CI/CD
 
 on:
   push:
@@ -7,8 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -17,17 +16,57 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: frontend/package-lock.json
-    - run: npm ci
+    
+    - name: Install dependencies
+      run: npm ci
       working-directory: ./frontend
-    - run: npm run lint
+    
+    - name: Run linter
+      run: npm run lint
       working-directory: ./frontend
-    - run: npm test
+    
+    - name: Run tests
+      run: npm test
       working-directory: ./frontend
-    - run: npm run build
+    
+    - name: Build application
+      run: npm run build
       working-directory: ./frontend
+
+  deploy:
+    runs-on: self-hosted
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Pull latest changes
+      run: |
+        cd /application/Astdev-Presentation
+        git pull origin main
+    
+    - name: Build and restart containers
+      run: |
+        cd /application/Astdev-Presentation
+        docker-compose down
+        docker-compose up -d --build
+    
+    - name: Verify deployment
+      run: |
+        echo "Waiting for containers to be ready"
+        sleep 10
+        docker-compose ps
+    
+    - name: Health check
+      run: |
+        echo "Checking if application is running"
+        curl -f http://localhost:80 || echo "Warning: Health check failed"
