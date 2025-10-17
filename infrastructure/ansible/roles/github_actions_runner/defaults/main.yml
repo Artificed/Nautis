@@ -1,0 +1,11 @@
+---
+runner_version: "2.329.0"
+runner_arch: "linux-x64"
+runner_download_url: "https://github.com/actions/runner/releases/download/v{{ runner_version }}/actions-runner-{{ runner_arch }}-{{ runner_version }}.tar.gz"
+runner_directory: "/home/{{ ansible_user }}/actions-runner"
+runner_user: "{{ ansible_user }}"
+
+runner_checksum: "sha256:194f1e1e4bd02f80b7e9633fc546084d8d4e19f3928a324d512ea53430102e1d"
+
+runner_repo_url: "https://github.com/Artificed/Astdev-Presentation"
+runner_token: "{{ lookup('env', 'RUNNER_TOKEN') }}" 
