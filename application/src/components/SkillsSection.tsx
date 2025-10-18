@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useCursor } from "./CustomCursor";
+import { motion } from "framer-motion";
 
 export default function SkillsSection() {
   const { setIsHovering } = useCursor();
@@ -111,18 +112,41 @@ export default function SkillsSection() {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-8 py-20">
-        <div className="text-center mb-20 opacity-0 animate-fade-in-up">
-          <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
+        <motion.div 
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <motion.h2 
+            className="text-5xl md:text-6xl font-bold text-gray-900 mb-4"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             My{" "}
             <span className="bg-gradient-to-r from-blue-300 via-indigo-300 to-purple-300 bg-clip-text text-transparent animate-gradient">
               Skills
             </span>
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-200 to-indigo-200 rounded-full mx-auto"></div>
-        </div>
+          </motion.h2>
+          <motion.div 
+            className="w-24 h-1 bg-gradient-to-r from-blue-200 to-indigo-200 rounded-full mx-auto"
+            initial={{ width: 0 }}
+            whileInView={{ width: 96 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          ></motion.div>
+        </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 md:gap-16">
-          <div className="opacity-0 animate-fade-in-up animation-delay-200">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <h3 className="text-2xl font-bold mb-8 pb-3 border-b-2 border-blue-200">
               <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                 Hard Skills
@@ -130,27 +154,47 @@ export default function SkillsSection() {
             </h3>
             <div className="space-y-6">
               {hardSkills.map((skill, index) => (
-                <div
+                <motion.div
                   key={skill.title}
-                  className="group opacity-0 animate-fade-in-up"
-                  style={{ animationDelay: `${(index + 3) * 100}ms` }}
+                  className="group"
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                   onMouseEnter={() => setIsHovering(true)}
                   onMouseLeave={() => setIsHovering(false)}
                 >
-                  <div className="flex items-center gap-4 p-4 bg-white/80 backdrop-blur rounded-xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer hover:translate-x-2">
-                    <div className={`w-12 h-12 bg-gradient-to-br ${skill.gradient} p-2.5 rounded-xl group-hover:scale-110 transition-transform duration-300 text-white`}>
+                  <motion.div 
+                    className="flex items-center gap-4 p-4 bg-white/80 backdrop-blur rounded-xl shadow-md transition-shadow duration-300 cursor-pointer"
+                    whileHover={{ 
+                      scale: 1.02, 
+                      x: 8,
+                      boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)"
+                    }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  >
+                    <motion.div 
+                      className={`w-12 h-12 bg-gradient-to-br ${skill.gradient} p-2.5 rounded-xl text-white`}
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    >
                       {skill.icon}
-                    </div>
+                    </motion.div>
                     <h4 className="text-base font-bold text-gray-900 flex-1">
                       {skill.title}
                     </h4>
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          <div className="opacity-0 animate-fade-in-up animation-delay-400">
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
             <h3 className="text-2xl font-bold mb-8 pb-3 border-b-2 border-purple-200">
               <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                 Soft Skills
@@ -158,25 +202,40 @@ export default function SkillsSection() {
             </h3>
             <div className="space-y-6">
               {softSkills.map((skill, index) => (
-                <div
+                <motion.div
                   key={skill.title}
-                  className="group opacity-0 animate-fade-in-up"
-                  style={{ animationDelay: `${(index + 7) * 100}ms` }}
+                  className="group"
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                   onMouseEnter={() => setIsHovering(true)}
                   onMouseLeave={() => setIsHovering(false)}
                 >
-                  <div className="flex items-center gap-4 p-4 bg-white/80 backdrop-blur rounded-xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer hover:translate-x-2">
-                    <div className={`w-12 h-12 bg-gradient-to-br ${skill.gradient} p-2.5 rounded-xl group-hover:scale-110 transition-transform duration-300 text-white`}>
+                  <motion.div 
+                    className="flex items-center gap-4 p-4 bg-white/80 backdrop-blur rounded-xl shadow-md transition-shadow duration-300 cursor-pointer"
+                    whileHover={{ 
+                      scale: 1.02, 
+                      x: 8,
+                      boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)"
+                    }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  >
+                    <motion.div 
+                      className={`w-12 h-12 bg-gradient-to-br ${skill.gradient} p-2.5 rounded-xl text-white`}
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    >
                       {skill.icon}
-                    </div>
+                    </motion.div>
                     <h4 className="text-base font-bold text-gray-900 flex-1">
                       {skill.title}
                     </h4>
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
