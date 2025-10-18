@@ -1,10 +1,10 @@
 services:
-  presentation-frontend:
-    container_name: presentation-frontend
-    image: presentation-frontend
+  presentation-application:
+    container_name: presentation-application
+    image: presentation-application
     restart: unless-stopped
     build:
-      context: ./frontend/
+      context: ./application/
       dockerfile: Dockerfile
     ports:
       - "80:80"

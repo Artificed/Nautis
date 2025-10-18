@@ -8,10 +8,10 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ghcr.io/artificed/astdev-presentation/presentation-frontend
-  FRONTEND_DIR: ./frontend
+  IMAGE_NAME: ghcr.io/artificed/astdev-presentation/presentation-application
+  APPLICATION_DIR: ./application
   K8S_NAMESPACE: astdev-presentation
-  DEPLOYMENT_NAME: presentation-frontend
+  DEPLOYMENT_NAME: presentation-application
 
 jobs:
   test:
@@ -29,10 +29,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: frontend/package-lock.json
+        cache-dependency-path: application/package-lock.json
     
     - name: Install & Test
-      working-directory: ${{ env.FRONTEND_DIR }}
+      working-directory: ${{ env.APPLICATION_DIR }}
       run: |
         npm ci
         npm run lint
@@ -71,7 +71,7 @@ jobs:
     - name: Build & Push
       uses: docker/build-push-action@v5
       with:
-        context: ${{ env.FRONTEND_DIR }}
+        context: ${{ env.APPLICATION_DIR }}
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
