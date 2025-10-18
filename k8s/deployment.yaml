@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: presentation-frontend
+  name: presentation-application
   namespace: astdev-presentation
   labels:
-    app: presentation-frontend
+    app: presentation-application
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: presentation-frontend
+      app: presentation-application
   template:
     metadata:
       labels:
-        app: presentation-frontend
+        app: presentation-application
     spec:
       imagePullSecrets:
       - name: ghcr-secret
       containers:
-      - name: frontend
-        image: ghcr.io/artificed/astdev-presentation/presentation-frontend:latest
+      - name: application
+        image: ghcr.io/artificed/astdev-presentation/presentation-application:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
