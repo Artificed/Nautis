@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { motion } from "framer-motion";
 import { useCursor } from "./CustomCursor";
 
 export default function AboutSection() {
@@ -66,27 +67,57 @@ export default function AboutSection() {
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-8 py-20">
-        <div className="text-center mb-20 opacity-0 animate-fade-in-up">
+        <motion.div 
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <div className="inline-block">
-            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
+            <motion.h2 
+              className="text-5xl md:text-6xl font-bold text-gray-900 mb-4"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
               About{" "}
               <span className="bg-gradient-to-r from-orange-300 via-amber-300 to-yellow-300 bg-clip-text text-transparent animate-gradient">
                 Me
               </span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-orange-200 to-amber-200 rounded-full mx-auto"></div>
+            </motion.h2>
+            <motion.div 
+              className="w-24 h-1 bg-gradient-to-r from-orange-200 to-amber-200 rounded-full mx-auto"
+              initial={{ width: 0 }}
+              whileInView={{ width: 96 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            ></motion.div>
           </div>
-        </div>
+        </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {aboutInfo.map((info, index) => (
-            <div
+            <motion.div
               key={info.label}
-              className="opacity-0 animate-fade-in-up"
-              style={{ animationDelay: `${(index + 2) * 200}ms` }}
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ 
+                duration: 0.6, 
+                delay: index * 0.2,
+                type: "spring",
+                stiffness: 100
+              }}
             >
-              <div
-                className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer"
+              <motion.div
+                className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg transition-shadow duration-500 cursor-pointer"
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: "0 25px 50px -12px rgb(0 0 0 / 0.25)"
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
               >
@@ -95,9 +126,13 @@ export default function AboutSection() {
                 ></div>
 
                 <div className="relative bg-white rounded-3xl p-8 h-full flex flex-col items-center text-center">
-                  <div className="w-16 h-16 text-gray-700 mb-4 transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
+                  <motion.div 
+                    className="w-16 h-16 text-gray-700 mb-4"
+                    whileHover={{ scale: 1.1, rotate: 6 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
                     {info.icon}
-                  </div>
+                  </motion.div>
 
                   <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3 min-h-[2.5rem] flex items-center justify-center">
                     {info.label}
@@ -114,8 +149,8 @@ export default function AboutSection() {
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12 translate-x-full group-hover:translate-x-[-200%] transition-transform duration-1000"></div>
                   </div>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           ))}
         </div>
       </div>
