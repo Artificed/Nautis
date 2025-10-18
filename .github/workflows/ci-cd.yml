@@ -49,18 +49,32 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    - name: Build and restart containers
+    - name: Build Docker image
       run: |
-        docker compose down || true
-        docker compose up -d --build
+        docker build -t presentation-frontend:latest ./frontend
+    
+    - name: Import image to k3s
+      run: |
+        docker save presentation-frontend:latest | sudo k3s ctr images import -
+    
+    - name: Deploy to k3s
+      run: |
+        kubectl apply -f k8s/namespace.yaml
+        kubectl apply -f k8s/deployment.yaml
+        kubectl apply -f k8s/service.yaml
+    
+    - name: Restart deployment 
+      run: |
+        kubectl rollout restart deployment/presentation-frontend -n astdev-presentation
+        kubectl rollout status deployment/presentation-frontend -n astdev-presentation --timeout=60s
     
     - name: Verify deployment
       run: |
-        echo "Waiting for containers to be ready"
-        sleep 10
-        docker compose ps
+        echo "Checking deployment status"
+        kubectl get pods -n astdev-presentation
+        kubectl get svc -n astdev-presentation
     
     - name: Health check
       run: |
         echo "Checking if application is running"
-        curl -f http://localhost:80 || echo "Warning: Health check failed"
+        curl -f http://localhost:30080 || echo "Warning: Health check failed"
