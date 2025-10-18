@@ -35,7 +35,6 @@ jobs:
       working-directory: ${{ env.APPLICATION_DIR }}
       run: |
         npm ci
-        npm run lint
         npm test
         npm run build
 

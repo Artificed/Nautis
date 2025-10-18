@@ -29,7 +29,6 @@ export default function CustomCursor({ children }: { children: ReactNode }) {
 
   return (
     <CursorContext.Provider value={{ setIsHovering }}>
-      {/* Main cursor dot */}
       <div
         className="fixed pointer-events-none z-[9999] mix-blend-difference"
         style={{
@@ -46,7 +45,6 @@ export default function CustomCursor({ children }: { children: ReactNode }) {
         />
       </div>
 
-      {/* Outer cursor ring */}
       <div
         className="fixed pointer-events-none z-[9998]"
         style={{
