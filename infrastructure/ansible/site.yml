@@ -9,6 +9,7 @@
   roles:
     - prerequisites
     - docker
+    - k3s
     - app_directory
     - github_cli
     - github_actions_runner
