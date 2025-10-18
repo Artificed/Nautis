@@ -8,22 +8,38 @@ export default function SkillsSection() {
   const hardSkills = [
     {
       title: "FullStack Development",
-      icon: "💻",
+      icon: (
+        <svg className="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+        </svg>
+      ),
       gradient: "from-blue-200 to-cyan-200",
     },
     {
       title: "Artificial Intelligence Systems",
-      icon: "🤖",
+      icon: (
+        <svg className="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+        </svg>
+      ),
       gradient: "from-purple-200 to-pink-200",
     },
     {
       title: "DevOps & Networking",
-      icon: "🔧",
+      icon: (
+        <svg className="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+        </svg>
+      ),
       gradient: "from-green-200 to-emerald-200",
     },
     {
       title: "Algorithm & Problem Solving",
-      icon: "🧩",
+      icon: (
+        <svg className="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+        </svg>
+      ),
       gradient: "from-orange-200 to-amber-200",
     },
   ];
@@ -31,22 +47,38 @@ export default function SkillsSection() {
   const softSkills = [
     {
       title: "Hard Working",
-      icon: "💪",
+      icon: (
+        <svg className="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      ),
       gradient: "from-red-200 to-rose-200",
     },
     {
       title: "Teamwork",
-      icon: "🤝",
+      icon: (
+        <svg className="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+      ),
       gradient: "from-indigo-200 to-blue-200",
     },
     {
       title: "Adaptability",
-      icon: "🌱",
+      icon: (
+        <svg className="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+      ),
       gradient: "from-teal-200 to-cyan-200",
     },
     {
       title: "Leadership",
-      icon: "👑",
+      icon: (
+        <svg className="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+        </svg>
+      ),
       gradient: "from-yellow-200 to-amber-200",
     },
   ];
@@ -106,7 +138,7 @@ export default function SkillsSection() {
                   onMouseLeave={() => setIsHovering(false)}
                 >
                   <div className="flex items-center gap-4 p-4 bg-white/80 backdrop-blur rounded-xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer hover:translate-x-2">
-                    <div className={`text-4xl bg-gradient-to-br ${skill.gradient} p-3 rounded-xl group-hover:scale-110 transition-transform duration-300`}>
+                    <div className={`w-12 h-12 bg-gradient-to-br ${skill.gradient} p-2.5 rounded-xl group-hover:scale-110 transition-transform duration-300 text-white`}>
                       {skill.icon}
                     </div>
                     <h4 className="text-base font-bold text-gray-900 flex-1">
@@ -134,7 +166,7 @@ export default function SkillsSection() {
                   onMouseLeave={() => setIsHovering(false)}
                 >
                   <div className="flex items-center gap-4 p-4 bg-white/80 backdrop-blur rounded-xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer hover:translate-x-2">
-                    <div className={`text-4xl bg-gradient-to-br ${skill.gradient} p-3 rounded-xl group-hover:scale-110 transition-transform duration-300`}>
+                    <div className={`w-12 h-12 bg-gradient-to-br ${skill.gradient} p-2.5 rounded-xl group-hover:scale-110 transition-transform duration-300 text-white`}>
                       {skill.icon}
                     </div>
                     <h4 className="text-base font-bold text-gray-900 flex-1">
