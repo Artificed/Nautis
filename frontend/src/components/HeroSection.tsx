@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from "react";
 
 export default function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [_, setCursorVariant] = useState("default");
   const [isHovering, setIsHovering] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -157,15 +156,9 @@ export default function HeroSection() {
             <div className="flex gap-4 pt-4 opacity-0 animate-fade-in-up animation-delay-600">
               <a
                 href="#contact"
-                className="group relative px-8 py-4 bg-gradient-to-r from-gray-900 to-gray-800 text-white rounded-full font-medium overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-105 active:scale-95"
-                onMouseEnter={() => {
-                  setIsHovering(true);
-                  setCursorVariant("button");
-                }}
-                onMouseLeave={() => {
-                  setIsHovering(false);
-                  setCursorVariant("default");
-                }}
+                className="group relative px-8 py-4 bg-gradient-to-r from-gray-900 to-gray-800 text-white rounded-full font-medium overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95"
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
               >
                 <span className="relative z-10">Get In Touch</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-200 to-pink-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -175,14 +168,8 @@ export default function HeroSection() {
               <a
                 href="#work"
                 className="group px-8 py-4 bg-white text-gray-900 rounded-full font-medium border-2 border-gray-200 hover:border-gray-900 transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95 relative overflow-hidden"
-                onMouseEnter={() => {
-                  setIsHovering(true);
-                  setCursorVariant("button");
-                }}
-                onMouseLeave={() => {
-                  setIsHovering(false);
-                  setCursorVariant("default");
-                }}
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
               >
                 <span className="relative z-10">View Work</span>
                 <span className="absolute inset-0 bg-gray-50 scale-0 group-hover:scale-100 transition-transform duration-300 rounded-full"></span>
