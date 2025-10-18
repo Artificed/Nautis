@@ -1,8 +1,11 @@
 import HeroSection from "../components/HeroSection";
+import Navbar from "../components/Navbar";
 
 export default function HomePage() {
   return (
-    <div className="snap-container">
+    <>
+      <Navbar />
+      <div className="snap-container">
       <div className="snap-section">
         <HeroSection />
       </div>
@@ -15,5 +18,6 @@ export default function HomePage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
