@@ -1,11 +1,13 @@
+import "./app.css";
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./lib/router/app-routes";
+
 function App() {
 
   return (
-    <>
-      <div>
-        <h1 className="text-red-500">Testing Tailwind CSS with Vite</h1>
-      </div>
-    </>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   )
 }
 
