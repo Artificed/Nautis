@@ -34,7 +34,7 @@ export default function Navbar() {
             href="#home"
             className="text-xl md:text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors"
           >
-            Paul
+            Paul Tsai A.
           </a>
 
           <div className="hidden md:flex items-center gap-8">
@@ -52,7 +52,6 @@ export default function Navbar() {
               </a>
             ))}
             
-            {/* CTA Button */}
             <a
               href="#contact"
               className="px-5 py-2.5 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transform hover:scale-105 transition-all duration-300 shadow-sm hover:shadow-md"
@@ -61,7 +60,6 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
