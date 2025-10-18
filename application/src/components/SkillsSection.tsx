@@ -78,58 +78,40 @@ export default function SkillsSection() {
         <div className="absolute bottom-1/3 left-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-purple-100/10 to-pink-100/10 blur-3xl animate-rotate-gradient animation-delay-3000"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-8 py-20">
-        <div className="text-center mb-16 opacity-0 animate-fade-in-up">
-          <div className="inline-block">
-            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
-              My{" "}
-              <span className="bg-gradient-to-r from-blue-300 via-indigo-300 to-purple-300 bg-clip-text text-transparent animate-gradient">
-                Skills
-              </span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-200 to-indigo-200 rounded-full mx-auto"></div>
-          </div>
+      <div className="relative z-10 max-w-4xl mx-auto px-8 py-20">
+        <div className="text-center mb-20 opacity-0 animate-fade-in-up">
+          <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
+            My{" "}
+            <span className="bg-gradient-to-r from-blue-300 via-indigo-300 to-purple-300 bg-clip-text text-transparent animate-gradient">
+              Skills
+            </span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-200 to-indigo-200 rounded-full mx-auto"></div>
         </div>
 
-        <div className="space-y-16">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16">
           <div className="opacity-0 animate-fade-in-up animation-delay-200">
-            <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-              <span className="bg-gradient-to-r from-blue-200 to-cyan-200 px-6 py-2 rounded-full">
+            <h3 className="text-2xl font-bold mb-8 pb-3 border-b-2 border-blue-200">
+              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                 Hard Skills
               </span>
             </h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="space-y-6">
               {hardSkills.map((skill, index) => (
                 <div
                   key={skill.title}
-                  className="opacity-0 animate-fade-in-up"
+                  className="group opacity-0 animate-fade-in-up"
                   style={{ animationDelay: `${(index + 3) * 100}ms` }}
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
                 >
-                  <div
-                    className="group relative bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer h-full"
-                    onMouseEnter={() => setIsHovering(true)}
-                    onMouseLeave={() => setIsHovering(false)}
-                  >
-                    <div
-                      className={`absolute -inset-0.5 bg-gradient-to-r ${skill.gradient} rounded-2xl opacity-0 group-hover:opacity-100 blur transition-opacity duration-500`}
-                    ></div>
-
-                    <div className="relative bg-white rounded-2xl p-6 h-full flex flex-col items-center text-center">
-                      <div className="text-5xl mb-4 transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
-                        {skill.icon}
-                      </div>
-
-                      <h4 className="text-base font-bold text-gray-900 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-gray-900 group-hover:to-gray-600 transition-all duration-300">
-                        {skill.title}
-                      </h4>
-
-                      <div className="absolute top-3 right-3 w-2 h-2 border-t-2 border-r-2 border-gray-200 group-hover:border-gray-400 transition-colors opacity-0 group-hover:opacity-100 rounded-tr-lg"></div>
-                      <div className="absolute bottom-3 left-3 w-2 h-2 border-b-2 border-l-2 border-gray-200 group-hover:border-gray-400 transition-colors opacity-0 group-hover:opacity-100 rounded-bl-lg"></div>
-
-                      <div className="absolute inset-0 rounded-2xl overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12 translate-x-full group-hover:translate-x-[-200%] transition-transform duration-1000"></div>
-                      </div>
+                  <div className="flex items-center gap-4 p-4 bg-white/80 backdrop-blur rounded-xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer hover:translate-x-2">
+                    <div className={`text-4xl bg-gradient-to-br ${skill.gradient} p-3 rounded-xl group-hover:scale-110 transition-transform duration-300`}>
+                      {skill.icon}
                     </div>
+                    <h4 className="text-base font-bold text-gray-900 flex-1">
+                      {skill.title}
+                    </h4>
                   </div>
                 </div>
               ))}
@@ -137,43 +119,27 @@ export default function SkillsSection() {
           </div>
 
           <div className="opacity-0 animate-fade-in-up animation-delay-400">
-            <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-              <span className="bg-gradient-to-r from-purple-200 to-pink-200 px-6 py-2 rounded-full">
+            <h3 className="text-2xl font-bold mb-8 pb-3 border-b-2 border-purple-200">
+              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                 Soft Skills
               </span>
             </h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="space-y-6">
               {softSkills.map((skill, index) => (
                 <div
                   key={skill.title}
-                  className="opacity-0 animate-fade-in-up"
+                  className="group opacity-0 animate-fade-in-up"
                   style={{ animationDelay: `${(index + 7) * 100}ms` }}
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
                 >
-                  <div
-                    className="group relative bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer h-full"
-                    onMouseEnter={() => setIsHovering(true)}
-                    onMouseLeave={() => setIsHovering(false)}
-                  >
-                    <div
-                      className={`absolute -inset-0.5 bg-gradient-to-r ${skill.gradient} rounded-2xl opacity-0 group-hover:opacity-100 blur transition-opacity duration-500`}
-                    ></div>
-
-                    <div className="relative bg-white rounded-2xl p-6 h-full flex flex-col items-center text-center">
-                      <div className="text-5xl mb-4 transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
-                        {skill.icon}
-                      </div>
-
-                      <h4 className="text-base font-bold text-gray-900 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-gray-900 group-hover:to-gray-600 transition-all duration-300">
-                        {skill.title}
-                      </h4>
-
-                      <div className="absolute top-3 right-3 w-2 h-2 border-t-2 border-r-2 border-gray-200 group-hover:border-gray-400 transition-colors opacity-0 group-hover:opacity-100 rounded-tr-lg"></div>
-                      <div className="absolute bottom-3 left-3 w-2 h-2 border-b-2 border-l-2 border-gray-200 group-hover:border-gray-400 transition-colors opacity-0 group-hover:opacity-100 rounded-bl-lg"></div>
-
-                      <div className="absolute inset-0 rounded-2xl overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12 translate-x-full group-hover:translate-x-[-200%] transition-transform duration-1000"></div>
-                      </div>
+                  <div className="flex items-center gap-4 p-4 bg-white/80 backdrop-blur rounded-xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer hover:translate-x-2">
+                    <div className={`text-4xl bg-gradient-to-br ${skill.gradient} p-3 rounded-xl group-hover:scale-110 transition-transform duration-300`}>
+                      {skill.icon}
                     </div>
+                    <h4 className="text-base font-bold text-gray-900 flex-1">
+                      {skill.title}
+                    </h4>
                   </div>
                 </div>
               ))}
