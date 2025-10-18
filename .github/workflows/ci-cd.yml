@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}/presentation-frontend
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -40,9 +44,49 @@ jobs:
       run: npm run build
       working-directory: ./frontend
 
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      packages: write
+    
+    outputs:
+      image-tag: ${{ steps.meta.outputs.tags }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Extract metadata (tags, labels)
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        tags: |
+          type=ref,event=branch
+          type=sha,prefix={{branch}}-
+          type=raw,value=latest,enable={{is_default_branch}}
+    
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./frontend
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+
   deploy:
     runs-on: self-hosted
-    needs: test
+    needs: build
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     
     env:
@@ -52,13 +96,27 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    - name: Build Docker image
+    - name: Log in to GitHub Container Registry
       run: |
-        docker build -t presentation-frontend:latest ./frontend
+        echo "${{ secrets.GITHUB_TOKEN }}" | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
+    
+    - name: Pull image from registry
+      run: |
+        docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
     
     - name: Import image to k3s
       run: |
-        docker save presentation-frontend:latest | sudo k3s ctr images import -
+        docker save ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest | sudo k3s ctr images import -
+    
+    - name: Create registry secret (if not exists)
+      run: |
+        kubectl create secret docker-registry ghcr-secret \
+          --docker-server=${{ env.REGISTRY }} \
+          --docker-username=${{ github.actor }} \
+          --docker-password=${{ secrets.GITHUB_TOKEN }} \
+          --docker-email=${{ github.actor }}@users.noreply.github.com \
+          --namespace=astdev-presentation \
+          --dry-run=client -o yaml | kubectl apply -f -
     
     - name: Deploy to k3s
       run: |

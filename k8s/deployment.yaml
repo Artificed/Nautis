@@ -15,10 +15,12 @@ spec:
       labels:
         app: presentation-frontend
     spec:
+      imagePullSecrets:
+      - name: ghcr-secret
       containers:
       - name: frontend
-        image: presentation-frontend:latest
-        imagePullPolicy: Never 
+        image: ghcr.io/artificed/astdev-presentation/presentation-frontend:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
           name: http
