@@ -2,6 +2,7 @@
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  cursor: none;
 }
 
 h1, h2, h3 {
@@ -142,6 +143,17 @@ h1, h2, h3 {
   }
 }
 
+@keyframes cursor-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.5;
+  }
+}
+
 .animate-gradient {
   background-size: 200% 200%;
   animation: gradient-shift 8s ease infinite;
@@ -175,6 +187,10 @@ h1, h2, h3 {
   animation: scale-pulse 4s ease-in-out infinite;
 }
 
+.animate-cursor-pulse {
+  animation: cursor-pulse 2s ease-in-out infinite;
+}
+
 .animation-delay-200 {
   animation-delay: 0.2s;
 }
@@ -193,6 +209,24 @@ h1, h2, h3 {
 
 .animation-delay-5000 {
   animation-delay: 5s;
+}
+
+/* Custom scrollbar for better UX */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 html {
