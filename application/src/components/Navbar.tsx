@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,7 +22,10 @@ export default function Navbar() {
   ];
 
   return (
-    <nav
+    <motion.nav
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-white/80 backdrop-blur-md shadow-sm py-4"
@@ -30,40 +34,50 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         <div className="flex items-center justify-between">
-          <a
+          <motion.a
             href="#home"
             className="text-xl md:text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 400 }}
           >
             Paul Tsai A.
-          </a>
+          </motion.a>
 
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link, index) => (
-              <a
+              <motion.a
                 key={link.name}
                 href={link.href}
                 className="relative text-gray-700 hover:text-gray-900 font-medium transition-colors group"
-                style={{
-                  animationDelay: `${index * 100}ms`,
-                }}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 * index }}
+                whileHover={{ y: -2 }}
               >
                 {link.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gray-900 transition-all duration-300 group-hover:w-full"></span>
-              </a>
+              </motion.a>
             ))}
             
-            <a
+            <motion.a
               href="#contact"
-              className="px-5 py-2.5 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transform hover:scale-105 transition-all duration-300 shadow-sm hover:shadow-md"
+              className="px-5 py-2.5 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 shadow-sm"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              whileHover={{ scale: 1.05, boxShadow: "0 4px 12px rgba(0,0,0,0.15)" }}
+              whileTap={{ scale: 0.95 }}
             >
               Let's Talk
-            </a>
+            </motion.a>
           </div>
 
-          <button
+          <motion.button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
             aria-label="Toggle menu"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             <svg
               className="w-6 h-6"
@@ -87,35 +101,54 @@ export default function Navbar() {
                 />
               )}
             </svg>
-          </button>
+          </motion.button>
         </div>
 
-        <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ${
-            isMobileMenuOpen ? "max-h-96 mt-4" : "max-h-0"
-          }`}
-        >
-          <div className="flex flex-col gap-4 py-4 bg-white/90 backdrop-blur-md rounded-2xl px-6 shadow-lg">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-gray-700 hover:text-gray-900 font-medium transition-colors py-2"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {link.name}
-              </a>
-            ))}
-            <a
-              href="#contact"
-              className="px-5 py-2.5 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors text-center mt-2"
-              onClick={() => setIsMobileMenuOpen(false)}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden overflow-hidden"
             >
-              Let's Talk
-            </a>
-          </div>
-        </div>
+              <motion.div 
+                className="flex flex-col gap-4 py-4 bg-white/90 backdrop-blur-md rounded-2xl px-6 shadow-lg mt-4"
+                initial={{ y: -20 }}
+                animate={{ y: 0 }}
+                exit={{ y: -20 }}
+              >
+                {navLinks.map((link, index) => (
+                  <motion.a
+                    key={link.name}
+                    href={link.href}
+                    className="text-gray-700 hover:text-gray-900 font-medium transition-colors py-2"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ x: 5 }}
+                  >
+                    {link.name}
+                  </motion.a>
+                ))}
+                <motion.a
+                  href="#contact"
+                  className="px-5 py-2.5 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors text-center mt-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.4 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Let's Talk
+                </motion.a>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </nav>
+    </motion.nav>
   );
 }
