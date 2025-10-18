@@ -1,8 +1,0 @@
----
-- name: Create application directory
-  file:
-    path: /application
-    state: directory
-    mode: "0755"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
