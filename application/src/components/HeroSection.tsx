@@ -1,9 +1,10 @@
 import { PERSONAL_DATA } from "../lib/constants/personal-data";
 import { useState, useEffect, useRef } from "react";
+import { useCursor } from "./CustomCursor";
 
 export default function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
+  const { setIsHovering } = useCursor();
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -48,34 +49,6 @@ export default function HeroSection() {
       ref={sectionRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-stone-50 via-amber-50/30 to-stone-100"
     >
-      <div
-        className="fixed pointer-events-none z-50 mix-blend-difference"
-        style={{
-          left: `${mousePosition.x}px`,
-          top: `${mousePosition.y}px`,
-          transform: "translate(-50%, -50%)",
-          transition: "width 0.3s, height 0.3s",
-        }}
-      >
-        <div
-          className={`rounded-full bg-white transition-all duration-300 ${
-            isHovering ? "w-12 h-12" : "w-6 h-6"
-          }`}
-        />
-      </div>
-
-      <div
-        className="fixed pointer-events-none z-40"
-        style={{
-          left: `${mousePosition.x}px`,
-          top: `${mousePosition.y}px`,
-          transform: "translate(-50%, -50%)",
-          transition: "left 0.15s, top 0.15s",
-        }}
-      >
-        <div className="w-10 h-10 rounded-full border-2 border-gray-400 opacity-30" />
-      </div>
-
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div 
           className="absolute top-20 right-32 w-32 h-32 rounded-3xl bg-gradient-to-br from-purple-50 to-blue-50 opacity-80 blur-xl animate-float transition-transform duration-300"

@@ -1,21 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
+import { useCursor } from "./CustomCursor";
 
 export default function AboutSection() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
+  const { setIsHovering } = useCursor();
   const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: e.clientX,
-        y: e.clientY,
-      });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
 
   const aboutInfo = [
     {
@@ -44,22 +32,6 @@ export default function AboutSection() {
       id="about"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-stone-100"
     >
-      <div
-        className="fixed pointer-events-none z-50 mix-blend-difference"
-        style={{
-          left: `${mousePosition.x}px`,
-          top: `${mousePosition.y}px`,
-          transform: "translate(-50%, -50%)",
-          transition: "width 0.3s, height 0.3s",
-        }}
-      >
-        <div
-          className={`rounded-full bg-white transition-all duration-300 ${
-            isHovering ? "w-12 h-12" : "w-6 h-6"
-          }`}
-        />
-      </div>
-
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 right-32 w-32 h-32 rounded-3xl bg-gradient-to-br from-orange-50 to-amber-50 opacity-80 blur-xl animate-float"></div>
         <div className="absolute top-16 left-20 w-24 h-24 rounded-2xl bg-gradient-to-br from-pink-50 to-rose-50 opacity-75 blur-lg animate-float-slow animation-delay-1000"></div>
@@ -119,29 +91,6 @@ export default function AboutSection() {
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="mt-16 text-center opacity-0 animate-fade-in-up animation-delay-800">
-          <div
-            className="group max-w-3xl mx-auto bg-white/60 backdrop-blur-sm rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 cursor-pointer"
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
-          >
-            <div className="relative">
-              <svg
-                className="w-10 h-10 text-amber-200 mx-auto mb-4 opacity-50"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-              </svg>
-              <p className="text-lg text-gray-700 font-light italic leading-relaxed">
-                Passionate about creating innovative solutions and bringing
-                ideas to life through code. Every project is an opportunity to
-                learn, grow, and make a meaningful impact.
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
