@@ -45,6 +45,9 @@ jobs:
     needs: test
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     
+    env:
+      KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
