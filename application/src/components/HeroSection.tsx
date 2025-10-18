@@ -395,7 +395,16 @@ export default function HeroSection() {
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
         >
-          <span className="text-sm font-medium">Scroll Down</span>
+          <motion.div 
+              animate={{ y: [0, 5, 0] }}
+              transition={{ 
+                duration: 1.5, 
+                repeat: Infinity, 
+                ease: "easeInOut" 
+              }}
+            >
+              <span className="text-sm font-medium">Scroll Down</span>
+            </motion.div>
           <div className="relative">
             <motion.svg 
               className="w-6 h-6" 
@@ -409,20 +418,8 @@ export default function HeroSection() {
                 ease: "easeInOut" 
               }}
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </motion.svg>
-            <motion.div 
-              className="absolute inset-0 border-2 border-gray-400 rounded-full"
-              animate={{ 
-                scale: [1, 1.5, 1.5],
-                opacity: [0.5, 0, 0]
-              }}
-              transition={{ 
-                duration: 2, 
-                repeat: Infinity, 
-                ease: "easeOut" 
-              }}
-            />
           </div>
         </motion.div>
       </motion.div>
