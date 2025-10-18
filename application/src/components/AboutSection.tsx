@@ -64,6 +64,131 @@ export default function AboutSection() {
         
         <div className="absolute top-1/3 right-1/3 w-80 h-80 rounded-full bg-gradient-to-br from-orange-100/15 to-pink-100/10 blur-3xl animate-rotate-gradient"></div>
         <div className="absolute bottom-1/3 left-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-blue-100/10 to-purple-100/10 blur-3xl animate-rotate-gradient animation-delay-3000"></div>
+
+        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <motion.path
+            d="M 400 300 Q 450 250, 500 300 T 600 300 Q 650 350, 700 300"
+            fill="none"
+            stroke="#fbbf24"
+            strokeWidth="3"
+            strokeLinecap="round"
+            opacity="0.3"
+            initial={{ pathLength: 0, pathOffset: 0 }}
+            animate={{ 
+              pathLength: [0, 1, 1, 0],
+              pathOffset: [0, 0, 0.2, 1],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+
+          <defs>
+            <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#fb923c" stopOpacity="0.4" />
+              <stop offset="50%" stopColor="#ec4899" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#a855f7" stopOpacity="0.4" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <motion.div
+          className="absolute top-24 left-1/5 w-24 h-24 bg-gradient-to-br from-amber-300/20 to-orange-300/20"
+          style={{ 
+            borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%",
+            filter: "blur(8px)"
+          }}
+          animate={{
+            borderRadius: [
+              "60% 40% 30% 70% / 60% 30% 70% 40%",
+              "30% 60% 70% 40% / 50% 60% 30% 60%",
+              "50% 50% 30% 70% / 30% 70% 70% 30%",
+              "60% 40% 30% 70% / 60% 30% 70% 40%",
+            ],
+            x: [0, 40, -20, 0],
+            y: [0, -30, 20, 0],
+            scale: [1, 1.2, 0.9, 1],
+            rotate: [0, 120, 240, 360],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        
+        <motion.div
+          className="absolute bottom-32 right-1/5 w-32 h-32 bg-gradient-to-br from-pink-300/20 to-purple-300/20"
+          style={{ 
+            borderRadius: "50% 50% 50% 50% / 50% 50% 50% 50%",
+            filter: "blur(10px)"
+          }}
+          animate={{
+            borderRadius: [
+              "50% 50% 50% 50% / 50% 50% 50% 50%",
+              "70% 30% 50% 50% / 30% 70% 50% 50%",
+              "50% 70% 30% 50% / 50% 30% 70% 50%",
+              "50% 50% 50% 50% / 50% 50% 50% 50%",
+            ],
+            x: [0, -50, 30, 0],
+            y: [0, 40, -20, 0],
+            scale: [1, 1.1, 1.3, 1],
+            rotate: [0, -90, -180, -360],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
+
+        <motion.div
+          className="absolute top-1/3 right-12"
+          animate={{
+            rotate: [0, 10, -10, 0],
+            scale: [1, 1.2, 0.9, 1],
+            y: [0, -15, 5, 0],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <svg width="30" height="30" viewBox="0 0 30 30">
+            <path
+              d="M15 2 L18 12 L28 12 L20 18 L23 28 L15 22 L7 28 L10 18 L2 12 L12 12 Z"
+              fill="#fbbf24"
+              opacity="0.4"
+            />
+          </svg>
+        </motion.div>
+
+        <motion.div
+          className="absolute bottom-1/4 left-12"
+          animate={{
+            rotate: [0, -15, 15, 0],
+            scale: [1, 0.8, 1.3, 1],
+            x: [0, 10, -10, 0],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1.5
+          }}
+        >
+          <svg width="25" height="25" viewBox="0 0 30 30">
+            <path
+              d="M15 2 L18 12 L28 12 L20 18 L23 28 L15 22 L7 28 L10 18 L2 12 L12 12 Z"
+              fill="#ec4899"
+              opacity="0.4"
+            />
+          </svg>
+        </motion.div>
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-8 py-20">
