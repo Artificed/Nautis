@@ -109,6 +109,117 @@ export default function SkillsSection() {
         
         <div className="absolute top-1/3 right-1/3 w-80 h-80 rounded-full bg-gradient-to-br from-blue-100/15 to-indigo-100/10 blur-3xl animate-rotate-gradient"></div>
         <div className="absolute bottom-1/3 left-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-purple-100/10 to-pink-100/10 blur-3xl animate-rotate-gradient animation-delay-3000"></div>
+
+        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <motion.path
+            d="M 100 300 Q 300 100 500 300 T 900 300"
+            fill="none"
+            stroke="url(#gradient1)"
+            strokeWidth="2"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: [0, 0.3, 0] }}
+            transition={{
+              pathLength: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+              opacity: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+            }}
+          />
+          <motion.path
+            d="M 200 100 Q 400 300 600 100 T 1000 100"
+            fill="none"
+            stroke="url(#gradient2)"
+            strokeWidth="2"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: [0, 0.3, 0] }}
+            transition={{
+              pathLength: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 },
+              opacity: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }
+            }}
+          />
+          <motion.path
+            d="M 50 500 Q 250 700 450 500 T 850 500"
+            fill="none"
+            stroke="url(#gradient3)"
+            strokeWidth="2"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: [0, 0.3, 0] }}
+            transition={{
+              pathLength: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 },
+              opacity: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }
+            }}
+          />
+          <defs>
+            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.4" />
+              <stop offset="50%" stopColor="#818cf8" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#c084fc" stopOpacity="0.4" />
+            </linearGradient>
+            <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#34d399" stopOpacity="0.4" />
+              <stop offset="50%" stopColor="#22d3ee" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#60a5fa" stopOpacity="0.4" />
+            </linearGradient>
+            <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#f472b6" stopOpacity="0.4" />
+              <stop offset="50%" stopColor="#a78bfa" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#818cf8" stopOpacity="0.4" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <motion.div
+          className="absolute top-1/4 right-10 w-20 h-20 border-2 border-blue-300/30 rounded-lg"
+          animate={{
+            rotate: [0, 90, 180, 270, 360],
+            scale: [1, 1.2, 1],
+            x: [0, 20, 0],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 left-10 w-16 h-16 border-2 border-purple-300/30"
+          style={{ borderRadius: "30%" }}
+          animate={{
+            rotate: [0, -90, -180, -270, -360],
+            scale: [1, 0.8, 1.1, 1],
+            y: [0, -30, 0],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute top-1/2 right-1/4 w-12 h-12 bg-gradient-to-br from-cyan-200/20 to-blue-200/20 rounded-full"
+          animate={{
+            scale: [1, 1.5, 1],
+            opacity: [0.3, 0.6, 0.3],
+            x: [0, 40, 0],
+            y: [0, -40, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
+        <motion.div
+          className="absolute bottom-1/3 right-1/5 w-24 h-24 border-4 border-indigo-200/20 rounded-full"
+          animate={{
+            scale: [1, 1.3, 1],
+            rotate: [0, 180, 360],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-8 py-20">
