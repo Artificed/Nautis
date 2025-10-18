@@ -91,6 +91,121 @@ export default function HeroSection() {
         
         <div className="absolute top-1/3 right-1/4 w-64 h-64 rounded-full bg-gradient-to-br from-purple-100/20 to-pink-100/20 blur-3xl animate-rotate-gradient"></div>
         <div className="absolute bottom-1/3 left-1/3 w-72 h-72 rounded-full bg-gradient-to-br from-blue-100/15 to-cyan-100/15 blur-3xl animate-rotate-gradient animation-delay-3000"></div>
+
+        <motion.div
+          className="absolute top-1/8 left-1/2 w-32 h-32"
+          animate={{
+            rotate: [0, 360],
+            y: [0, -30, 0],
+            x: [0, 20, 0],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <motion.polygon
+              points="50 1 95 25 95 75 50 99 5 75 5 25"
+              fill="none"
+              stroke="#c084fc"
+              strokeWidth="2"
+              opacity="0.4"
+              initial={{ pathLength: 0 }}
+              animate={{ 
+                pathLength: [0, 1, 0],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+          </svg>
+        </motion.div>
+
+        <motion.div
+          className="absolute bottom-1/4 right-1/8 w-20 h-20"
+          animate={{
+            rotate: [0, -360],
+            scale: [1, 1.2, 1],
+            y: [0, 20, 0],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <motion.polygon
+              points="50 10, 90 80, 10 80"
+              fill="none"
+              stroke="#f472b6"
+              strokeWidth="2"
+              opacity="0.3"
+              animate={{
+                strokeDashoffset: [0, 100],
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            />
+          </svg>
+        </motion.div>
+
+        <motion.div
+          className="absolute top-2/3 right-6/12 w-16 h-16"
+          animate={{
+            rotate: [0, 180, 360],
+            scale: [1, 1.5, 1],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <motion.rect
+              x="25"
+              y="25"
+              width="50"
+              height="50"
+              fill="none"
+              stroke="#818cf8"
+              strokeWidth="2"
+              opacity="0.4"
+              transform="rotate(45 50 50)"
+              animate={{
+                opacity: [0.2, 0.6, 0.2],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+          </svg>
+        </motion.div>
+
+        <motion.div
+          className="absolute bottom-1/2 left-1/6 w-14 h-14"
+          animate={{
+            rotate: [0, 360],
+            x: [0, -15, 0],
+            y: [0, 15, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        >
+        </motion.div>
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-8 py-20">
