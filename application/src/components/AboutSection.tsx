@@ -80,7 +80,19 @@ export default function AboutSection() {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              animate={{ 
+                y: [0, -8, 0],
+              }}
+              transition={{
+                opacity: { duration: 0.5, delay: 0.2 },
+                scale: { duration: 0.5, delay: 0.2 },
+                y: {
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.5
+                }
+              }}
             >
               About{" "}
               <span className="bg-gradient-to-r from-orange-300 via-amber-300 to-yellow-300 bg-clip-text text-transparent animate-gradient">
@@ -92,7 +104,18 @@ export default function AboutSection() {
               initial={{ width: 0 }}
               whileInView={{ width: 96 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              animate={{
+                scaleX: [1, 1.3, 1],
+              }}
+              transition={{ 
+                width: { duration: 0.8, delay: 0.4 },
+                scaleX: {
+                  duration: 2.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1
+                }
+              }}
             ></motion.div>
           </div>
         </motion.div>
@@ -129,7 +152,25 @@ export default function AboutSection() {
                   <motion.div 
                     className="w-16 h-16 text-gray-700 mb-4"
                     whileHover={{ scale: 1.1, rotate: 6 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    animate={{ 
+                      y: [0, -5, 0],
+                      rotate: [0, 2, -2, 0]
+                    }}
+                    transition={{ 
+                      y: {
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: index * 0.4
+                      },
+                      rotate: {
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: index * 0.4
+                      },
+                      scale: { type: "spring", stiffness: 400, damping: 10 }
+                    }}
                   >
                     {info.icon}
                   </motion.div>
@@ -142,8 +183,32 @@ export default function AboutSection() {
                     {info.value}
                   </p>
 
-                  <div className="absolute top-4 right-4 w-3 h-3 border-t-2 border-r-2 border-gray-200 group-hover:border-gray-400 transition-colors opacity-0 group-hover:opacity-100 rounded-tr-lg"></div>
-                  <div className="absolute bottom-4 left-4 w-3 h-3 border-b-2 border-l-2 border-gray-200 group-hover:border-gray-400 transition-colors opacity-0 group-hover:opacity-100 rounded-bl-lg"></div>
+                  <motion.div 
+                    className="absolute top-4 right-4 w-3 h-3 border-t-2 border-r-2 border-gray-200 group-hover:border-gray-400 transition-colors opacity-0 group-hover:opacity-100 rounded-tr-lg"
+                    animate={{ 
+                      scale: [1, 1.2, 1],
+                      rotate: [0, 5, 0]
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: index * 0.5
+                    }}
+                  />
+                  <motion.div 
+                    className="absolute bottom-4 left-4 w-3 h-3 border-b-2 border-l-2 border-gray-200 group-hover:border-gray-400 transition-colors opacity-0 group-hover:opacity-100 rounded-bl-lg"
+                    animate={{ 
+                      scale: [1, 1.2, 1],
+                      rotate: [0, -5, 0]
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: index * 0.5 + 0.3
+                    }}
+                  />
 
                   <div className="absolute inset-0 rounded-3xl overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12 translate-x-full group-hover:translate-x-[-200%] transition-transform duration-1000"></div>

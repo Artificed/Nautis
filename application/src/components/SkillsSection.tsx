@@ -124,7 +124,19 @@ export default function SkillsSection() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            animate={{ 
+              y: [0, -8, 0],
+            }}
+            transition={{
+              opacity: { duration: 0.5, delay: 0.2 },
+              scale: { duration: 0.5, delay: 0.2 },
+              y: {
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 0.5
+              }
+            }}
           >
             My{" "}
             <span className="bg-gradient-to-r from-blue-300 via-indigo-300 to-purple-300 bg-clip-text text-transparent animate-gradient">
@@ -136,7 +148,18 @@ export default function SkillsSection() {
             initial={{ width: 0 }}
             whileInView={{ width: 96 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            animate={{
+              scaleX: [1, 1.2, 1],
+            }}
+            transition={{ 
+              width: { duration: 0.8, delay: 0.4 },
+              scaleX: {
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1
+              }
+            }}
           ></motion.div>
         </motion.div>
 
@@ -176,7 +199,25 @@ export default function SkillsSection() {
                     <motion.div 
                       className={`w-12 h-12 bg-gradient-to-br ${skill.gradient} p-2.5 rounded-xl text-white`}
                       whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                      animate={{ 
+                        rotate: [0, 5, -5, 0],
+                        y: [0, -5, 0]
+                      }}
+                      transition={{ 
+                        rotate: {
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: index * 0.3
+                        },
+                        y: {
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: index * 0.3
+                        },
+                        scale: { type: "spring", stiffness: 400, damping: 10 }
+                      }}
                     >
                       {skill.icon}
                     </motion.div>
@@ -224,7 +265,25 @@ export default function SkillsSection() {
                     <motion.div 
                       className={`w-12 h-12 bg-gradient-to-br ${skill.gradient} p-2.5 rounded-xl text-white`}
                       whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                      animate={{ 
+                        rotate: [0, -5, 5, 0],
+                        y: [0, -5, 0]
+                      }}
+                      transition={{ 
+                        rotate: {
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: index * 0.3 + 0.5
+                        },
+                        y: {
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: index * 0.3 + 0.5
+                        },
+                        scale: { type: "spring", stiffness: 400, damping: 10 }
+                      }}
                     >
                       {skill.icon}
                     </motion.div>
