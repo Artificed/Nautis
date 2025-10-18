@@ -8,7 +8,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}/presentation-frontend
+  IMAGE_NAME: ghcr.io/artificed/astdev-presentation/presentation-frontend
 
 jobs:
   test:
@@ -52,9 +52,6 @@ jobs:
       contents: read
       packages: write
     
-    outputs:
-      image-tag: ${{ steps.meta.outputs.tags }}
-    
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -70,7 +67,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v5
       with:
-        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        images: ${{ env.IMAGE_NAME }}
         tags: |
           type=ref,event=branch
           type=sha,prefix={{branch}}-
@@ -98,20 +95,20 @@ jobs:
     
     - name: Log in to GitHub Container Registry
       run: |
-        echo "${{ secrets.GITHUB_TOKEN }}" | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
+        echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
     
     - name: Pull image from registry
       run: |
-        docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+        docker pull ${{ env.IMAGE_NAME }}:latest
     
     - name: Import image to k3s
       run: |
-        docker save ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest | sudo k3s ctr images import -
+        docker save ${{ env.IMAGE_NAME }}:latest | sudo k3s ctr images import -
     
     - name: Create registry secret (if not exists)
       run: |
         kubectl create secret docker-registry ghcr-secret \
-          --docker-server=${{ env.REGISTRY }} \
+          --docker-server=ghcr.io \
           --docker-username=${{ github.actor }} \
           --docker-password=${{ secrets.GITHUB_TOKEN }} \
           --docker-email=${{ github.actor }}@users.noreply.github.com \
