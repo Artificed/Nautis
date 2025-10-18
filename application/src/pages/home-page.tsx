@@ -1,5 +1,6 @@
 import HeroSection from "../components/HeroSection";
 import AboutSection from "../components/AboutSection";
+import SkillsSection from "../components/SkillsSection";
 import Navbar from "../components/Navbar";
 import CustomCursor from "../components/CustomCursor";
 
@@ -14,6 +15,10 @@ export default function HomePage() {
 
         <div className="snap-section">
           <AboutSection />
+        </div>
+
+        <div className="snap-section">
+          <SkillsSection />
         </div>
       </div>
     </CustomCursor>
