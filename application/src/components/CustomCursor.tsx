@@ -15,8 +15,8 @@ export const useCursor = () => useContext(CursorContext);
 export default function CustomCursor({ children }: { children: ReactNode }) {
   const [isHovering, setIsHovering] = useState(false);
 
-  const cursorX = useMotionValue(0);
-  const cursorY = useMotionValue(0);
+  const cursorX = useMotionValue(window.outerWidth / 2);
+  const cursorY = useMotionValue(-20);
 
   const slowSpringConfig = { damping: 30, stiffness: 200, mass: 0.6 };
   const cursorXSpring = useSpring(cursorX, slowSpringConfig);
