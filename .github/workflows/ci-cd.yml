@@ -80,4 +80,4 @@ jobs:
     - name: Health check
       run: |
         echo "Checking if application is running"
-        curl -f http://localhost:30080 || echo "Warning: Health check failed"
+        curl -f http://localhost:80 || echo "Warning: Health check failed"
