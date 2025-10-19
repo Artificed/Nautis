@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+  font-size: 115%;
+}
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   cursor: none;

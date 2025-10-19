@@ -273,7 +273,7 @@ export default function AboutSection() {
                   className={`absolute -inset-0.5 bg-gradient-to-r ${info.gradient} rounded-3xl opacity-0 group-hover:opacity-100 blur transition-opacity duration-500`}
                 ></div>
 
-                <div className="relative bg-white rounded-3xl h-full flex flex-col items-center text-center">
+                <div className="relative bg-white rounded-3xl h-full flex flex-col items-center text-center p-4">
                   <motion.div 
                     className="w-16 h-16 text-gray-700 mb-4"
                     whileHover={{ scale: 1.1, rotate: 6 }}
