@@ -18,55 +18,55 @@ export default function WhyMeSection() {
   const strengths: Strength[] = [
     {
       title: "Strong Work Ethic",
-      icon: "✓",
+      icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
       gradient: "from-orange-200 to-amber-200",
       color: "#fb923c",
     },
     {
       title: "Highly Dedicated",
-      icon: "★",
+      icon: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z",
       gradient: "from-pink-200 to-rose-200",
       color: "#f472b6",
     },
     {
       title: "Detail-Oriented",
-      icon: "◉",
+      icon: "M15 12a3 3 0 11-6 0 3 3 0 016 0zM2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z",
       gradient: "from-amber-200 to-yellow-200",
       color: "#fbbf24",
     },
     {
       title: "Efficient Time Management",
-      icon: "⏱",
+      icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
       gradient: "from-orange-200 to-rose-200",
       color: "#fb923c",
     },
     {
       title: "Proactive and Punctual",
-      icon: "↗",
+      icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6",
       gradient: "from-rose-200 to-pink-200",
       color: "#fb7185",
     },
     {
       title: "High Commitment",
-      icon: "◆",
+      icon: "M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z",
       gradient: "from-yellow-200 to-amber-200",
       color: "#facc15",
     },
     {
       title: "Highly Adaptable",
-      icon: "↻",
+      icon: "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15",
       gradient: "from-orange-200 to-amber-200",
       color: "#fb923c",
     },
     {
       title: "Eager to Innovate and Learn",
-      icon: "💡",
+      icon: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z",
       gradient: "from-pink-200 to-rose-200",
       color: "#f472b6",
     },
     {
       title: "Zero Procrastination",
-      icon: "⚡",
+      icon: "M13 10V3L4 14h7v7l9-11h-7z",
       gradient: "from-amber-200 to-yellow-200",
       color: "#fbbf24",
     },
@@ -94,6 +94,37 @@ export default function WhyMeSection() {
     const orbitRadius = Math.min(centerX, centerY) * 0.7;
     let time = 0;
 
+    const drawHexagon = (x: number, y: number, radius: number) => {
+      ctx.beginPath();
+      for (let i = 0; i < 6; i++) {
+        const angle = (Math.PI / 3) * i - Math.PI / 2 + Math.PI / 6;
+        const hx = x + radius * Math.cos(angle);
+        const hy = y + radius * Math.sin(angle);
+        if (i === 0) {
+          ctx.moveTo(hx, hy);
+        } else {
+          ctx.lineTo(hx, hy);
+        }
+      }
+      ctx.closePath();
+    };
+
+    const drawSVGPath = (pathData: string, x: number, y: number, size: number, color: string) => {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.scale(size / 12, size / 12);
+      ctx.translate(-12, -12);
+      
+      const path = new Path2D(pathData);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.stroke(path);
+      
+      ctx.restore();
+    };
+
     const animate = () => {
       const rect = canvas.getBoundingClientRect();
       ctx.clearRect(0, 0, rect.width, rect.height);
@@ -112,7 +143,7 @@ export default function WhyMeSection() {
       ctx.stroke();
       ctx.setLineDash([]);
 
-      // Draw center circle
+      // Draw center hexagon
       const gradient = ctx.createLinearGradient(
         centerX - 80, centerY - 80,
         centerX + 80, centerY + 80
@@ -122,36 +153,29 @@ export default function WhyMeSection() {
       gradient.addColorStop(1, '#fbbf24');
 
       ctx.fillStyle = gradient;
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, 84, 0, Math.PI * 2);
+      drawHexagon(centerX, centerY, 84);
       ctx.fill();
 
-      // Inner white circle
+      // Inner white hexagon
       ctx.fillStyle = 'white';
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, 76, 0, Math.PI * 2);
+      drawHexagon(centerX, centerY, 76);
       ctx.fill();
 
-      // Draw "Why PL?" text
-      ctx.fillStyle = '#fb923c';
-      ctx.font = 'bold 28px Inter, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText('Why', centerX, centerY - 15);   
-      ctx.fillText('PL?', centerX, centerY + 15);
+      // Draw center SVG icon (user profile icon)
+      const centerIconPath = "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z";
+      drawSVGPath(centerIconPath, centerX, centerY, 48, '#fb923c');
 
-      // Draw pulsing ring
-      const pulseRadius = 80 + Math.sin(time * 0.05) * 10;
-      const pulseAlpha = 0.3 + Math.sin(time * 0.05) * 0.2;
+      // Draw pulsing hexagon
+      const pulseRadius = 80 + Math.sin(time * 0.03) * 8;
+      const pulseAlpha = 0.3 + Math.sin(time * 0.03) * 0.2;
       ctx.strokeStyle = `rgba(251, 146, 60, ${pulseAlpha})`;
       ctx.lineWidth = 3;
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, pulseRadius, 0, Math.PI * 2);
+      drawHexagon(centerX, centerY, pulseRadius);
       ctx.stroke();
 
       // Draw orbiting icons
       strengths.forEach((strength, index) => {
-        const angle = (index / strengths.length) * Math.PI * 2 + time * 0.01;
+        const angle = (index / strengths.length) * Math.PI * 2 + time * 0.005;
         const x = centerX + Math.cos(angle) * orbitRadius;
         const y = centerY + Math.sin(angle) * orbitRadius;
 
@@ -162,7 +186,7 @@ export default function WhyMeSection() {
         
         ctx.fillStyle = iconGradient;
         ctx.beginPath();
-        ctx.arc(x, y, 64, 0, Math.PI * 2);
+        ctx.arc(x, y, 56, 0, Math.PI * 2);
         ctx.fill();
 
         // White border
@@ -175,17 +199,13 @@ export default function WhyMeSection() {
           ctx.shadowColor = strength.color;
           ctx.shadowBlur = 20;
           ctx.beginPath();
-          ctx.arc(x, y, 35, 0, Math.PI * 2);
+          ctx.arc(x, y, 36, 0, Math.PI * 2);
           ctx.stroke();
           ctx.shadowBlur = 0;
         }
 
-        // Draw icon
-        ctx.fillStyle = 'white';
-        ctx.font = 'bold 24px Inter, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(strength.icon, x, y);
+        // Draw SVG icon
+        drawSVGPath(strength.icon, x, y, 28, 'white');
       });
 
       time++;
@@ -214,7 +234,7 @@ export default function WhyMeSection() {
     const orbitRadius = Math.min(centerX, centerY);
 
     let foundHover = false;
-    const time = performance.now() * 0.01;
+    const time = performance.now() * 0.005;
 
     strengths.forEach((_, index) => {
       const angle = (index / strengths.length) * Math.PI * 2 + time;
@@ -222,7 +242,7 @@ export default function WhyMeSection() {
       const iconY = centerY + Math.sin(angle) * orbitRadius;
       const distance = Math.sqrt((x - iconX) ** 2 + (y - iconY) ** 2);
 
-      if (distance < 30) {
+      if (distance < 64) {
         setHoveredIndex(index);
         setIsHovering(true);
         foundHover = true;
@@ -256,14 +276,32 @@ export default function WhyMeSection() {
         <div className="absolute bottom-32 left-40 w-36 h-36 rounded-3xl bg-gradient-to-br from-pink-100/35 to-rose-100/25 opacity-65 blur-xl animate-float animation-delay-3000 -rotate-12"></div>
       </div>
 
-      {/* Canvas Container */}
-      <div className="relative z-10 w-full h-full flex items-center justify-center p-8">
+      {/* Main Content */}
+      <div className="relative z-10 w-full h-full flex items-center justify-between max-w-7xl mx-auto px-8 lg:px-16 translate-x-12 translate-y-4 gap-12">
+        
+        {/* Left Side - Text Content */}
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="flex-1 max-w-xl"
+        >
+          <h2 className="text-6xl font-bold mb-6 pb-2 bg-gradient-to-r from-orange-500 via-rose-500 to-amber-500 bg-clip-text text-transparent">
+            Why Me?
+          </h2>
+          <p className="text-xl md:text-2xl text-gray-700 leading-relaxed">
+            A combination of technical excellence, unwavering dedication, and a proven track record of delivering exceptional results.
+          </p>
+        </motion.div>
+
+        {/* Right Side - Canvas */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="relative w-full h-full max-w-2xl aspect-square"
+          className="relative w-full max-w-2xl aspect-square"
         >
           <canvas
             ref={canvasRef}
