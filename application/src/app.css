@@ -256,7 +256,6 @@ h1, h2, h3 {
   animation-delay: 5s;
 }
 
-/* Custom scrollbar for better UX */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -282,9 +281,14 @@ html {
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
   height: 100vh;
+  scroll-padding-top: 0;
 }
 
 .snap-section {
   scroll-snap-align: start;
   scroll-snap-stop: always;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto;
+  box-sizing: border-box;
 }

@@ -274,7 +274,7 @@ export default function ExperienceSection() {
 
         <div className="relative overflow-x-auto pb-8 hide-scrollbar">
           <div className="min-w-max px-4">
-            <div className="relative mb-12">
+            <div className="relative">
               <div className="relative flex justify-center items-center gap-28">
                 <div className="absolute top-1/2 left-[14%] right-[14%] h-1 bg-gray-200 rounded-full -translate-y-1/2"></div>
                 <motion.div
