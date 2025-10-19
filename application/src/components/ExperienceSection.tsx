@@ -73,14 +73,6 @@ export default function ExperienceSection() {
     },
   };
 
-  const dotVariants = {
-    hidden: { scale: 0, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-    },
-  };
-
   return (
     <section
       ref={sectionRef}
@@ -88,9 +80,9 @@ export default function ExperienceSection() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50"
     >
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-32 w-96 h-96 rounded-full bg-gradient-to-br from-green-200/30 to-emerald-200/20 blur-3xl animate-float"></div>
-        <div className="absolute bottom-32 left-32 w-[28rem] h-[28rem] rounded-full bg-gradient-to-br from-teal-200/25 to-cyan-200/20 blur-3xl animate-float-slower animation-delay-2000"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[32rem] h-[32rem] rounded-full bg-gradient-to-br from-emerald-200/20 to-green-200/15 blur-3xl animate-pulse-slow"></div>
+        <div className="absolute top-20 right-32 w-96 h-96 rounded-full bg-gradient-to-br from-green-200/30 to-emerald-200/20 blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-32 left-32 w-[28rem] h-[28rem] rounded-full bg-gradient-to-br from-teal-200/25 to-cyan-200/20 blur-3xl animate-pulse animation-delay-2000"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[32rem] h-[32rem] rounded-full bg-gradient-to-br from-emerald-200/20 to-green-200/15 blur-3xl animate-pulse"></div>
       </div>
 
       <div className="relative z-10 w-full mx-auto px-6 sm:px-8 lg:px-12 py-24">
@@ -101,37 +93,80 @@ export default function ExperienceSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
-              Experience
-            </span>
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-green-600 to-teal-600 mx-auto rounded-full"></div>
+            <motion.div 
+            className="text-center mb-4"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            >
+            <div className="inline-block">
+                <motion.h2 
+                className="text-5xl md:text-6xl font-bold text-gray-900 mb-4"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                animate={{ 
+                    y: [0, -8, 0],
+                }}
+                transition={{
+                    opacity: { duration: 0.5, delay: 0.2 },
+                    scale: { duration: 0.5, delay: 0.2 },
+                    y: {
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 0.5
+                    }
+                }}
+                >
+                <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent animate-gradient">
+                    Experience
+                </span>
+                </motion.h2>
+
+                <motion.div 
+                className="w-24 h-1 bg-gradient-to-r from-green-600 to-teal-600 rounded-full mx-auto"
+                initial={{ width: 0 }}
+                whileInView={{ width: 96 }}
+                viewport={{ once: true }}
+                animate={{
+                    scaleX: [1, 1.3, 1],
+                }}
+                transition={{ 
+                    width: { duration: 0.8, delay: 0.4 },
+                    scaleX: {
+                    duration: 2.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1
+                    }
+                }}
+                ></motion.div>
+            </div>
+            </motion.div>
+
           <p className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto">
             My journey through various organizations and roles
           </p>
         </motion.div>
 
-        {/* Horizontal Timeline */}
         <div className="relative overflow-x-auto pb-8 hide-scrollbar">
           <div className="min-w-max px-4">
-            {/* Timeline Line */}
             <div className="relative mb-12">
-              <div className="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 rounded-full -translate-y-1/2"></div>
-              <motion.div
-                variants={timelineVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
-                className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 rounded-full -translate-y-1/2 origin-left"
-              ></motion.div>
+              <div className="relative flex justify-center items-center gap-28">
+                <div className="absolute top-1/2 left-[14%] right-[14%] h-1 bg-gray-200 rounded-full -translate-y-1/2"></div>
+                <motion.div
+                  variants={timelineVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
+                  className="absolute top-1/2 left-[14%] right-[14%] h-1 bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 rounded-full -translate-y-1/2 origin-left"
+                ></motion.div>
 
-              {/* Timeline Cards */}
-              <div className="relative flex justify-between items-center gap-8">
                 {experiences.map((experience, index) => (
-                  <div key={index} className="relative flex flex-col items-center" style={{ minWidth: '280px' }}>
-                    {/* Card */}
+                  <div key={index} className="relative flex flex-col items-center">
                     <motion.div
                       variants={cardVariants}
                       initial="hidden"
@@ -141,14 +176,10 @@ export default function ExperienceSection() {
                       className={`${index % 2 === 0 ? 'mb-32' : 'mt-32'} relative`}
                     >
                       <div
-                        className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-200/50 group w-72"
+                        className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-200/50 group w-64"
                         onMouseEnter={() => setIsHovering(true)}
                         onMouseLeave={() => setIsHovering(false)}
                       >
-                        {/* Connecting Line to Timeline */}
-                        <div className={`absolute left-1/2 -translate-x-1/2 w-0.5 h-20 bg-gradient-to-b ${index % 2 === 0 ? 'top-full from-gray-300 to-transparent' : 'bottom-full from-transparent to-gray-300'}`}></div>
-
-                        {/* Icon */}
                         <div className="flex justify-center mb-4">
                           <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${experience.gradient} p-3 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                             <div className="text-white">
@@ -157,7 +188,6 @@ export default function ExperienceSection() {
                           </div>
                         </div>
 
-                        {/* Content */}
                         <div className="text-center">
                           <div className="mb-3">
                             <div className="text-sm font-bold text-transparent bg-gradient-to-r from-green-600 to-teal-600 bg-clip-text mb-2">
@@ -172,21 +202,8 @@ export default function ExperienceSection() {
                           </div>
                         </div>
 
-                        {/* Decorative Glow */}
                         <div className={`absolute inset-0 bg-gradient-to-br ${experience.gradient} opacity-0 group-hover:opacity-10 blur-xl rounded-2xl transition-opacity duration-500 pointer-events-none`}></div>
                       </div>
-                    </motion.div>
-
-                    {/* Dot on timeline - positioned separately to avoid conflicts */}
-                    <motion.div
-                      variants={dotVariants}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true, amount: 0.3 }}
-                      transition={{ delay: index * 0.3 + 0.3, duration: 0.4 }}
-                      className="absolute top-1/2 -translate-y-1/2 z-20"
-                    >
-                      <div className={`w-5 h-5 rounded-full bg-gradient-to-br ${experience.gradient} shadow-lg ring-4 ring-white`}></div>
                     </motion.div>
                   </div>
                 ))}
