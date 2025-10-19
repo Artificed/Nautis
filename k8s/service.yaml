@@ -11,6 +11,6 @@ spec:
     app: presentation-application
   ports:
   - port: 5678
-    targetPort: 80
+    targetPort: 5678
     protocol: TCP
     name: http
