@@ -15,4 +15,4 @@ spec:
           service:
             name: presentation-application
             port:
-              number: 5678
+              number: 80

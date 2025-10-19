@@ -122,4 +122,4 @@ jobs:
         kubectl get svc -n ${{ env.K8S_NAMESPACE }}
         
         echo " Health Check:"
-        curl -f http://localhost:5678 || echo "⚠️  Warning: Health check failed"
+        curl -f http://localhost:80 || echo "⚠️  Warning: Health check failed"

@@ -6,7 +6,7 @@ metadata:
   labels:
     app: presentation-application
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: presentation-application
@@ -22,7 +22,7 @@ spec:
         image: ghcr.io/artificed/astdev-presentation/presentation-application:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 5678
+        - containerPort: 80
           name: http
         resources:
           requests:
@@ -34,12 +34,12 @@ spec:
         livenessProbe:
           httpGet:
             path: /
-            port: 5678
+            port: 80
           initialDelaySeconds: 10
           periodSeconds: 10
         readinessProbe:
           httpGet:
             path: /
-            port: 5678
+            port: 80
           initialDelaySeconds: 5
           periodSeconds: 5
