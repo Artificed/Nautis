@@ -4,6 +4,7 @@ import SkillsSection from "../components/SkillsSection";
 import StrengthsSection from "../components/StrengthsSection";
 import ExperienceSection from "../components/ExperienceSection";
 import AchievementSection from "../components/AchievementSection";
+import WhyMeSection from "../components/WhyMeSection";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CustomCursor from "../components/CustomCursor";
@@ -35,6 +36,10 @@ export default function HomePage() {
 
         <div className="snap-section">
           <AchievementSection />
+        </div>
+
+        <div className="snap-section">
+          <WhyMeSection />
         </div>
 
         <div className="snap-section">
