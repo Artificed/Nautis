@@ -296,17 +296,22 @@ export default function ExperienceSection() {
                       transition={{ delay: index * 0.3 + 0.5, duration: 0.6 }}
                       className={`${index % 2 === 0 ? 'mb-32' : 'mt-32'} relative`}
                     >
-                      <div
+                      <motion.div
                         className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-200/50 group w-64"
                         onMouseEnter={() => setIsHovering(true)}
                         onMouseLeave={() => setIsHovering(false)}
+                        whileHover="hover"
+                        initial="initial"
                       >
                         <div className="flex justify-center mb-4">
                           <motion.div 
                             className={`w-16 h-16 rounded-xl bg-gradient-to-br ${experience.gradient} p-3 shadow-lg`}
-                            whileHover={{ 
-                              scale: 1.1,
-                              rotate: 360,
+                            variants={{
+                              initial: { scale: 1, rotate: 0 },
+                              hover: { 
+                                scale: 1.1,
+                                rotate: 360,
+                              }
                             }}
                             transition={{ 
                               type: "spring",
@@ -339,7 +344,7 @@ export default function ExperienceSection() {
                         </div>
 
                         <div className={`absolute inset-0 bg-gradient-to-br ${experience.gradient} opacity-0 group-hover:opacity-10 blur-xl rounded-2xl transition-opacity duration-500 pointer-events-none`}></div>
-                      </div>
+                      </motion.div>
                     </motion.div>
                   </div>
                 ))}
