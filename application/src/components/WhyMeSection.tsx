@@ -14,6 +14,7 @@ export default function WhyMeSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const animationFrameRef = useRef<number>(0);
+  const timeRef = useRef<number>(0);
 
   const strengths: Strength[] = [
     {
@@ -92,7 +93,6 @@ export default function WhyMeSection() {
     const centerX = canvas.width / (2 * window.devicePixelRatio);
     const centerY = canvas.height / (2 * window.devicePixelRatio);
     const orbitRadius = Math.min(centerX, centerY) * 0.7;
-    let time = 0;
 
     const drawHexagon = (x: number, y: number, radius: number) => {
       ctx.beginPath();
@@ -166,8 +166,8 @@ export default function WhyMeSection() {
       drawSVGPath(centerIconPath, centerX, centerY, 48, '#fb923c');
 
       // Draw pulsing hexagon
-      const pulseRadius = 80 + Math.sin(time * 0.03) * 8;
-      const pulseAlpha = 0.3 + Math.sin(time * 0.03) * 0.2;
+      const pulseRadius = 80 + Math.sin(timeRef.current * 0.03) * 8;
+      const pulseAlpha = 0.3 + Math.sin(timeRef.current * 0.03) * 0.2;
       ctx.strokeStyle = `rgba(251, 146, 60, ${pulseAlpha})`;
       ctx.lineWidth = 3;
       drawHexagon(centerX, centerY, pulseRadius);
@@ -175,7 +175,7 @@ export default function WhyMeSection() {
 
       // Draw orbiting icons
       strengths.forEach((strength, index) => {
-        const angle = (index / strengths.length) * Math.PI * 2 + time * 0.005;
+        const angle = (index / strengths.length) * Math.PI * 2 + timeRef.current * 0.002;
         const x = centerX + Math.cos(angle) * orbitRadius;
         const y = centerY + Math.sin(angle) * orbitRadius;
 
@@ -194,21 +194,11 @@ export default function WhyMeSection() {
         ctx.lineWidth = 3;
         ctx.stroke();
 
-        // Glow effect on hover
-        if (hoveredIndex === index) {
-          ctx.shadowColor = strength.color;
-          ctx.shadowBlur = 20;
-          ctx.beginPath();
-          ctx.arc(x, y, 36, 0, Math.PI * 2);
-          ctx.stroke();
-          ctx.shadowBlur = 0;
-        }
-
         // Draw SVG icon
         drawSVGPath(strength.icon, x, y, 28, 'white');
       });
 
-      time++;
+      timeRef.current++;
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
@@ -231,28 +221,29 @@ export default function WhyMeSection() {
     const y = e.clientY - rect.top;
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    const orbitRadius = Math.min(centerX, centerY);
+    const orbitRadius = Math.min(centerX, centerY) * 0.7;
 
     let foundHover = false;
-    const time = performance.now() * 0.005;
 
     strengths.forEach((_, index) => {
-      const angle = (index / strengths.length) * Math.PI * 2 + time;
+      const angle = (index / strengths.length) * Math.PI * 2 + timeRef.current * 0.002;
       const iconX = centerX + Math.cos(angle) * orbitRadius;
       const iconY = centerY + Math.sin(angle) * orbitRadius;
       const distance = Math.sqrt((x - iconX) ** 2 + (y - iconY) ** 2);
 
-      if (distance < 64) {
-        setHoveredIndex(index);
-        setIsHovering(true);
+      if (distance < 56) {
+        if (hoveredIndex !== index) {
+          setHoveredIndex(index);
+        }
         foundHover = true;
       }
     });
 
-    if (!foundHover) {
+    if (!foundHover && hoveredIndex !== null) {
       setHoveredIndex(null);
-      setIsHovering(false);
     }
+    
+    setIsHovering(foundHover);
   };
 
   const handleCanvasMouseLeave = () => {
