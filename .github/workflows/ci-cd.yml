@@ -92,6 +92,10 @@ jobs:
         docker pull ${{ env.IMAGE_NAME }}:latest
         docker save ${{ env.IMAGE_NAME }}:latest | sudo k3s ctr images import -
     
+    - name: Apply Namespace
+      run: |
+        kubectl apply -f k8s/namespace.yaml
+
     - name: Configure Registry Secret
       run: |
         kubectl create secret docker-registry ghcr-secret \
@@ -102,9 +106,8 @@ jobs:
           --namespace=${{ env.K8S_NAMESPACE }} \
           --dry-run=client -o yaml | kubectl apply -f -
     
-    - name: Apply Manifests
+    - name: Apply Other Manifests
       run: |
-        kubectl apply -f k8s/namespace.yaml
         kubectl apply -f k8s/deployment.yaml
         kubectl apply -f k8s/service.yaml
         kubectl apply -f k8s/ingress.yaml
@@ -119,4 +122,4 @@ jobs:
         kubectl get svc -n ${{ env.K8S_NAMESPACE }}
         
         echo " Health Check:"
-        curl -f http://localhost:80 || echo "⚠️  Warning: Health check failed"
+        curl -f http://localhost:5678 || echo "⚠️  Warning: Health check failed"

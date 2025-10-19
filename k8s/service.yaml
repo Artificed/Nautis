@@ -10,7 +10,7 @@ spec:
   selector:
     app: presentation-application
   ports:
-  - port: 80
+  - port: 5678
     targetPort: 80
     protocol: TCP
     name: http
