@@ -43,7 +43,7 @@ export default function AboutSection() {
     <section
       ref={sectionRef}
       id="about"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-stone-100 via-amber-50 to-orange-50"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50"
     >
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 right-32 w-96 h-96 rounded-full bg-gradient-to-br from-orange-200/30 to-amber-200/20 blur-3xl animate-float"></div>
@@ -273,7 +273,7 @@ export default function AboutSection() {
                   className={`absolute -inset-0.5 bg-gradient-to-r ${info.gradient} rounded-3xl opacity-0 group-hover:opacity-100 blur transition-opacity duration-500`}
                 ></div>
 
-                <div className="relative bg-white rounded-3xl p-8 h-full flex flex-col items-center text-center">
+                <div className="relative bg-white rounded-3xl h-full flex flex-col items-center text-center">
                   <motion.div 
                     className="w-16 h-16 text-gray-700 mb-4"
                     whileHover={{ scale: 1.1, rotate: 6 }}

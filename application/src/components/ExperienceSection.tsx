@@ -77,12 +77,133 @@ export default function ExperienceSection() {
     <section
       ref={sectionRef}
       id="experience"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-stone-100 via-amber-50 to-orange-50"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50"
     >
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-32 w-96 h-96 rounded-full bg-gradient-to-br from-orange-200/30 to-amber-200/20 blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-32 left-32 w-[28rem] h-[28rem] rounded-full bg-gradient-to-br from-amber-200/25 to-orange-200/20 blur-3xl animate-pulse animation-delay-2000"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[32rem] h-[32rem] rounded-full bg-gradient-to-br from-stone-200/20 to-amber-200/15 blur-3xl animate-pulse"></div>
+        <div className="absolute top-20 right-32 w-96 h-96 rounded-full bg-gradient-to-br from-orange-200/30 to-amber-200/20 blur-3xl animate-float"></div>
+        <div className="absolute bottom-32 left-32 w-[28rem] h-[28rem] rounded-full bg-gradient-to-br from-amber-200/25 to-orange-200/20 blur-3xl animate-float-slower animation-delay-2000"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[32rem] h-[32rem] rounded-full bg-gradient-to-br from-stone-200/20 to-amber-200/15 blur-3xl animate-pulse-slow"></div>
+        
+        <div className="absolute top-20 left-20 w-32 h-32 rounded-3xl bg-gradient-to-br from-orange-100/40 to-amber-100/30 opacity-80 blur-xl animate-float rotate-12"></div>
+        <div className="absolute top-40 right-40 w-24 h-24 rounded-2xl bg-gradient-to-br from-amber-100/35 to-yellow-100/25 opacity-75 blur-lg animate-float-slow animation-delay-1000 -rotate-6"></div>
+        <div className="absolute bottom-40 right-20 w-28 h-28 rounded-3xl bg-gradient-to-br from-orange-100/40 to-amber-100/30 opacity-70 blur-xl animate-float-slower animation-delay-2000 rotate-45"></div>
+        <div className="absolute bottom-32 left-40 w-36 h-36 rounded-3xl bg-gradient-to-br from-amber-100/35 to-orange-100/25 opacity-65 blur-xl animate-float animation-delay-3000 -rotate-12"></div>
+        <div className="absolute top-1/3 right-1/4 w-20 h-20 rounded-2xl bg-gradient-to-br from-yellow-100/30 to-amber-100/20 opacity-60 blur-lg animate-float-slow animation-delay-4000 rotate-90"></div>
+        <div className="absolute bottom-1/4 left-1/3 w-16 h-16 rounded-xl bg-gradient-to-br from-orange-100/25 to-amber-100/20 opacity-55 blur-lg animate-float-slower rotate-45"></div>
+        
+        <div className="absolute top-1/4 left-1/4 w-12 h-12 rounded-full bg-gradient-to-br from-amber-100/20 to-orange-100/15 opacity-30 blur-md animate-float animation-delay-5000"></div>
+        <div className="absolute bottom-1/3 right-1/3 w-10 h-10 rounded-full bg-gradient-to-br from-orange-100/25 to-yellow-100/15 opacity-35 blur-md animate-float-slow animation-delay-2000"></div>
+        <div className="absolute top-2/3 right-1/4 w-8 h-8 rounded-full bg-gradient-to-br from-amber-100/20 to-orange-100/15 opacity-25 blur-sm animate-float-slower animation-delay-1000"></div>
+        <div className="absolute top-1/2 left-1/5 w-14 h-14 rounded-full bg-gradient-to-br from-orange-100/20 to-amber-100/15 opacity-30 blur-md animate-float animation-delay-3500"></div>
+        
+        <div className="absolute top-1/3 right-1/3 w-80 h-80 rounded-full bg-gradient-to-br from-orange-100/15 to-amber-100/10 blur-3xl animate-rotate-gradient"></div>
+        <div className="absolute bottom-1/3 left-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-amber-100/10 to-orange-100/10 blur-3xl animate-rotate-gradient animation-delay-3000"></div>
+
+        <motion.div
+          className="absolute top-24 left-1/5 w-24 h-24 bg-gradient-to-br from-amber-300/20 to-orange-300/20"
+          style={{ 
+            borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%",
+            filter: "blur(8px)"
+          }}
+          animate={{
+            borderRadius: [
+              "60% 40% 30% 70% / 60% 30% 70% 40%",
+              "30% 60% 70% 40% / 50% 60% 30% 60%",
+              "50% 50% 30% 70% / 30% 70% 70% 30%",
+              "60% 40% 30% 70% / 60% 30% 70% 40%",
+            ],
+            x: [0, 40, -20, 0],
+            y: [0, -30, 20, 0],
+            scale: [1, 1.2, 0.9, 1],
+            rotate: [0, 120, 240, 360],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        
+        <motion.div
+          className="absolute bottom-32 right-1/5 w-32 h-32 bg-gradient-to-br from-orange-300/20 to-amber-300/20"
+          style={{ 
+            borderRadius: "50% 50% 50% 50% / 50% 50% 50% 50%",
+            filter: "blur(10px)"
+          }}
+          animate={{
+            borderRadius: [
+              "50% 50% 50% 50% / 50% 50% 50% 50%",
+              "70% 30% 50% 50% / 30% 70% 50% 50%",
+              "50% 70% 30% 50% / 50% 30% 70% 50%",
+              "50% 50% 50% 50% / 50% 50% 50% 50%",
+            ],
+            x: [0, -50, 30, 0],
+            y: [0, 40, -20, 0],
+            scale: [1, 1.1, 1.3, 1],
+            rotate: [0, -90, -180, -360],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
+
+        <motion.div
+          className="absolute top-1/4 right-10 w-20 h-20 border-2 border-blue-300/30 rounded-lg"
+          animate={{
+            rotate: [0, 90, 180, 270, 360],
+            scale: [1, 1.2, 1],
+            x: [0, 20, 0],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 left-10 w-16 h-16 border-2 border-purple-300/30"
+          style={{ borderRadius: "30%" }}
+          animate={{
+            rotate: [0, -90, -180, -270, -360],
+            scale: [1, 0.8, 1.1, 1],
+            y: [0, -30, 0],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute top-1/2 right-1/4 w-12 h-12 bg-gradient-to-br from-cyan-200/20 to-blue-200/20 rounded-full"
+          animate={{
+            scale: [1, 1.5, 1],
+            opacity: [0.3, 0.6, 0.3],
+            x: [0, 40, 0],
+            y: [0, -40, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
+        <motion.div
+          className="absolute bottom-1/3 right-1/5 w-24 h-24 border-4 border-indigo-200/20 rounded-full"
+          animate={{
+            scale: [1, 1.3, 1],
+            rotate: [0, 180, 360],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
       </div>
 
       <div className="relative z-10 w-full mx-auto px-6 sm:px-8 lg:px-12 py-24">
@@ -181,11 +302,26 @@ export default function ExperienceSection() {
                         onMouseLeave={() => setIsHovering(false)}
                       >
                         <div className="flex justify-center mb-4">
-                          <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${experience.gradient} p-3 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                          <motion.div 
+                            className={`w-16 h-16 rounded-xl bg-gradient-to-br ${experience.gradient} p-3 shadow-lg`}
+                            whileHover={{ 
+                              scale: 1.1,
+                              rotate: 360,
+                            }}
+                            transition={{ 
+                              type: "spring",
+                              stiffness: 260,
+                              damping: 20,
+                              rotate: {
+                                duration: 0.6,
+                                ease: "easeInOut"
+                              }
+                            }}
+                          >
                             <div className="text-white">
                               {experience.icon}
                             </div>
-                          </div>
+                          </motion.div>
                         </div>
 
                         <div className="text-center">
