@@ -14,7 +14,7 @@ export default function SkillsSection() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
         </svg>
       ),
-      gradient: "from-blue-200 to-cyan-200",
+      gradient: "from-orange-200 to-amber-200",
     },
     {
       title: "Artificial Intelligence Systems",
@@ -23,7 +23,7 @@ export default function SkillsSection() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
         </svg>
       ),
-      gradient: "from-purple-200 to-pink-200",
+      gradient: "from-pink-200 to-rose-200",
     },
     {
       title: "DevOps & Networking",
@@ -32,7 +32,7 @@ export default function SkillsSection() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
         </svg>
       ),
-      gradient: "from-green-200 to-emerald-200",
+      gradient: "from-amber-200 to-yellow-200",
     },
     {
       title: "Algorithm & Problem Solving",
@@ -62,7 +62,7 @@ export default function SkillsSection() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
         </svg>
       ),
-      gradient: "from-indigo-200 to-blue-200",
+      gradient: "from-rose-200 to-pink-200",
     },
     {
       title: "Adaptability",
@@ -71,7 +71,7 @@ export default function SkillsSection() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
         </svg>
       ),
-      gradient: "from-teal-200 to-cyan-200",
+      gradient: "from-orange-200 to-rose-200",
     },
     {
       title: "Leadership",
@@ -88,27 +88,27 @@ export default function SkillsSection() {
     <section
       ref={sectionRef}
       id="skills"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-stone-100 via-amber-50 to-orange-50"
     >
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-32 w-96 h-96 rounded-full bg-gradient-to-br from-blue-200/30 to-cyan-200/20 blur-3xl animate-float"></div>
-        <div className="absolute bottom-32 left-32 w-[28rem] h-[28rem] rounded-full bg-gradient-to-br from-indigo-200/25 to-purple-200/20 blur-3xl animate-float-slower animation-delay-2000"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[32rem] h-[32rem] rounded-full bg-gradient-to-br from-teal-200/20 to-emerald-200/15 blur-3xl animate-pulse-slow"></div>
+        <div className="absolute top-20 right-32 w-96 h-96 rounded-full bg-gradient-to-br from-orange-200/30 to-rose-200/20 blur-3xl animate-float"></div>
+        <div className="absolute bottom-32 left-32 w-[28rem] h-[28rem] rounded-full bg-gradient-to-br from-amber-200/25 to-orange-200/20 blur-3xl animate-float-slower animation-delay-2000"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[32rem] h-[32rem] rounded-full bg-gradient-to-br from-rose-200/20 to-amber-200/15 blur-3xl animate-pulse-slow"></div>
         
-        <div className="absolute top-20 left-20 w-32 h-32 rounded-3xl bg-gradient-to-br from-blue-100/40 to-cyan-100/30 opacity-80 blur-xl animate-float rotate-12"></div>
-        <div className="absolute top-40 right-40 w-24 h-24 rounded-2xl bg-gradient-to-br from-purple-100/35 to-indigo-100/25 opacity-75 blur-lg animate-float-slow animation-delay-1000 -rotate-6"></div>
-        <div className="absolute bottom-40 right-20 w-28 h-28 rounded-3xl bg-gradient-to-br from-green-100/40 to-emerald-100/30 opacity-70 blur-xl animate-float-slower animation-delay-2000 rotate-45"></div>
+        <div className="absolute top-20 left-20 w-32 h-32 rounded-3xl bg-gradient-to-br from-orange-100/40 to-amber-100/30 opacity-80 blur-xl animate-float rotate-12"></div>
+        <div className="absolute top-40 right-40 w-24 h-24 rounded-2xl bg-gradient-to-br from-pink-100/35 to-rose-100/25 opacity-75 blur-lg animate-float-slow animation-delay-1000 -rotate-6"></div>
+        <div className="absolute bottom-40 right-20 w-28 h-28 rounded-3xl bg-gradient-to-br from-amber-100/40 to-yellow-100/30 opacity-70 blur-xl animate-float-slower animation-delay-2000 rotate-45"></div>
         <div className="absolute bottom-32 left-40 w-36 h-36 rounded-3xl bg-gradient-to-br from-pink-100/35 to-rose-100/25 opacity-65 blur-xl animate-float animation-delay-3000 -rotate-12"></div>
         <div className="absolute top-1/3 right-1/4 w-20 h-20 rounded-2xl bg-gradient-to-br from-yellow-100/30 to-amber-100/20 opacity-60 blur-lg animate-float-slow animation-delay-4000 rotate-90"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-16 h-16 rounded-xl bg-gradient-to-br from-cyan-100/25 to-blue-100/20 opacity-55 blur-lg animate-float-slower rotate-45"></div>
+        <div className="absolute bottom-1/4 left-1/3 w-16 h-16 rounded-xl bg-gradient-to-br from-rose-100/25 to-pink-100/20 opacity-55 blur-lg animate-float-slower rotate-45"></div>
         
-        <div className="absolute top-1/4 left-1/4 w-12 h-12 rounded-full bg-gradient-to-br from-indigo-100/20 to-purple-100/15 opacity-30 blur-md animate-float animation-delay-5000"></div>
-        <div className="absolute bottom-1/3 right-1/3 w-10 h-10 rounded-full bg-gradient-to-br from-teal-100/25 to-green-100/15 opacity-35 blur-md animate-float-slow animation-delay-2000"></div>
-        <div className="absolute top-2/3 right-1/4 w-8 h-8 rounded-full bg-gradient-to-br from-blue-100/20 to-cyan-100/15 opacity-25 blur-sm animate-float-slower animation-delay-1000"></div>
+        <div className="absolute top-1/4 left-1/4 w-12 h-12 rounded-full bg-gradient-to-br from-orange-100/20 to-amber-100/15 opacity-30 blur-md animate-float animation-delay-5000"></div>
+        <div className="absolute bottom-1/3 right-1/3 w-10 h-10 rounded-full bg-gradient-to-br from-pink-100/25 to-rose-100/15 opacity-35 blur-md animate-float-slow animation-delay-2000"></div>
+        <div className="absolute top-2/3 right-1/4 w-8 h-8 rounded-full bg-gradient-to-br from-amber-100/20 to-yellow-100/15 opacity-25 blur-sm animate-float-slower animation-delay-1000"></div>
         <div className="absolute top-1/2 left-1/5 w-14 h-14 rounded-full bg-gradient-to-br from-pink-100/20 to-rose-100/15 opacity-30 blur-md animate-float animation-delay-3500"></div>
         
-        <div className="absolute top-1/3 right-1/3 w-80 h-80 rounded-full bg-gradient-to-br from-blue-100/15 to-indigo-100/10 blur-3xl animate-rotate-gradient"></div>
-        <div className="absolute bottom-1/3 left-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-purple-100/10 to-pink-100/10 blur-3xl animate-rotate-gradient animation-delay-3000"></div>
+        <div className="absolute top-1/3 right-1/3 w-80 h-80 rounded-full bg-gradient-to-br from-orange-100/15 to-rose-100/10 blur-3xl animate-rotate-gradient"></div>
+        <div className="absolute bottom-1/3 left-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-amber-100/10 to-pink-100/10 blur-3xl animate-rotate-gradient animation-delay-3000"></div>
 
         <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <motion.path
@@ -194,7 +194,7 @@ export default function SkillsSection() {
           }}
         />
         <motion.div
-          className="absolute top-1/2 right-1/4 w-12 h-12 bg-gradient-to-br from-cyan-200/20 to-blue-200/20 rounded-full"
+          className="absolute top-1/2 right-1/4 w-12 h-12 bg-gradient-to-br from-orange-200/20 to-rose-200/20 rounded-full"
           animate={{
             scale: [1, 1.5, 1],
             opacity: [0.3, 0.6, 0.3],
@@ -250,12 +250,12 @@ export default function SkillsSection() {
             }}
           >
             My{" "}
-            <span className="bg-gradient-to-r from-blue-300 via-indigo-300 to-purple-300 bg-clip-text text-transparent animate-gradient">
+            <span className="bg-gradient-to-r from-orange-300 via-amber-300 to-rose-300 bg-clip-text text-transparent animate-gradient">
               Skills
             </span>
           </motion.h2>
           <motion.div 
-            className="w-24 h-1 bg-gradient-to-r from-blue-200 to-indigo-200 rounded-full mx-auto"
+            className="w-24 h-1 bg-gradient-to-r from-orange-200 to-rose-200 rounded-full mx-auto"
             initial={{ width: 0 }}
             whileInView={{ width: 96 }}
             viewport={{ once: true }}
@@ -281,8 +281,8 @@ export default function SkillsSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h3 className="text-2xl font-bold mb-8 pb-3 border-b-2 border-blue-200">
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+            <h3 className="text-2xl font-bold mb-8 pb-3 border-b-2 border-orange-200">
+              <span className="bg-gradient-to-r from-orange-400 to-rose-400 bg-clip-text text-transparent">
                 Hard Skills
               </span>
             </h3>
@@ -347,8 +347,8 @@ export default function SkillsSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <h3 className="text-2xl font-bold mb-8 pb-3 border-b-2 border-purple-200">
-              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <h3 className="text-2xl font-bold mb-8 pb-3 border-b-2 border-pink-200">
+              <span className="bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent">
                 Soft Skills
               </span>
             </h3>
