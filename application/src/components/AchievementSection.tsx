@@ -149,7 +149,7 @@ export default function AchievementSection() {
                     className="relative bg-white/70 backdrop-blur-md rounded-3xl shadow-xl overflow-visible border border-orange-200/30 group hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 flex flex-col h-full"
                   >
                     {/* Image Section */}
-                    <div className="relative overflow-hidden h-64">
+                    <div className="relative overflow-hidden h-64 rounded-t-3xl">
                       <motion.img
                         src={achievement.image}
                         alt={achievement.title}
