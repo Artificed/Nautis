@@ -15,6 +15,8 @@ export default function WhyMeSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const animationFrameRef = useRef<number>(0);
   const timeRef = useRef<number>(0);
+  const lastMouseMoveTime = useRef<number>(0);
+  const isHoveringRef = useRef<boolean>(false);
 
   const strengths: Strength[] = [
     {
@@ -77,36 +79,52 @@ export default function WhyMeSection() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { 
+      alpha: true,
+      desynchronized: true
+    });
     if (!ctx) return;
+
+    let centerX = 0;
+    let centerY = 0;
+    let orbitRadius = 0;
 
     const updateCanvasSize = () => {
       const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * window.devicePixelRatio;
-      canvas.height = rect.height * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      const dpr = window.devicePixelRatio;
+      
+      centerX = rect.width / 2;
+      centerY = rect.height / 2;
+      orbitRadius = Math.min(centerX, centerY) * 0.7;
+      
+      const newWidth = rect.width * dpr;
+      const newHeight = rect.height * dpr;
+      
+      if (canvas.width !== newWidth || canvas.height !== newHeight) {
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.scale(dpr, dpr);
+      }
     };
 
     updateCanvasSize();
     window.addEventListener('resize', updateCanvasSize);
 
-    const centerX = canvas.width / (2 * window.devicePixelRatio);
-    const centerY = canvas.height / (2 * window.devicePixelRatio);
-    const orbitRadius = Math.min(centerX, centerY) * 0.7;
-
-    const drawHexagon = (x: number, y: number, radius: number) => {
-      ctx.beginPath();
+    const createHexagonPath = (x: number, y: number, radius: number): Path2D => {
+      const path = new Path2D();
       for (let i = 0; i < 6; i++) {
         const angle = (Math.PI / 3) * i - Math.PI / 2 + Math.PI / 6;
         const hx = x + radius * Math.cos(angle);
         const hy = y + radius * Math.sin(angle);
         if (i === 0) {
-          ctx.moveTo(hx, hy);
+          path.moveTo(hx, hy);
         } else {
-          ctx.lineTo(hx, hy);
+          path.lineTo(hx, hy);
         }
       }
-      ctx.closePath();
+      path.closePath();
+      return path;
     };
 
     const drawSVGPath = (pathData: string, x: number, y: number, size: number, color: string) => {
@@ -126,8 +144,7 @@ export default function WhyMeSection() {
     };
 
     const animate = () => {
-      const rect = canvas.getBoundingClientRect();
-      ctx.clearRect(0, 0, rect.width, rect.height);
+      ctx.clearRect(0, 0, centerX * 2, centerY * 2);
 
       // Draw orbit rings
       ctx.strokeStyle = 'rgba(251, 146, 60, 0.15)';
@@ -152,14 +169,14 @@ export default function WhyMeSection() {
       gradient.addColorStop(0.5, '#f43f5e');
       gradient.addColorStop(1, '#fbbf24');
 
+      const outerHex = createHexagonPath(centerX, centerY, 84);
       ctx.fillStyle = gradient;
-      drawHexagon(centerX, centerY, 84);
-      ctx.fill();
+      ctx.fill(outerHex);
 
       // Inner white hexagon
+      const innerHex = createHexagonPath(centerX, centerY, 76);
       ctx.fillStyle = 'white';
-      drawHexagon(centerX, centerY, 76);
-      ctx.fill();
+      ctx.fill(innerHex);
 
       // Draw center SVG icon (user profile icon)
       const centerIconPath = "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z";
@@ -168,10 +185,10 @@ export default function WhyMeSection() {
       // Draw pulsing hexagon
       const pulseRadius = 80 + Math.sin(timeRef.current * 0.03) * 8;
       const pulseAlpha = 0.3 + Math.sin(timeRef.current * 0.03) * 0.2;
+      const pulseHex = createHexagonPath(centerX, centerY, pulseRadius);
       ctx.strokeStyle = `rgba(251, 146, 60, ${pulseAlpha})`;
       ctx.lineWidth = 3;
-      drawHexagon(centerX, centerY, pulseRadius);
-      ctx.stroke();
+      ctx.stroke(pulseHex);
 
       // Draw orbiting icons
       strengths.forEach((strength, index) => {
@@ -190,6 +207,8 @@ export default function WhyMeSection() {
         ctx.fill();
 
         // White border
+        ctx.beginPath();
+        ctx.arc(x, y, 56, 0, Math.PI * 2);
         ctx.strokeStyle = 'white';
         ctx.lineWidth = 3;
         ctx.stroke();
@@ -210,9 +229,13 @@ export default function WhyMeSection() {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [strengths, hoveredIndex]);
+  }, []);
 
   const handleCanvasMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    const now = performance.now();
+    if (now - lastMouseMoveTime.current < 16) return;
+    lastMouseMoveTime.current = now;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -224,30 +247,36 @@ export default function WhyMeSection() {
     const orbitRadius = Math.min(centerX, centerY) * 0.7;
 
     let foundHover = false;
+    const currentTime = timeRef.current;
 
-    strengths.forEach((_, index) => {
-      const angle = (index / strengths.length) * Math.PI * 2 + timeRef.current * 0.002;
+    for (let index = 0; index < strengths.length; index++) {
+      const angle = (index / strengths.length) * Math.PI * 2 + currentTime * 0.002;
       const iconX = centerX + Math.cos(angle) * orbitRadius;
       const iconY = centerY + Math.sin(angle) * orbitRadius;
       const distance = Math.sqrt((x - iconX) ** 2 + (y - iconY) ** 2);
 
-      if (distance < 56) {
+      if (distance < 60) {
+        foundHover = true;
         if (hoveredIndex !== index) {
           setHoveredIndex(index);
         }
-        foundHover = true;
+        break;
       }
-    });
+    }
+
+    if (foundHover !== isHoveringRef.current) {
+      isHoveringRef.current = foundHover;
+      setIsHovering(foundHover);
+    }
 
     if (!foundHover && hoveredIndex !== null) {
       setHoveredIndex(null);
     }
-    
-    setIsHovering(foundHover);
   };
 
   const handleCanvasMouseLeave = () => {
     setHoveredIndex(null);
+    isHoveringRef.current = false;
     setIsHovering(false);
   };
 
@@ -267,10 +296,8 @@ export default function WhyMeSection() {
         <div className="absolute bottom-32 left-40 w-36 h-36 rounded-3xl bg-gradient-to-br from-pink-100/35 to-rose-100/25 opacity-65 blur-xl animate-float animation-delay-3000 -rotate-12"></div>
       </div>
 
-      {/* Main Content */}
       <div className="relative z-10 w-full h-full flex items-center justify-between max-w-7xl mx-auto px-8 lg:px-16 translate-x-12 translate-y-4 gap-12">
         
-        {/* Left Side - Text Content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -286,7 +313,6 @@ export default function WhyMeSection() {
           </p>
         </motion.div>
 
-        {/* Right Side - Canvas */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -302,7 +328,6 @@ export default function WhyMeSection() {
             style={{ cursor: hoveredIndex !== null ? 'pointer' : 'default' }}
           />
           
-          {/* Tooltip */}
           {hoveredIndex !== null && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
