@@ -9,6 +9,20 @@ services:
     ports:
       - "80:80"
 
+  automation-server:
+    container_name: automation-server
+    image: automation-server
+    restart: unless-stopped
+    build:
+      context: ./automation-server/
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ~/.kube/config:/root/.kube/config:ro
+    environment:
+      - KUBECONFIG=/root/.kube/config
+
   cluster-mcp:
     container_name: cluster-mcp
     image: cluster-mcp
