@@ -15,10 +15,9 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Work", href: "#work" },
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Contact", href: "#contact" },
+    { name: "Work Plan", href: "/work-plan" },
+    { name: "Innovations", href: "/innovations" },
+    { name: "TPA", href: "/tpa-changes" }
   ];
 
   return (
@@ -35,7 +34,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         <div className="flex items-center justify-between">
           <motion.a
-            href="#home"
+            href="/"
             className="text-xl md:text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400 }}
@@ -60,7 +59,7 @@ export default function Navbar() {
             ))}
             
             <motion.a
-              href="#contact"
+              href="/research"
               className="px-5 py-2.5 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 shadow-sm"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -68,7 +67,7 @@ export default function Navbar() {
               whileHover={{ scale: 1.05, boxShadow: "0 4px 12px rgba(0,0,0,0.15)" }}
               whileTap={{ scale: 0.95 }}
             >
-              Let's Talk
+              Research
             </motion.a>
           </div>
 
@@ -134,7 +133,7 @@ export default function Navbar() {
                   </motion.a>
                 ))}
                 <motion.a
-                  href="#contact"
+                  href="#research"
                   className="px-5 py-2.5 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors text-center mt-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -142,7 +141,7 @@ export default function Navbar() {
                   transition={{ delay: 0.4 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Let's Talk
+                  Research
                 </motion.a>
               </motion.div>
             </motion.div>
