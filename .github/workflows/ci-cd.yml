@@ -126,22 +126,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Prepare Images
-      run: |
-        echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-        
-        # Pull and import application image
-        docker pull ${{ env.IMAGE_NAME_APP }}:latest
-        docker save ${{ env.IMAGE_NAME_APP }}:latest | sudo k3s ctr images import -
-        
-        # Pull and import cluster-mcp image
-        docker pull ${{ env.IMAGE_NAME_MCP }}:latest
-        docker save ${{ env.IMAGE_NAME_MCP }}:latest | sudo k3s ctr images import -
-        
-        # Pull and import automation-server image
-        docker pull ${{ env.IMAGE_NAME_AUTOMATION }}:latest
-        docker save ${{ env.IMAGE_NAME_AUTOMATION }}:latest | sudo k3s ctr images import -
-    
     - name: Apply Namespaces
       run: |
         # Use k3s kubectl directly to avoid kubeconfig issues

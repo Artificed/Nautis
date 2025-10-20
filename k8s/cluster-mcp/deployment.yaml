@@ -21,8 +21,6 @@ spec:
       containers:
       - name: cluster-mcp
         image: ghcr.io/artificed/astdev-presentation/cluster-mcp:latest
-        # Image is built and pushed by GitHub Actions CI/CD
-        # See: .github/workflows/ci-cd.yml
         imagePullPolicy: Always
         stdin: true
         tty: true
