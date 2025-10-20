@@ -1,0 +1,73 @@
+# n8n Helm Chart Configuration with Traefik
+# community-charts/n8n - For running n8n locally with Traefik ingress
+
+# Image configuration
+image:
+  repository: n8nio/n8n
+  tag: ""  # Leave empty to use chart's appVersion
+  pullPolicy: IfNotPresent
+
+# Encryption key - REQUIRED
+# Generate with: openssl rand -hex 32
+encryptionKey: "4f269b9c8a271296a0f11bc47a04a177415e91a4c143c752fa44bfe63036cd3a"
+
+# Service configuration - NodePort for direct IP access
+service:
+  enabled: true
+  type: NodePort
+  port: 5678
+
+# Ingress - DISABLED
+ingress:
+  enabled: false
+
+# Main node configuration
+main:
+  # Resource limits
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+
+  # Persistence for workflows and data
+  persistence:
+    enabled: true
+    size: 8Gi
+    accessMode: ReadWriteOnce
+    # storageClass: "local-path"  # Common for local clusters
+
+  # Environment variables
+  extraEnvVars:
+    N8N_SECURE_COOKIE: "false"
+
+# Database configuration
+# Using default SQLite - fine for local development
+db:
+  type: sqlite
+  sqlite:
+    database: database.sqlite
+
+# Security context
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 1000
+  allowPrivilegeEscalation: false
+
+podSecurityContext:
+  fsGroup: 1000
+
+# Queue mode - DISABLED for localhost
+# Uncomment below if you want to test queue mode locally
+# worker:
+#   mode: queue
+#   count: 1
+# webhook:
+#   mode: queue
+#   count: 1
+#   url: "http://n8n.localhost"
+# redis:
+#   enabled: true
