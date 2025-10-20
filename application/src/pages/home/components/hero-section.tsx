@@ -1,7 +1,7 @@
-import { PERSONAL_DATA } from "../profile/constants";
+import { PERSONAL_DATA } from "../interfaces/constants/constants";
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { useCursor } from "../../ui/components/custom-cursor";
+import { useCursor } from "../../../common/shared/custom-cursor";
 
 export default function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });

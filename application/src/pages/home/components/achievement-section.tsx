@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useCursor } from "../../ui/components/custom-cursor";
+import { useCursor } from "../../../common/shared/custom-cursor";
 
 interface Achievement {
   title: string;

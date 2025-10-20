@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useCursor } from "./custom-cursor";
+import { useCursor } from "../shared/custom-cursor";
 
 export default function Footer() {
   const { setIsHovering } = useCursor();

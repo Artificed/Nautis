@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useCursor } from "../../ui/components/custom-cursor";
+import { useCursor } from "../../../common/shared/custom-cursor";
 import { motion } from "framer-motion";
 // Updated import paths
 

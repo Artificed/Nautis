@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { useCursor } from "../../ui/components/custom-cursor";
+import { useCursor } from "../../../common/shared/custom-cursor";
 
 interface Strength {
   title: string;
@@ -282,7 +282,6 @@ export default function WhyMeSection() {
 
   return (
     <section
-      id означает
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-rose-50"
     >
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

@@ -1,4 +1,4 @@
-import type { PersonalInfo } from "./interfaces";
+import type { PersonalInfo } from "../types/personal-info";
 
 export const PERSONAL_DATA: PersonalInfo = {
   name: "Paul Tsai Adinata",
