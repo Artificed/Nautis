@@ -5,5 +5,4 @@ export interface PersonalInfo {
     location: string;
     profileImage: string;
     highlights: string[];
-  }
-  
+}

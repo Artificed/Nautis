@@ -157,26 +157,42 @@ export default function AutomationSection() {
                 ))}
               </h1>
   
-              {/* n8n Logo */}
-              <motion.img
-                src="/src/assets/n8n-logo.png"
-                alt="n8n Logo"
-                className="w-64 h-64 object-contain"
+              {/* n8n Logo Card */}
+                <motion.div
+                className="relative group p-8 rounded-3xl bg-gradient-to-br white backdrop-blur-md shadow-xl border border-white/30"
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.4 }}
                 animate={{
-                  y: [0, -15, 0],
+                    y: [0, -15, 0],
                 }}
-                whileHover={{ 
-                  scale: 1.1,
-                  rotate: [0, -5, 5, -5, 0],
-                  transition: { duration: 0.5 }
+                whileHover={{
+                    scale: 1.05,
+                    y: -5,
+                    transition: { duration: 0.4 }
                 }}
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
-              />
+                >
+                {/* Glow effect on hover */}
+                <motion.div
+                    className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/30 to-transparent opacity-0 group-hover:opacity-100 blur-lg"
+                    transition={{ duration: 0.4 }}
+                />
+
+                {/* Logo inside card */}
+                <motion.img
+                    src="/src/assets/n8n-logo.png"
+                    alt="n8n Logo"
+                    className="relative z-10 w-64 h-64 object-contain mx-auto"
+                    whileHover={{
+                    rotate: [0, -5, 5, -5, 0],
+                    scale: 1.08,
+                    transition: { duration: 0.5 },
+                    }}
+                />
+                </motion.div>
             </motion.div>
   
             {/* Right Side - Features */}
@@ -185,7 +201,7 @@ export default function AutomationSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="space-y-6 translate-y-10"
+              className="space-y-6 translate-y-20"
             >
               {automationFeatures.map((feature, index) => (
                 <motion.div
