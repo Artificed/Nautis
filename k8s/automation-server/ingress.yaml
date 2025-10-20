@@ -6,15 +6,14 @@ metadata:
   labels:
     app: automation-server
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/use-regex: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.priority: "10"
 spec:
-  ingressClassName: nginx
   rules:
   - http:
       paths:
-      - path: /automation(/|$)(.*)
-        pathType: ImplementationSpecific
+      - path: /automation
+        pathType: Prefix
         backend:
           service:
             name: automation-server
