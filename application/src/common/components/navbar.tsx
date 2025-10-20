@@ -15,6 +15,7 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
+    { name: "Home", href: "/" },
     { name: "Work Plan", href: "/work-plan" },
     { name: "Innovations", href: "/innovations" },
     { name: "TPA", href: "/tpa-changes" }
