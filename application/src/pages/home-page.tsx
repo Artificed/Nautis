@@ -1,13 +1,13 @@
-import HeroSection from "../components/HeroSection";
-import AboutSection from "../components/AboutSection";
-import SkillsSection from "../components/SkillsSection";
-import StrengthsSection from "../components/StrengthsSection";
-import ExperienceSection from "../components/ExperienceSection";
-import AchievementSection from "../components/AchievementSection";
-import WhyMeSection from "../components/WhyMeSection";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import CustomCursor from "../components/CustomCursor";
+import CustomCursor from "../ui/components/custom-cursor";
+import Navbar from "../navigation/components/navbar";
+import HeroSection from "../personal/components/hero-section";
+import AboutSection from "../personal/components/about-section";
+import SkillsSection from "../personal/components/skills-section";
+import StrengthsSection from "../personal/components/strengths-section";
+import ExperienceSection from "../personal/components/experience-section";
+import AchievementSection from "../personal/components/achievement-section";
+import WhyMeSection from "../personal/components/why-me-section";
+import Footer from "../ui/components/footer";
 
 export default function HomePage() {
   return (
