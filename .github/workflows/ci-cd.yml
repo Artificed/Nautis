@@ -94,7 +94,7 @@ jobs:
     
     - name: Apply Namespace
       run: |
-        kubectl apply -f k8s/namespace.yaml
+        kubectl apply -f k8s/application/namespace.yaml
 
     - name: Configure Registry Secret
       run: |
@@ -108,9 +108,9 @@ jobs:
     
     - name: Apply Other Manifests
       run: |
-        kubectl apply -f k8s/deployment.yaml
-        kubectl apply -f k8s/service.yaml
-        kubectl apply -f k8s/ingress.yaml
+        kubectl apply -f k8s/application/deployment.yaml
+        kubectl apply -f k8s/application/service.yaml
+        kubectl apply -f k8s/application/ingress.yaml
     
     - name: Rollout & Verify
       run: |
