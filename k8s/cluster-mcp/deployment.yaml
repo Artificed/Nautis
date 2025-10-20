@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cluster-mcp
+  namespace: cluster-mcp
+  labels:
+    app: cluster-mcp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cluster-mcp
+  template:
+    metadata:
+      labels:
+        app: cluster-mcp
+    spec:
+      serviceAccountName: cluster-mcp
+      imagePullSecrets:
+      - name: ghcr-secret
+      containers:
+      - name: cluster-mcp
+        image: ghcr.io/artificed/astdev-presentation/cluster-mcp:latest
+        # Image is built and pushed by GitHub Actions CI/CD
+        # See: .github/workflows/ci-cd.yml
+        imagePullPolicy: Always
+        stdin: true
+        tty: true
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
