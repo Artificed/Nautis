@@ -8,9 +8,12 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ghcr.io/artificed/astdev-presentation/presentation-application
+  IMAGE_NAME_APP: ghcr.io/artificed/astdev-presentation/presentation-application
+  IMAGE_NAME_MCP: ghcr.io/artificed/astdev-presentation/cluster-mcp
   APPLICATION_DIR: ./application
+  MCP_DIR: ./cluster-mcp
   K8S_NAMESPACE: astdev-presentation
+  K8S_NAMESPACE_MCP: cluster-mcp
   DEPLOYMENT_NAME: presentation-application
 
 jobs:
@@ -57,23 +60,41 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Extract metadata
-      id: meta
+    - name: Extract metadata (Application)
+      id: meta-app
       uses: docker/metadata-action@v5
       with:
-        images: ${{ env.IMAGE_NAME }}
+        images: ${{ env.IMAGE_NAME_APP }}
         tags: |
           type=ref,event=branch
           type=sha,prefix={{branch}}-
           type=raw,value=latest,enable={{is_default_branch}}
     
-    - name: Build & Push
+    - name: Build & Push Application
       uses: docker/build-push-action@v5
       with:
         context: ${{ env.APPLICATION_DIR }}
         push: true
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
+        tags: ${{ steps.meta-app.outputs.tags }}
+        labels: ${{ steps.meta-app.outputs.labels }}
+
+    - name: Extract metadata (MCP)
+      id: meta-mcp
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.IMAGE_NAME_MCP }}
+        tags: |
+          type=ref,event=branch
+          type=sha,prefix={{branch}}-
+          type=raw,value=latest,enable={{is_default_branch}}
+    
+    - name: Build & Push Cluster MCP
+      uses: docker/build-push-action@v5
+      with:
+        context: ${{ env.MCP_DIR }}
+        push: true
+        tags: ${{ steps.meta-mcp.outputs.tags }}
+        labels: ${{ steps.meta-mcp.outputs.labels }}
 
   deploy:
     name: Deploy to VM
@@ -86,18 +107,26 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Prepare Image
+    - name: Prepare Images
       run: |
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-        docker pull ${{ env.IMAGE_NAME }}:latest
-        docker save ${{ env.IMAGE_NAME }}:latest | sudo k3s ctr images import -
+        
+        # Pull and import application image
+        docker pull ${{ env.IMAGE_NAME_APP }}:latest
+        docker save ${{ env.IMAGE_NAME_APP }}:latest | sudo k3s ctr images import -
+        
+        # Pull and import cluster-mcp image
+        docker pull ${{ env.IMAGE_NAME_MCP }}:latest
+        docker save ${{ env.IMAGE_NAME_MCP }}:latest | sudo k3s ctr images import -
     
-    - name: Apply Namespace
+    - name: Apply Namespaces
       run: |
         kubectl apply -f k8s/application/namespace.yaml
+        kubectl apply -f k8s/cluster-mcp/namespace.yaml
 
-    - name: Configure Registry Secret
+    - name: Configure Registry Secrets
       run: |
+        # Secret for application namespace
         kubectl create secret docker-registry ghcr-secret \
           --docker-server=ghcr.io \
           --docker-username=${{ github.actor }} \
@@ -105,24 +134,54 @@ jobs:
           --docker-email=${{ github.actor }}@users.noreply.github.com \
           --namespace=${{ env.K8S_NAMESPACE }} \
           --dry-run=client -o yaml | kubectl apply -f -
+        
+        # Secret for cluster-mcp namespace
+        kubectl create secret docker-registry ghcr-secret \
+          --docker-server=ghcr.io \
+          --docker-username=${{ github.actor }} \
+          --docker-password=${{ secrets.GITHUB_TOKEN }} \
+          --docker-email=${{ github.actor }}@users.noreply.github.com \
+          --namespace=${{ env.K8S_NAMESPACE_MCP }} \
+          --dry-run=client -o yaml | kubectl apply -f -
     
-    - name: Apply Other Manifests
+    - name: Apply Application Manifests
       run: |
         kubectl apply -f k8s/application/deployment.yaml
         kubectl apply -f k8s/application/service.yaml
         kubectl apply -f k8s/application/ingress.yaml
     
-    - name: Rollout & Verify
+    - name: Apply Cluster MCP Manifests
+      run: |
+        kubectl apply -f k8s/cluster-mcp/rbac.yaml
+        kubectl apply -f k8s/cluster-mcp/deployment.yaml
+        kubectl apply -f k8s/cluster-mcp/service.yaml
+    
+    - name: Rollout & Verify Application
       run: |
         kubectl rollout restart deployment/${{ env.DEPLOYMENT_NAME }} -n ${{ env.K8S_NAMESPACE }}
         kubectl rollout status deployment/${{ env.DEPLOYMENT_NAME }} -n ${{ env.K8S_NAMESPACE }} --timeout=300s
         
-        echo "Deployment Status:"
+        echo "Application Deployment Status:"
         kubectl get pods -n ${{ env.K8S_NAMESPACE }}
         kubectl get svc -n ${{ env.K8S_NAMESPACE }}
         
-        echo "Pod Details:"
+        echo "Application Pod Details:"
         kubectl describe pods -n ${{ env.K8S_NAMESPACE }} -l app=presentation-application | tail -50
         
         echo "Health Check:"
         curl -f http://localhost:80 || echo "⚠️  Warning: Health check failed"
+    
+    - name: Rollout & Verify Cluster MCP
+      run: |
+        kubectl rollout restart deployment/cluster-mcp -n ${{ env.K8S_NAMESPACE_MCP }}
+        kubectl rollout status deployment/cluster-mcp -n ${{ env.K8S_NAMESPACE_MCP }} --timeout=300s
+        
+        echo "Cluster MCP Deployment Status:"
+        kubectl get pods -n ${{ env.K8S_NAMESPACE_MCP }}
+        kubectl get svc -n ${{ env.K8S_NAMESPACE_MCP }}
+        
+        echo "Cluster MCP Pod Details:"
+        kubectl describe pods -n ${{ env.K8S_NAMESPACE_MCP }} -l app=cluster-mcp | tail -50
+        
+        echo "Test MCP Server Access to Cluster:"
+        kubectl exec -n ${{ env.K8S_NAMESPACE_MCP }} deployment/cluster-mcp -- python -c "from kubernetes import client, config; config.load_incluster_config(); v1 = client.CoreV1Api(); print(f'✅ MCP can access cluster! Found {len(v1.list_namespace().items)} namespaces')" || echo "⚠️  Warning: MCP access test failed"
