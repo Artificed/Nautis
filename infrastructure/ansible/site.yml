@@ -12,3 +12,5 @@
     - k3s
     - github_cli
     - github_actions_runner
+    - helm
+    # - n8n
