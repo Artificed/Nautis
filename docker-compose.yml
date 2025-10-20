@@ -8,3 +8,17 @@ services:
       dockerfile: Dockerfile
     ports:
       - "80:80"
+
+  cluster-mcp:
+    container_name: cluster-mcp
+    image: cluster-mcp
+    restart: unless-stopped
+    build:
+      context: ./cluster-mcp/
+      dockerfile: Dockerfile
+    volumes:
+      - ~/.kube/config:/root/.kube/config:ro
+    environment:
+      - KUBECONFIG=/root/.kube/config
+    stdin_open: true
+    tty: true
