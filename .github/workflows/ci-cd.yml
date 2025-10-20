@@ -179,6 +179,7 @@ jobs:
         sudo k3s kubectl apply -f k8s/automation-server/rbac.yaml
         sudo k3s kubectl apply -f k8s/automation-server/deployment.yaml
         sudo k3s kubectl apply -f k8s/automation-server/service.yaml
+        sudo k3s kubectl apply -f k8s/automation-server/middleware.yaml
         sudo k3s kubectl apply -f k8s/automation-server/ingress.yaml
     
     - name: Rollout & Verify Application
