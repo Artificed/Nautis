@@ -35,77 +35,158 @@ export default function AutomationSection() {
   
     return (
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50">
-        {/* Animated background elements */}
+        {/* Mechanical Gears / Energy Waves Background Theme */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 right-32 w-96 h-96 rounded-full bg-gradient-to-br from-orange-200/30 to-amber-200/20 blur-3xl animate-float"></div>
-          <div className="absolute bottom-32 left-32 w-[28rem] h-[28rem] rounded-full bg-gradient-to-br from-purple-200/25 to-pink-200/20 blur-3xl animate-float-slower animation-delay-2000"></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[32rem] h-[32rem] rounded-full bg-gradient-to-br from-cyan-200/20 to-blue-200/15 blur-3xl animate-pulse-slow"></div>
-          
-          <div className="absolute top-20 left-20 w-32 h-32 rounded-3xl bg-gradient-to-br from-orange-100/40 to-amber-100/30 opacity-80 blur-xl animate-float rotate-12"></div>
-          <div className="absolute top-40 right-40 w-24 h-24 rounded-2xl bg-gradient-to-br from-pink-100/35 to-rose-100/25 opacity-75 blur-lg animate-float-slow animation-delay-1000 -rotate-6"></div>
-          <div className="absolute bottom-40 right-20 w-28 h-28 rounded-3xl bg-gradient-to-br from-cyan-100/40 to-blue-100/30 opacity-70 blur-xl animate-float-slower animation-delay-2000 rotate-45"></div>
-          <div className="absolute bottom-32 left-40 w-36 h-36 rounded-3xl bg-gradient-to-br from-purple-100/35 to-indigo-100/25 opacity-65 blur-xl animate-float animation-delay-3000 -rotate-12"></div>
-          <div className="absolute top-1/3 right-1/4 w-20 h-20 rounded-2xl bg-gradient-to-br from-amber-100/30 to-orange-100/20 opacity-60 blur-lg animate-float-slow animation-delay-4000 rotate-90"></div>
-          <div className="absolute bottom-1/4 left-1/3 w-16 h-16 rounded-xl bg-gradient-to-br from-teal-100/25 to-cyan-100/20 opacity-55 blur-lg animate-float-slower rotate-45"></div>
-          
-          <div className="absolute top-1/4 left-1/4 w-12 h-12 rounded-full bg-gradient-to-br from-yellow-100/20 to-amber-100/15 opacity-30 blur-md animate-float animation-delay-5000"></div>
-          <div className="absolute bottom-1/3 right-1/3 w-10 h-10 rounded-full bg-gradient-to-br from-pink-100/25 to-rose-100/15 opacity-35 blur-md animate-float-slow animation-delay-2000"></div>
-          <div className="absolute top-2/3 right-1/4 w-8 h-8 rounded-full bg-gradient-to-br from-cyan-100/20 to-blue-100/15 opacity-25 blur-sm animate-float-slower animation-delay-1000"></div>
-          <div className="absolute top-1/2 left-1/5 w-14 h-14 rounded-full bg-gradient-to-br from-purple-100/20 to-indigo-100/15 opacity-30 blur-md animate-float animation-delay-3500"></div>
-          
-          <div className="absolute top-1/3 right-1/3 w-80 h-80 rounded-full bg-gradient-to-br from-orange-100/15 to-pink-100/10 blur-3xl animate-rotate-gradient"></div>
-          <div className="absolute bottom-1/3 left-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-blue-100/10 to-purple-100/10 blur-3xl animate-rotate-gradient animation-delay-3000"></div>
-  
+          {/* Glowing energy waves */}
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-amber-400/20 to-orange-500/10 blur-3xl animate-pulse-slow"></div>
+          <div className="absolute bottom-1/3 right-1/4 w-[30rem] h-[30rem] rounded-full bg-gradient-to-br from-yellow-500/15 to-amber-600/10 blur-3xl animate-pulse-slow animation-delay-2000"></div>
+          <div className="absolute top-1/2 right-1/5 w-72 h-72 rounded-full bg-gradient-to-br from-orange-400/20 to-red-500/10 blur-3xl animate-pulse-slow animation-delay-4000"></div>
+
+          {/* Rotating Gears */}
           <motion.div
-            className="absolute top-24 left-1/5 w-24 h-24 bg-gradient-to-br from-amber-300/20 to-orange-300/20"
-            style={{ 
-              borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%",
-              filter: "blur(8px)"
-            }}
+            className="absolute top-32 left-1/6"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          >
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="35" fill="none" stroke="rgba(251, 191, 36, 0.3)" strokeWidth="3" />
+              <circle cx="60" cy="60" r="20" fill="none" stroke="rgba(251, 191, 36, 0.4)" strokeWidth="2" />
+              {[...Array(8)].map((_, i) => (
+                <rect
+                  key={i}
+                  x="57"
+                  y="10"
+                  width="6"
+                  height="20"
+                  fill="rgba(251, 191, 36, 0.3)"
+                  transform={`rotate(${i * 45} 60 60)`}
+                />
+              ))}
+            </svg>
+          </motion.div>
+
+          <motion.div
+            className="absolute bottom-40 right-1/5"
+            animate={{ rotate: -360 }}
+            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          >
+            <svg width="90" height="90" viewBox="0 0 90 90">
+              <circle cx="45" cy="45" r="25" fill="none" stroke="rgba(245, 158, 11, 0.4)" strokeWidth="2" />
+              <circle cx="45" cy="45" r="15" fill="none" stroke="rgba(245, 158, 11, 0.5)" strokeWidth="2" />
+              {[...Array(6)].map((_, i) => (
+                <rect
+                  key={i}
+                  x="42"
+                  y="8"
+                  width="6"
+                  height="15"
+                  fill="rgba(245, 158, 11, 0.4)"
+                  transform={`rotate(${i * 60} 45 45)`}
+                />
+              ))}
+            </svg>
+          </motion.div>
+
+          <motion.div
+            className="absolute top-2/3 right-1/4"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          >
+            <svg width="70" height="70" viewBox="0 0 70 70">
+              <circle cx="35" cy="35" r="20" fill="none" stroke="rgba(251, 146, 60, 0.3)" strokeWidth="2" />
+              <circle cx="35" cy="35" r="12" fill="none" stroke="rgba(251, 146, 60, 0.4)" strokeWidth="1.5" />
+              {[...Array(10)].map((_, i) => (
+                <rect
+                  key={i}
+                  x="33"
+                  y="5"
+                  width="4"
+                  height="12"
+                  fill="rgba(251, 146, 60, 0.3)"
+                  transform={`rotate(${i * 36} 35 35)`}
+                />
+              ))}
+            </svg>
+          </motion.div>
+
+          {/* Mechanical cogs small */}
+          <motion.div
+            className="absolute top-1/3 left-1/4 opacity-20"
+            animate={{ rotate: -360 }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          >
+            <svg width="50" height="50" viewBox="0 0 50 50">
+              <circle cx="25" cy="25" r="15" fill="none" stroke="rgba(251, 191, 36, 0.6)" strokeWidth="2" />
+              {[...Array(12)].map((_, i) => (
+                <line
+                  key={i}
+                  x1="25"
+                  y1="25"
+                  x2="25"
+                  y2="8"
+                  stroke="rgba(251, 191, 36, 0.5)"
+                  strokeWidth="1"
+                  transform={`rotate(${i * 30} 25 25)`}
+                />
+              ))}
+            </svg>
+          </motion.div>
+
+          {/* Floating mechanical parts */}
+          <motion.div
+            className="absolute top-1/5 right-1/6 w-12 h-12 border-4 border-amber-400/20 rounded-sm"
             animate={{
-              borderRadius: [
-                "60% 40% 30% 70% / 60% 30% 70% 40%",
-                "30% 60% 70% 40% / 50% 60% 30% 60%",
-                "50% 50% 30% 70% / 30% 70% 70% 30%",
-                "60% 40% 30% 70% / 60% 30% 70% 40%",
-              ],
-              x: [0, 40, -20, 0],
-              y: [0, -30, 20, 0],
-              scale: [1, 1.2, 0.9, 1],
-              rotate: [0, 120, 240, 360],
+              y: [0, -20, 0],
+              rotate: [0, 90, 180, 270, 360],
             }}
             transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          
-          <motion.div
-            className="absolute bottom-32 right-1/5 w-32 h-32 bg-gradient-to-br from-pink-300/20 to-purple-300/20"
-            style={{ 
-              borderRadius: "50% 50% 50% 50% / 50% 50% 50% 50%",
-              filter: "blur(10px)"
-            }}
-            animate={{
-              borderRadius: [
-                "50% 50% 50% 50% / 50% 50% 50% 50%",
-                "70% 30% 50% 50% / 30% 70% 50% 50%",
-                "50% 70% 30% 50% / 50% 30% 70% 50%",
-                "50% 50% 50% 50% / 50% 50% 50% 50%",
-              ],
-              x: [0, -50, 30, 0],
-              y: [0, 40, -20, 0],
-              scale: [1, 1.1, 1.3, 1],
-              rotate: [0, -90, -180, -360],
-            }}
-            transition={{
-              duration: 18,
+              duration: 12,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: 1
             }}
           />
+          <motion.div
+            className="absolute bottom-1/4 left-1/5 w-8 h-8 border-3 border-orange-400/25"
+            style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
+            animate={{
+              y: [0, 30, 0],
+              rotate: [0, -180, -360],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+
+          {/* Hexagonal wireframes */}
+          <motion.div
+            className="absolute top-20 left-1/3 opacity-20"
+            animate={{
+              y: [0, -40, 0],
+              rotate: [0, 180, 360],
+            }}
+            transition={{
+              duration: 16,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          >
+            <svg width="60" height="60" viewBox="0 0 100 100">
+              <polygon
+                points="50 1 95 25 95 75 50 99 5 75 5 25"
+                fill="none"
+                stroke="rgba(251, 191, 36, 0.4)"
+                strokeWidth="2"
+              />
+              <polygon
+                points="50 20 80 35 80 65 50 80 20 65 20 35"
+                fill="none"
+                stroke="rgba(251, 191, 36, 0.3)"
+                strokeWidth="1.5"
+              />
+            </svg>
+          </motion.div>
         </div>
   
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 py-20">

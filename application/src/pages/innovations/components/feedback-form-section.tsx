@@ -61,77 +61,250 @@ export default function FeedbackFormSection() {
   
     return (
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50">
-        {/* Animated background elements */}
+        {/* Tech Circuit / Data Flow Background Theme */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 right-32 w-96 h-96 rounded-full bg-gradient-to-br from-orange-200/30 to-amber-200/20 blur-3xl animate-float"></div>
-          <div className="absolute bottom-32 left-32 w-[28rem] h-[28rem] rounded-full bg-gradient-to-br from-purple-200/25 to-pink-200/20 blur-3xl animate-float-slower animation-delay-2000"></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[32rem] h-[32rem] rounded-full bg-gradient-to-br from-cyan-200/20 to-blue-200/15 blur-3xl animate-pulse-slow"></div>
-          
-          <div className="absolute top-20 left-20 w-32 h-32 rounded-3xl bg-gradient-to-br from-orange-100/40 to-amber-100/30 opacity-80 blur-xl animate-float rotate-12"></div>
-          <div className="absolute top-40 right-40 w-24 h-24 rounded-2xl bg-gradient-to-br from-pink-100/35 to-rose-100/25 opacity-75 blur-lg animate-float-slow animation-delay-1000 -rotate-6"></div>
-          <div className="absolute bottom-40 right-20 w-28 h-28 rounded-3xl bg-gradient-to-br from-cyan-100/40 to-blue-100/30 opacity-70 blur-xl animate-float-slower animation-delay-2000 rotate-45"></div>
-          <div className="absolute bottom-32 left-40 w-36 h-36 rounded-3xl bg-gradient-to-br from-purple-100/35 to-indigo-100/25 opacity-65 blur-xl animate-float animation-delay-3000 -rotate-12"></div>
-          <div className="absolute top-1/3 right-1/4 w-20 h-20 rounded-2xl bg-gradient-to-br from-amber-100/30 to-orange-100/20 opacity-60 blur-lg animate-float-slow animation-delay-4000 rotate-90"></div>
-          <div className="absolute bottom-1/4 left-1/3 w-16 h-16 rounded-xl bg-gradient-to-br from-teal-100/25 to-cyan-100/20 opacity-55 blur-lg animate-float-slower rotate-45"></div>
-          
-          <div className="absolute top-1/4 left-1/4 w-12 h-12 rounded-full bg-gradient-to-br from-yellow-100/20 to-amber-100/15 opacity-30 blur-md animate-float animation-delay-5000"></div>
-          <div className="absolute bottom-1/3 right-1/3 w-10 h-10 rounded-full bg-gradient-to-br from-pink-100/25 to-rose-100/15 opacity-35 blur-md animate-float-slow animation-delay-2000"></div>
-          <div className="absolute top-2/3 right-1/4 w-8 h-8 rounded-full bg-gradient-to-br from-cyan-100/20 to-blue-100/15 opacity-25 blur-sm animate-float-slower animation-delay-1000"></div>
-          <div className="absolute top-1/2 left-1/5 w-14 h-14 rounded-full bg-gradient-to-br from-purple-100/20 to-indigo-100/15 opacity-30 blur-md animate-float animation-delay-3500"></div>
-          
-          <div className="absolute top-1/3 right-1/3 w-80 h-80 rounded-full bg-gradient-to-br from-orange-100/15 to-pink-100/10 blur-3xl animate-rotate-gradient"></div>
-          <div className="absolute bottom-1/3 left-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-blue-100/10 to-purple-100/10 blur-3xl animate-rotate-gradient animation-delay-3000"></div>
-  
+          {/* Glowing orbs */}
+          <div className="absolute top-20 right-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-orange-200/30 to-amber-200/20 blur-3xl animate-pulse-slow"></div>
+          <div className="absolute bottom-1/4 left-1/5 w-[28rem] h-[28rem] rounded-full bg-gradient-to-br from-purple-200/25 to-pink-200/20 blur-3xl animate-pulse-slow animation-delay-2000"></div>
+          <div className="absolute top-1/2 right-1/3 w-80 h-80 rounded-full bg-gradient-to-br from-cyan-200/20 to-blue-200/15 blur-3xl animate-pulse-slow animation-delay-4000"></div>
+
+          {/* Flowing particles */}
           <motion.div
-            className="absolute top-24 left-1/5 w-24 h-24 bg-gradient-to-br from-amber-300/20 to-orange-300/20"
-            style={{ 
-              borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%",
-              filter: "blur(8px)"
-            }}
+            className="absolute top-32 left-1/4 w-3 h-3 rounded-full bg-orange-400/60"
             animate={{
-              borderRadius: [
-                "60% 40% 30% 70% / 60% 30% 70% 40%",
-                "30% 60% 70% 40% / 50% 60% 30% 60%",
-                "50% 50% 30% 70% / 30% 70% 70% 30%",
-                "60% 40% 30% 70% / 60% 30% 70% 40%",
+              x: [0, 300, 600, 900],
+              y: [0, -100, 50, -50],
+              opacity: [0, 1, 1, 0],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+          <motion.div
+            className="absolute top-48 right-1/3 w-2 h-2 rounded-full bg-amber-400/70"
+            animate={{
+              x: [0, -250, -500, -800],
+              y: [0, 80, -60, 100],
+              opacity: [0, 1, 1, 0],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "linear",
+              delay: 1,
+            }}
+          />
+          <motion.div
+            className="absolute bottom-40 left-1/5 w-2.5 h-2.5 rounded-full bg-pink-300/60"
+            animate={{
+              x: [0, 400, 200, 700],
+              y: [0, -120, -60, -180],
+              opacity: [0, 1, 1, 0],
+            }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+              ease: "linear",
+              delay: 2,
+            }}
+          />
+          <motion.div
+            className="absolute top-1/3 right-1/4 w-2 h-2 rounded-full bg-teal-400/70"
+            animate={{
+              x: [0, -350, -100, -600],
+              y: [0, 90, 180, 50],
+              opacity: [0, 1, 1, 0],
+            }}
+            transition={{
+              duration: 9,
+              repeat: Infinity,
+              ease: "linear",
+              delay: 3,
+            }}
+          />
+
+          {/* Circuit board lines */}
+          <svg className="absolute inset-0 w-full h-full opacity-20">
+            <motion.line
+              x1="10%"
+              y1="20%"
+              x2="90%"
+              y2="20%"
+              stroke="url(#gradient1)"
+              strokeWidth="2"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: [0, 1, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+            />
+            <motion.line
+              x1="15%"
+              y1="50%"
+              x2="85%"
+              y2="50%"
+              stroke="url(#gradient2)"
+              strokeWidth="2"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: [0, 1, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "linear", delay: 1 }}
+            />
+            <motion.line
+              x1="20%"
+              y1="80%"
+              x2="80%"
+              y2="80%"
+              stroke="url(#gradient3)"
+              strokeWidth="2"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: [0, 1, 0] }}
+              transition={{ duration: 7, repeat: Infinity, ease: "linear", delay: 2 }}
+            />
+            <motion.circle
+              cx="20%"
+              cy="30%"
+              r="4"
+              fill="#fb923c"
+              opacity="0.4"
+              animate={{
+                opacity: [0.2, 0.8, 0.2],
+              }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.circle
+              cx="80%"
+              cy="70%"
+              r="3"
+              fill="#a855f7"
+              opacity="0.4"
+              animate={{
+                opacity: [0.2, 0.8, 0.2],
+              }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            />
+            <defs>
+              <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#fb923c" stopOpacity="0" />
+                <stop offset="50%" stopColor="#fb923c" stopOpacity="1" />
+                <stop offset="100%" stopColor="#fb923c" stopOpacity="0" />
+              </linearGradient>
+              <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#fbbf24" stopOpacity="0" />
+                <stop offset="50%" stopColor="#fbbf24" stopOpacity="1" />
+                <stop offset="100%" stopColor="#fbbf24" stopOpacity="0" />
+              </linearGradient>
+              <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#f472b6" stopOpacity="0" />
+                <stop offset="50%" stopColor="#f472b6" stopOpacity="1" />
+                <stop offset="100%" stopColor="#f472b6" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+          </svg>
+
+          {/* Geometric shapes */}
+          <motion.div
+            className="absolute top-1/4 left-1/6 w-20 h-20 border-2 border-orange-400/30"
+            animate={{
+              rotate: [0, 360],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-1/4 right-1/6 w-16 h-16 border-2 border-purple-400/30 rounded-full"
+            animate={{
+              scale: [1, 1.5, 1],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+
+          {/* Data nodes */}
+          <motion.div
+            className="absolute top-1/3 left-1/3 w-4 h-4 bg-orange-400/50 rounded-full"
+            animate={{
+              scale: [1, 1.5, 1],
+              boxShadow: [
+                "0 0 10px rgba(251, 146, 60, 0.3)",
+                "0 0 30px rgba(251, 146, 60, 0.8)",
+                "0 0 10px rgba(251, 146, 60, 0.3)",
               ],
-              x: [0, 40, -20, 0],
-              y: [0, -30, 20, 0],
-              scale: [1, 1.2, 0.9, 1],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-1/3 right-1/3 w-3 h-3 bg-amber-400/50 rounded-full"
+            animate={{
+              scale: [1, 1.5, 1],
+              boxShadow: [
+                "0 0 10px rgba(251, 191, 36, 0.3)",
+                "0 0 30px rgba(251, 191, 36, 0.8)",
+                "0 0 10px rgba(251, 191, 36, 0.3)",
+              ],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1,
+            }}
+          />
+
+          {/* Floating hexagons */}
+          <motion.div
+            className="absolute top-20 right-1/5"
+            animate={{
+              y: [0, -30, 0],
               rotate: [0, 120, 240, 360],
             }}
             transition={{
               duration: 20,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "linear",
             }}
-          />
-          
+          >
+            <svg width="60" height="60" viewBox="0 0 100 100">
+              <polygon
+                points="50 1 95 25 95 75 50 99 5 75 5 25"
+                fill="none"
+                stroke="rgba(251, 146, 60, 0.3)"
+                strokeWidth="2"
+              />
+            </svg>
+          </motion.div>
           <motion.div
-            className="absolute bottom-32 right-1/5 w-32 h-32 bg-gradient-to-br from-pink-300/20 to-purple-300/20"
-            style={{ 
-              borderRadius: "50% 50% 50% 50% / 50% 50% 50% 50%",
-              filter: "blur(10px)"
-            }}
+            className="absolute bottom-32 left-1/4"
             animate={{
-              borderRadius: [
-                "50% 50% 50% 50% / 50% 50% 50% 50%",
-                "70% 30% 50% 50% / 30% 70% 50% 50%",
-                "50% 70% 30% 50% / 50% 30% 70% 50%",
-                "50% 50% 50% 50% / 50% 50% 50% 50%",
-              ],
-              x: [0, -50, 30, 0],
-              y: [0, 40, -20, 0],
-              scale: [1, 1.1, 1.3, 1],
-              rotate: [0, -90, -180, -360],
+              y: [0, 40, 0],
+              rotate: [0, -120, -240, -360],
             }}
             transition={{
               duration: 18,
               repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1
+              ease: "linear",
             }}
-          />
+          >
+            <svg width="50" height="50" viewBox="0 0 100 100">
+              <polygon
+                points="50 1 95 25 95 75 50 99 5 75 5 25"
+                fill="none"
+                stroke="rgba(251, 191, 36, 0.4)"
+                strokeWidth="2"
+              />
+            </svg>
+          </motion.div>
         </div>
   
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 py-20">
@@ -149,11 +322,11 @@ export default function FeedbackFormSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
               className="inline-block mb-8"
-            >
-              <span className="px-4 py-2 bg-gradient-to-r from-orange-200 to-amber-200 rounded-full text-orange-900 font-semibold text-sm">
-                Innovation #1
-              </span>
-            </motion.div>
+              >
+                <span className="px-4 py-2 bg-gradient-to-r from-orange-200 to-amber-200 rounded-full text-orange-900 font-semibold text-sm">
+                  Innovation #1
+                </span>
+              </motion.div>
             
             <h1 className="text-5xl md:text-6xl font-bold pb-6">
               {"Feedback Form System".split(" ").map((word, wordIndex) => (
