@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "k8s-cluster": {
+      "command": "python",
+      "args": ["/absolute/path/to/cluster-mcp/main.py"],
+      "env": {
+        "KUBECONFIG": "/path/to/your/.kube/config"
+      }
+    }
+  }
+}
