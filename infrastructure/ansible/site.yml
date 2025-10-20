@@ -13,4 +13,4 @@
     - github_cli
     - github_actions_runner
     - helm
-    # - n8n
+    - n8n

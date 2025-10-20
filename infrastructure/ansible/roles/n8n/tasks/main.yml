@@ -1,0 +1,69 @@
+---
+- name: Add n8n Helm repository
+  ansible.builtin.command:
+    cmd: helm repo add community-charts https://community-charts.github.io/helm-charts
+  register: helm_repo_add
+  failed_when: helm_repo_add.rc != 0 and 'already exists' not in helm_repo_add.stderr
+  changed_when: helm_repo_add.rc == 0
+
+- name: Update Helm repositories
+  ansible.builtin.command:
+    cmd: helm repo update
+  changed_when: true
+
+- name: Create n8n namespace directory on target machine
+  ansible.builtin.file:
+    path: /tmp/n8n-deployment
+    state: directory
+    mode: '0755'
+
+- name: Copy namespace.yaml to target machine
+  ansible.builtin.copy:
+    src: namespace.yaml
+    dest: /tmp/n8n-deployment/namespace.yaml
+    mode: '0644'
+
+- name: Copy values.yaml to target machine
+  ansible.builtin.copy:
+    src: values.yaml
+    dest: /tmp/n8n-deployment/values.yaml
+    mode: '0644'
+
+- name: Apply n8n namespace
+  ansible.builtin.command:
+    cmd: kubectl apply -f /tmp/n8n-deployment/namespace.yaml
+  environment:
+    KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+  changed_when: true
+
+- name: Check if n8n is already installed
+  ansible.builtin.command:
+    cmd: helm list -n n8n -o json
+  environment:
+    KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+  register: n8n_helm_list
+  changed_when: false
+  failed_when: false
+
+- name: Deploy n8n using Helm
+  ansible.builtin.command:
+    cmd: helm install n8n community-charts/n8n --values /tmp/n8n-deployment/values.yaml --namespace n8n
+  environment:
+    KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+  when: n8n_helm_list.stdout == '[]' or n8n_helm_list.stdout == ''
+  register: helm_install
+  changed_when: helm_install.rc == 0
+
+- name: Upgrade n8n if already installed
+  ansible.builtin.command:
+    cmd: helm upgrade n8n community-charts/n8n --values /tmp/n8n-deployment/values.yaml --namespace n8n
+  environment:
+    KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+  when: n8n_helm_list.stdout != '[]' and n8n_helm_list.stdout != ''
+  register: helm_upgrade
+  changed_when: helm_upgrade.rc == 0
+
+- name: Display n8n deployment status
+  ansible.builtin.debug:
+    msg: "n8n has been successfully deployed to the n8n namespace"
+
