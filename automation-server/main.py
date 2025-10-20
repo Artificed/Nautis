@@ -87,7 +87,7 @@ async def health_check():
         raise HTTPException(status_code=503, detail=f"Kubernetes connection failed: {str(e)}")
 
 
-@app.get("/api/namespaces")
+@app.get("/namespaces")
 async def get_namespaces():
     """Get list of all namespaces in the cluster"""
     try:
@@ -108,7 +108,7 @@ async def get_namespaces():
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post("/api/pods")
+@app.post("/pods")
 async def get_pods(query: PodQuery):
     """Get information about pods in a namespace or across all namespaces"""
     try:
@@ -150,7 +150,7 @@ async def get_pods(query: PodQuery):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post("/api/deployments")
+@app.post("/deployments")
 async def get_deployments(query: NamespaceQuery):
     """Get information about deployments in a namespace or across all namespaces"""
     try:
@@ -182,7 +182,7 @@ async def get_deployments(query: NamespaceQuery):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post("/api/services")
+@app.post("/services")
 async def get_services(query: NamespaceQuery):
     """Get information about services in a namespace or across all namespaces"""
     try:
@@ -218,7 +218,7 @@ async def get_services(query: NamespaceQuery):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.get("/api/nodes")
+@app.get("/nodes")
 async def get_nodes():
     """Get information about cluster nodes"""
     try:
@@ -265,7 +265,7 @@ async def get_nodes():
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post("/api/ingresses")
+@app.post("/ingresses")
 async def get_ingresses(query: NamespaceQuery):
     """Get information about ingresses in a namespace or across all namespaces"""
     try:
@@ -307,7 +307,7 @@ async def get_ingresses(query: NamespaceQuery):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post("/api/pods/logs")
+@app.post("/pods/logs")
 async def get_pod_logs(query: LogQuery):
     """Get logs from a specific pod"""
     try:
@@ -330,7 +330,7 @@ async def get_pod_logs(query: LogQuery):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post("/api/pods/describe")
+@app.post("/pods/describe")
 async def describe_pod(query: PodDescribeQuery):
     """Get detailed information about a specific pod"""
     try:
@@ -398,33 +398,27 @@ async def describe_pod(query: PodDescribeQuery):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.get("/api/cluster/summary")
+@app.get("/cluster/summary")
 async def get_cluster_summary():
     """Get a summary overview of the entire cluster"""
     try:
-        # Get nodes
         nodes = v1.list_node()
         node_count = len(nodes.items)
         
-        # Get all pods
         pods = v1.list_pod_for_all_namespaces()
         pod_count = len(pods.items)
         
-        # Count pods by status
         pod_status_counts = {}
         for pod in pods.items:
             status = pod.status.phase
             pod_status_counts[status] = pod_status_counts.get(status, 0) + 1
         
-        # Get deployments
         deployments = apps_v1.list_deployment_for_all_namespaces()
         deployment_count = len(deployments.items)
-        
-        # Get services
+
         services = v1.list_service_for_all_namespaces()
         service_count = len(services.items)
         
-        # Get namespaces
         namespaces = v1.list_namespace()
         namespace_count = len(namespaces.items)
         
