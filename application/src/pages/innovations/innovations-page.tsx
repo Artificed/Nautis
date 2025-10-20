@@ -3,6 +3,7 @@ import Navbar from "../../common/components/navbar";
 import Footer from "../../common/components/footer";
 import FeedbackFormSection from "./components/feedback-form-section";
 import AutomationSection from "./components/automation-section";
+import SchedulingSection from "./components/scheduling-section";
 
 export default function InnovationsPage() {
   return (
@@ -15,6 +16,10 @@ export default function InnovationsPage() {
 
         <div className="snap-section">
           <AutomationSection />
+        </div>
+
+        <div className="snap-section">
+          <SchedulingSection />
         </div>
 
         <div className="snap-section">
