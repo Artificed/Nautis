@@ -101,8 +101,6 @@ jobs:
     runs-on: self-hosted
     needs: build
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    env:
-      KUBECONFIG: /etc/rancher/k3s/k3s.yaml
     
     steps:
     - uses: actions/checkout@v4
@@ -121,67 +119,68 @@ jobs:
     
     - name: Apply Namespaces
       run: |
-        kubectl apply -f k8s/application/namespace.yaml
-        kubectl apply -f k8s/cluster-mcp/namespace.yaml
+        # Use k3s kubectl directly to avoid kubeconfig issues
+        sudo k3s kubectl apply -f k8s/application/namespace.yaml
+        sudo k3s kubectl apply -f k8s/cluster-mcp/namespace.yaml
 
     - name: Configure Registry Secrets
       run: |
         # Secret for application namespace
-        kubectl create secret docker-registry ghcr-secret \
+        sudo k3s kubectl create secret docker-registry ghcr-secret \
           --docker-server=ghcr.io \
           --docker-username=${{ github.actor }} \
           --docker-password=${{ secrets.GITHUB_TOKEN }} \
           --docker-email=${{ github.actor }}@users.noreply.github.com \
           --namespace=${{ env.K8S_NAMESPACE }} \
-          --dry-run=client -o yaml | kubectl apply -f -
+          --dry-run=client -o yaml | sudo k3s kubectl apply -f -
         
         # Secret for cluster-mcp namespace
-        kubectl create secret docker-registry ghcr-secret \
+        sudo k3s kubectl create secret docker-registry ghcr-secret \
           --docker-server=ghcr.io \
           --docker-username=${{ github.actor }} \
           --docker-password=${{ secrets.GITHUB_TOKEN }} \
           --docker-email=${{ github.actor }}@users.noreply.github.com \
           --namespace=${{ env.K8S_NAMESPACE_MCP }} \
-          --dry-run=client -o yaml | kubectl apply -f -
+          --dry-run=client -o yaml | sudo k3s kubectl apply -f -
     
     - name: Apply Application Manifests
       run: |
-        kubectl apply -f k8s/application/deployment.yaml
-        kubectl apply -f k8s/application/service.yaml
-        kubectl apply -f k8s/application/ingress.yaml
+        sudo k3s kubectl apply -f k8s/application/deployment.yaml
+        sudo k3s kubectl apply -f k8s/application/service.yaml
+        sudo k3s kubectl apply -f k8s/application/ingress.yaml
     
     - name: Apply Cluster MCP Manifests
       run: |
-        kubectl apply -f k8s/cluster-mcp/rbac.yaml
-        kubectl apply -f k8s/cluster-mcp/deployment.yaml
-        kubectl apply -f k8s/cluster-mcp/service.yaml
+        sudo k3s kubectl apply -f k8s/cluster-mcp/rbac.yaml
+        sudo k3s kubectl apply -f k8s/cluster-mcp/deployment.yaml
+        sudo k3s kubectl apply -f k8s/cluster-mcp/service.yaml
     
     - name: Rollout & Verify Application
       run: |
-        kubectl rollout restart deployment/${{ env.DEPLOYMENT_NAME }} -n ${{ env.K8S_NAMESPACE }}
-        kubectl rollout status deployment/${{ env.DEPLOYMENT_NAME }} -n ${{ env.K8S_NAMESPACE }} --timeout=300s
+        sudo k3s kubectl rollout restart deployment/${{ env.DEPLOYMENT_NAME }} -n ${{ env.K8S_NAMESPACE }}
+        sudo k3s kubectl rollout status deployment/${{ env.DEPLOYMENT_NAME }} -n ${{ env.K8S_NAMESPACE }} --timeout=300s
         
         echo "Application Deployment Status:"
-        kubectl get pods -n ${{ env.K8S_NAMESPACE }}
-        kubectl get svc -n ${{ env.K8S_NAMESPACE }}
+        sudo k3s kubectl get pods -n ${{ env.K8S_NAMESPACE }}
+        sudo k3s kubectl get svc -n ${{ env.K8S_NAMESPACE }}
         
         echo "Application Pod Details:"
-        kubectl describe pods -n ${{ env.K8S_NAMESPACE }} -l app=presentation-application | tail -50
+        sudo k3s kubectl describe pods -n ${{ env.K8S_NAMESPACE }} -l app=presentation-application | tail -50
         
         echo "Health Check:"
         curl -f http://localhost:80 || echo "⚠️  Warning: Health check failed"
     
     - name: Rollout & Verify Cluster MCP
       run: |
-        kubectl rollout restart deployment/cluster-mcp -n ${{ env.K8S_NAMESPACE_MCP }}
-        kubectl rollout status deployment/cluster-mcp -n ${{ env.K8S_NAMESPACE_MCP }} --timeout=300s
+        sudo k3s kubectl rollout restart deployment/cluster-mcp -n ${{ env.K8S_NAMESPACE_MCP }}
+        sudo k3s kubectl rollout status deployment/cluster-mcp -n ${{ env.K8S_NAMESPACE_MCP }} --timeout=300s
         
         echo "Cluster MCP Deployment Status:"
-        kubectl get pods -n ${{ env.K8S_NAMESPACE_MCP }}
-        kubectl get svc -n ${{ env.K8S_NAMESPACE_MCP }}
+        sudo k3s kubectl get pods -n ${{ env.K8S_NAMESPACE_MCP }}
+        sudo k3s kubectl get svc -n ${{ env.K8S_NAMESPACE_MCP }}
         
         echo "Cluster MCP Pod Details:"
-        kubectl describe pods -n ${{ env.K8S_NAMESPACE_MCP }} -l app=cluster-mcp | tail -50
+        sudo k3s kubectl describe pods -n ${{ env.K8S_NAMESPACE_MCP }} -l app=cluster-mcp | tail -50
         
         echo "Test MCP Server Access to Cluster:"
-        kubectl exec -n ${{ env.K8S_NAMESPACE_MCP }} deployment/cluster-mcp -- python -c "from kubernetes import client, config; config.load_incluster_config(); v1 = client.CoreV1Api(); print(f'✅ MCP can access cluster! Found {len(v1.list_namespace().items)} namespaces')" || echo "⚠️  Warning: MCP access test failed"
+        sudo k3s kubectl exec -n ${{ env.K8S_NAMESPACE_MCP }} deployment/cluster-mcp -- python -c "from kubernetes import client, config; config.load_incluster_config(); v1 = client.CoreV1Api(); print(f'✅ MCP can access cluster! Found {len(v1.list_namespace().items)} namespaces')" || echo "⚠️  Warning: MCP access test failed"
