@@ -101,21 +101,27 @@ async def handle_sse(scope, receive, send):
             InitializationOptions(
                 server_name="k8s-cluster-mcp",
                 server_version="0.1.0",
-                capabilities=server.get_capabilities(NotificationOptions()),
+                capabilities=server.get_capabilities(
+                    notification_options=NotificationOptions(),
+                    experimental_capabilities={}
+                ),
             ),
         )
 
 
 async def handle_messages(scope, receive, send):
     sse = SseServerTransport("/messages")
-    async with sse.connect_post(scope, receive, send) as streams:
+    async with sse.connect_sse(scope, receive, send) as streams:
         await server.run(
             streams[0],
             streams[1],
             InitializationOptions(
                 server_name="k8s-cluster-mcp",
                 server_version="0.1.0",
-                capabilities=server.get_capabilities(NotificationOptions()),
+                capabilities=server.get_capabilities(
+                    notification_options=NotificationOptions(),
+                    experimental_capabilities={}
+                ),
             ),
         )
 
