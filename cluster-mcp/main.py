@@ -4,7 +4,11 @@ import json
 from mcp.server.models import InitializationOptions
 import mcp.types as types
 from mcp.server import NotificationOptions, Server
-import mcp.server.stdio
+from mcp.server.sse import SseServerTransport
+from starlette.applications import Starlette
+from starlette.routing import Route
+from starlette.responses import Response
+import uvicorn
 
 from kubernetes import client, config
 from kubernetes.client.rest import ApiException
@@ -576,11 +580,23 @@ async def handle_call_tool(
         ]
 
 
-async def main():
-    async with mcp.server.stdio.stdio_server() as (read_stream, write_stream):
+async def handle_health(request):
+    """Health check endpoint"""
+    return Response(content="OK", status_code=200)
+
+
+async def handle_sse(request):
+    """Handle SSE connection for MCP"""
+    sse = SseServerTransport("/messages")
+    
+    async with sse.connect_sse(
+        request.scope,
+        request.receive,
+        request._send
+    ) as streams:
         await server.run(
-            read_stream,
-            write_stream,
+            streams[0],
+            streams[1],
             InitializationOptions(
                 server_name="k8s-cluster-mcp",
                 server_version="0.1.0",
@@ -592,6 +608,45 @@ async def main():
         )
 
 
+async def handle_messages(request):
+    """Handle POST messages for MCP"""
+    sse = SseServerTransport("/messages")
+    
+    async with sse.connect_post(
+        request.scope,
+        request.receive,
+        request._send
+    ) as streams:
+        await server.run(
+            streams[0],
+            streams[1],
+            InitializationOptions(
+                server_name="k8s-cluster-mcp",
+                server_version="0.1.0",
+                capabilities=server.get_capabilities(
+                    notification_options=NotificationOptions(),
+                    experimental_capabilities={},
+                ),
+            ),
+        )
+
+
+# Create Starlette app
+app = Starlette(
+    routes=[
+        Route("/health", endpoint=handle_health, methods=["GET"]),
+        Route("/sse", endpoint=handle_sse),
+        Route("/messages", endpoint=handle_messages, methods=["POST"]),
+    ]
+)
+
+
 if __name__ == "__main__":
-    asyncio.run(main())
+    # Run the HTTP server
+    uvicorn.run(
+        app,
+        host="0.0.0.0",
+        port=8080,
+        log_level="info"
+    )
 
