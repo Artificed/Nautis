@@ -85,7 +85,7 @@ export default function MobileSection() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           
           {/* LEFT SIDE */}
-          <div className="flex flex-col justify-center space-y-16">
+          <div className="flex flex-col justify-center space-y-12 ml-14">
             
             {/* TOP LEFT - Badge and Title */}
             <motion.div
@@ -113,7 +113,7 @@ export default function MobileSection() {
               </p>
             </motion.div>
 
-{/* BOTTOM LEFT - Project Stats with SVG icons */}
+          {/* BOTTOM LEFT - Project Stats with SVG icons */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -196,10 +196,10 @@ export default function MobileSection() {
               whileHover={{ scale: 1.02, y: -5 }}
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
-              className="relative bg-white/90 backdrop-blur-md rounded-3xl p-10 shadow-2xl border-2 border-gray-200/50"
+              className="relative bg-white/90 backdrop-blur-md rounded-3xl mt-6 p-10 shadow-2xl border-2 border-gray-200/50"
             >
               {/* Card Header */}
-              <div className="mb-8">
+              <div className="mb-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center shadow-lg">
                     <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -225,7 +225,7 @@ export default function MobileSection() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
                     whileHover={{ x: 5 }}
-                    className="flex items-start gap-4 group"
+                    className="flex items-center gap-4 group"
                   >
                     <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${activity.color} flex items-center justify-center text-white shadow-md group-hover:shadow-lg transition-all duration-300 flex-shrink-0`}>
                       {activity.icon}
@@ -243,7 +243,7 @@ export default function MobileSection() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.2 }}
-                className="mt-8 pt-6 border-t border-gray-200"
+                className="mt-6 pt-4 border-t border-gray-200"
               >
                 <div className="flex items-center gap-2 text-sm text-gray-500">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
