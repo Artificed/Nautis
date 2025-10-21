@@ -592,8 +592,13 @@ async def handle_health(request):
 
 async def handle_root(request):
     """Root endpoint that provides MCP server information"""
-    # Get the base URL from the request
-    base_url = str(request.url).rstrip('/')
+    # Get the base URL from the request headers (before middleware stripping)
+    # The X-Forwarded-Prefix header or reconstruct from Host header
+    host = request.headers.get("host", "localhost")
+    scheme = request.url.scheme
+    
+    # Reconstruct the full base URL with /cluster-mcp prefix
+    base_url = f"{scheme}://{host}/cluster-mcp"
     
     return Response(
         json.dumps({
