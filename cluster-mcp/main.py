@@ -625,14 +625,14 @@ async def handle_root(request):
     )
 
 
-async def handle_sse(request):
+async def handle_sse(scope, receive, send):
     """Handle SSE connection for MCP"""
     sse = SseServerTransport("/messages")
     
     async with sse.connect_sse(
-        request.scope,
-        request.receive,
-        request._send
+        scope,
+        receive,
+        send
     ) as streams:
         await server.run(
             streams[0],
@@ -648,14 +648,14 @@ async def handle_sse(request):
         )
 
 
-async def handle_messages(request):
+async def handle_messages(scope, receive, send):
     """Handle POST messages for MCP"""
     sse = SseServerTransport("/messages")
     
     async with sse.connect_post(
-        request.scope,
-        request.receive,
-        request._send
+        scope,
+        receive,
+        send
     ) as streams:
         await server.run(
             streams[0],
