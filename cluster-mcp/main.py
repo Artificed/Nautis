@@ -2,7 +2,7 @@ import asyncio
 import json
 import uvicorn
 from starlette.applications import Starlette
-from starlette.routing import Route
+from starlette.routing import Route, Mount
 from starlette.responses import Response
 from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
@@ -125,8 +125,8 @@ app = Starlette(
     routes=[
         Route("/", endpoint=handle_root, methods=["GET"]),
         Route("/health", endpoint=handle_health, methods=["GET"]),
-        Route("/sse", endpoint=handle_sse),
-        Route("/messages", endpoint=handle_messages, methods=["POST"]),
+        Mount("/sse", app=handle_sse),  # Use Mount for raw ASGI
+        Mount("/messages", app=handle_messages),  # Same for messages
     ],
     middleware=[
         Middleware(
