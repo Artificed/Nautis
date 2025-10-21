@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import { useCursor } from "../../../common/shared/custom-cursor";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 export default function VibeCodingSection() {
   const { setIsHovering } = useCursor();
+  const [isSpinning, setIsSpinning] = useState(false);
 
   // Memoize random values to prevent re-calculation on re-render
   const animationConfig = useMemo(() => ({
@@ -228,7 +229,7 @@ export default function VibeCodingSection() {
               </span>
             </motion.div>
             
-            <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center">
+            <h1 className="text-4xl md:text-5xl font-bold pb-8 text-center leading-tight">
               {"Vibe Coding Prevention".split(" ").map((word, wordIndex) => (
                 <span key={wordIndex} className="inline-block mr-3 pb-2">
                   {word.split("").map((char, charIndex) => (
@@ -265,21 +266,28 @@ export default function VibeCodingSection() {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 }}
               animate={{
                 y: [0, -15, 0],
+                rotateY: isSpinning ? 360 : 0,
+              }}
+              transition={{ 
+                duration: 0.8, 
+                delay: 0.4,
+                rotateY: { duration: 1.2, ease: "easeInOut" }
               }}
               whileHover={{
                 scale: 1.05,
                 y: -5,
-                rotateY: 360,
-                transition: { 
-                  duration: 0.8,
-                  rotateY: { duration: 1.2, ease: "easeInOut" }
-                }
               }}
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
+              onMouseEnter={() => {
+                setIsHovering(true);
+                setIsSpinning(true);
+              }}
+              onMouseLeave={() => {
+                setIsHovering(false);
+                // Let the animation complete before resetting
+                setTimeout(() => setIsSpinning(false), 1200);
+              }}
               style={{ transformStyle: "preserve-3d" }}
             >
               <motion.div
