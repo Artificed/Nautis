@@ -3,6 +3,7 @@ import Navbar from "../../common/components/navbar";
 import Footer from "../../common/components/footer";
 import GameSection from "./components/game-section";
 import WebSection from "./components/web-section";
+import NetworkSection from "./components/network-section";
 
 export default function TPAPage() {
   return (
@@ -15,6 +16,10 @@ export default function TPAPage() {
 
         <div className="snap-section">
           <WebSection />
+        </div>
+
+        <div className="snap-section">
+          <NetworkSection />
         </div>
 
         <div className="snap-section">
