@@ -18,7 +18,6 @@ export default function WebSection() {
         </svg>
       ),
       gradient: "from-purple-500 via-pink-500 to-rose-500",
-      tags: ["n8n", "Agents", "No-Code"],
     },
     {
       title: "Model Context Protocol",
@@ -34,7 +33,6 @@ export default function WebSection() {
         </svg>
       ),
       gradient: "from-emerald-500 via-green-500 to-teal-500",
-      tags: ["Context Sharing", "Standardized", "Interoperability"],
     },
     {
       title: "RAG Systems",
@@ -49,7 +47,6 @@ export default function WebSection() {
         </svg>
       ),
       gradient: "from-orange-500 via-amber-500 to-yellow-500",
-      tags: ["Knowledge Base", "Real-Time", "Accuracy"],
     },
   ];
 
@@ -162,109 +159,118 @@ export default function WebSection() {
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
+      <div className="container mx-auto px-6 relative z-10 max-w-7xl">
+        <div className="flex flex-col lg:flex-row items-start gap-60">
+          
+          {/* Left side - Header */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-block mb-4"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="left-1/5 lg:w-2/5 lg:sticky lg:top-32"
           >
-            <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white px-6 py-2 rounded-full text-sm font-semibold tracking-wide shadow-lg">
-              TPA WEB
-            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="inline-block mb-6"
+            >
+              <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white px-6 py-2 rounded-full text-sm font-semibold tracking-wide shadow-lg">
+                TPA WEB
+              </div>
+            </motion.div>
+
+            <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent leading-tight">
+              Modern AI Features
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-700 leading-relaxed">
+              Cutting-edge AI technologies for next-generation web applications
+            </p>
           </motion.div>
 
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-            Modern AI Features
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            Cutting-edge AI technologies for next-generation web applications
-          </p>
-        </motion.div>
-
-        {/* AI Features Grid */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {modernAIFeatures.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ 
-                opacity: 1, 
-                y: [0, -10, 0],
-              }}
-              transition={{ 
-                opacity: { duration: 0.6, delay: index * 0.08 },
-                y: {
-                  duration: 3.5 + (index % 3) * 0.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: index * 0.3,
-                }
-              }}
-              whileHover={{
-                scale: 1.03,
-                transition: { duration: 0.3 }
-              }}
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
-              className="relative group"
-            >
+          {/* Right side - Cascading/Staggered Card Layout */}
+          <div className="lg:w-3/5 relative" style={{ minHeight: '620px' }}>
+            {modernAIFeatures.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: 100, y: 50 }}
+                animate={{ 
+                  opacity: 1, 
+                  x: 0,
+                  y: 0,
+                }}
+                transition={{ 
+                  duration: 0.8,
+                  delay: index * 0.2,
+                  type: "spring",
+                  stiffness: 100,
+                }}
+                drag
+                dragElastic={0.1}
+                dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
+                whileHover={{
+                  scale: 1.03,
+                  rotate: 0,
+                  transition: { duration: 0.3 }
+                }}
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
+                className="absolute group cursor-grab active:cursor-grabbing"
+                style={{
+                  top: `${index * 220 - 30}px`,
+                  left: index % 2 === 0 ? '0' : '5%',
+                  width: 'min(500px, 95%)',
+                  rotate: index % 2 === 0 ? '-1deg' : '1deg',
+                }}
+              >
               <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200/50 h-full overflow-hidden">
                 {/* Gradient overlay on hover */}
                 <motion.div
                   className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-2xl`}
                 />
 
-                {/* Icon */}
-                <div
-                  className="w-16 h-16 mb-4 relative z-10 text-white transition-transform duration-500 ease-out group-hover:rotate-[360deg]"
-                >
-                  <div className={`w-full h-full rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center shadow-lg`}>
-                    {feature.icon}
+                {/* Content wrapper */}
+                <div className="relative z-10 flex items-start gap-4">
+                  {/* Icon */}
+                  <motion.div
+                    className={`w-16 h-16 rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center shadow-lg flex-shrink-0`}
+                    whileHover={{ rotate: 360, scale: 1.1 }}
+                    transition={{ duration: 0.6, type: "spring" }}
+                  >
+                    <div className="text-white">
+                      {feature.icon}
+                    </div>
+                  </motion.div>
+
+                  {/* Text content */}
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold mb-1 text-gray-900">
+                      {feature.title}
+                    </h3>
+                    <p className={`text-sm font-semibold mb-3 bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
+                      {feature.subtitle}
+                    </p>
+                    <p className="text-gray-600 text-sm leading-relaxed">
+                      {feature.description}
+                    </p>
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="relative z-10">
-                  <h3 className="text-xl font-bold mb-1 text-gray-900">
-                    {feature.title}
-                  </h3>
-                  <p className={`text-sm font-semibold mb-3 bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
-                    {feature.subtitle}
-                  </p>
-                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-                    {feature.description}
-                  </p>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {feature.tags.map((tag, tagIndex) => (
-                      <motion.span
-                        key={tagIndex}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: index * 0.08 + tagIndex * 0.05 }}
-                        className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-700 font-medium"
-                      >
-                        {tag}
-                      </motion.span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Corner accent */}
+                {/* Decorative corner glow */}
                 <motion.div
                   className={`absolute -top-8 -right-8 w-32 h-32 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-20 rounded-full blur-2xl transition-opacity duration-300`}
                 />
+
+                {/* Number indicator */}
+                <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-gray-100/80 backdrop-blur-sm flex items-center justify-center border border-gray-200/50">
+                  <span className="text-sm font-bold text-gray-400">
+                    {index + 1}
+                  </span>
+                </div>
               </div>
             </motion.div>
           ))}
+          </div>
         </div>
       </div>
     </section>
