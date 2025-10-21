@@ -20,4 +20,32 @@ spec:
             name: cluster-mcp
             port:
               number: 8080
-
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cluster-mcp-direct
+  namespace: cluster-mcp
+  labels:
+    app: cluster-mcp
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.priority: "15"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /sse
+        pathType: Prefix
+        backend:
+          service:
+            name: cluster-mcp
+            port:
+              number: 8080
+      - path: /messages
+        pathType: Prefix
+        backend:
+          service:
+            name: cluster-mcp
+            port:
+              number: 8080
