@@ -8,6 +8,8 @@ from mcp.server.sse import SseServerTransport
 from starlette.applications import Starlette
 from starlette.routing import Route
 from starlette.responses import Response
+from starlette.middleware import Middleware
+from starlette.middleware.cors import CORSMiddleware
 import uvicorn
 
 from kubernetes import client, config
@@ -582,7 +584,40 @@ async def handle_call_tool(
 
 async def handle_health(request):
     """Health check endpoint"""
-    return Response(content="OK", status_code=200)
+    return Response(
+        json.dumps({"status": "healthy", "server": "k8s-cluster-mcp"}),
+        media_type="application/json"
+    )
+
+
+async def handle_root(request):
+    """Root endpoint that provides MCP server information"""
+    # Get the base URL from the request
+    base_url = str(request.url).rstrip('/')
+    
+    return Response(
+        json.dumps({
+            "name": "k8s-cluster-mcp",
+            "version": "0.1.0",
+            "transport": "sse",
+            "protocol": "mcp",
+            "endpoints": {
+                "sse": f"{base_url}/sse",
+                "messages": f"{base_url}/messages",
+                "health": f"{base_url}/health"
+            },
+            "description": "Kubernetes Cluster MCP Server - Connect via SSE transport",
+            "instructions": {
+                "connection": f"Use SSE transport to connect to {base_url}",
+                "note": "MCP client should append /sse for SSE connection and /messages for POST messages"
+            }
+        }, indent=2),
+        media_type="application/json",
+        headers={
+            "Cache-Control": "no-cache",
+            "X-MCP-Server": "k8s-cluster-mcp"
+        }
+    )
 
 
 async def handle_sse(request):
@@ -631,12 +666,22 @@ async def handle_messages(request):
         )
 
 
-# Create Starlette app
+# Create Starlette app with CORS support
 app = Starlette(
     routes=[
+        Route("/", endpoint=handle_root, methods=["GET"]),
         Route("/health", endpoint=handle_health, methods=["GET"]),
         Route("/sse", endpoint=handle_sse),
         Route("/messages", endpoint=handle_messages, methods=["POST"]),
+    ],
+    middleware=[
+        Middleware(
+            CORSMiddleware,
+            allow_origins=["*"],
+            allow_methods=["GET", "POST", "OPTIONS"],
+            allow_headers=["*"],
+            expose_headers=["*"],
+        )
     ]
 )
 

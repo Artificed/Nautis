@@ -7,4 +7,19 @@ spec:
   stripPrefix:
     prefixes:
       - /cluster-mcp
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: mcp-headers
+  namespace: cluster-mcp
+spec:
+  headers:
+    customResponseHeaders:
+      Access-Control-Allow-Origin: "*"
+      Access-Control-Allow-Methods: "GET, POST, OPTIONS"
+      Access-Control-Allow-Headers: "Content-Type, Accept"
+      Cache-Control: "no-cache"
+    customRequestHeaders:
+      X-Forwarded-Proto: "http"
 
