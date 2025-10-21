@@ -173,6 +173,8 @@ jobs:
         sudo k3s kubectl apply -f k8s/cluster-mcp/rbac.yaml
         sudo k3s kubectl apply -f k8s/cluster-mcp/deployment.yaml
         sudo k3s kubectl apply -f k8s/cluster-mcp/service.yaml
+        sudo k3s kubectl apply -f k8s/cluster-mcp/middleware.yaml
+        sudo k3s kubectl apply -f k8s/cluster-mcp/ingress.yaml
     
     - name: Apply Automation Server Manifests
       run: |
@@ -205,12 +207,21 @@ jobs:
         echo "Cluster MCP Deployment Status:"
         sudo k3s kubectl get pods -n ${{ env.K8S_NAMESPACE_MCP }}
         sudo k3s kubectl get svc -n ${{ env.K8S_NAMESPACE_MCP }}
+        sudo k3s kubectl get ingress -n ${{ env.K8S_NAMESPACE_MCP }}
         
         echo "Cluster MCP Pod Details:"
         sudo k3s kubectl describe pods -n ${{ env.K8S_NAMESPACE_MCP }} -l app=cluster-mcp | tail -50
         
+        echo "Test Cluster MCP Health:"
+        sleep 10  # Wait for pods to be ready
+        POD_NAME=$(sudo k3s kubectl get pod -n ${{ env.K8S_NAMESPACE_MCP }} -l app=cluster-mcp -o jsonpath='{.items[0].metadata.name}')
+        sudo k3s kubectl exec -n ${{ env.K8S_NAMESPACE_MCP }} $POD_NAME -- curl -f http://localhost:8080/health && echo "✅ Cluster MCP is healthy!" || echo "⚠️  Warning: Health check failed"
+        
         echo "Test MCP Server Access to Cluster:"
-        sudo k3s kubectl exec -n ${{ env.K8S_NAMESPACE_MCP }} deployment/cluster-mcp -- python -c "from kubernetes import client, config; config.load_incluster_config(); v1 = client.CoreV1Api(); print(f'✅ MCP can access cluster! Found {len(v1.list_namespace().items)} namespaces')" || echo "⚠️  Warning: MCP access test failed"
+        sudo k3s kubectl exec -n ${{ env.K8S_NAMESPACE_MCP }} $POD_NAME -- python -c "from kubernetes import client, config; config.load_incluster_config(); v1 = client.CoreV1Api(); print(f'✅ MCP can access cluster! Found {len(v1.list_namespace().items)} namespaces')" || echo "⚠️  Warning: MCP access test failed"
+        
+        echo "Test External MCP Access:"
+        curl -f http://localhost/cluster-mcp/health && echo "✅ Cluster MCP is accessible externally!" || echo "⚠️  Warning: External access test failed"
     
     - name: Rollout & Verify Automation Server
       run: |
