@@ -179,8 +179,8 @@ export default function NetworkSection() {
           <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
             Infrastructure & Deployment
           </h1>
-          <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            Modern network architecture and strategic deployment methodologies
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            Modern network architecture & Strategic deployment
           </p>
         </motion.div>
 
