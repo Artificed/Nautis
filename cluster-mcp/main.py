@@ -1,39 +1,38 @@
 import asyncio
 import json
 import uvicorn
+
 from starlette.applications import Starlette
-from starlette.routing import Route, Mount
-from starlette.responses import Response
+from starlette.responses import JSONResponse, Response
+from starlette.routing import Route
 from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
 
 from mcp.server import Server, NotificationOptions
+from mcp.server.http import HttpServerTransport
 from mcp.server.models import InitializationOptions
-from mcp.server.sse import SseServerTransport
 import mcp.types as types
 
 from kubernetes import client, config
 from kubernetes.client.rest import ApiException
 
 
-# --- Initialize MCP Server ---
 server = Server("k8s-cluster-mcp")
 
-# Load Kubernetes config
 try:
     config.load_kube_config()
 except Exception:
     try:
         config.load_incluster_config()
     except Exception as e:
-        print(f"Warning: Could not load kube config: {e}")
+        print(f"⚠️ Warning: Could not load kube config: {e}")
 
 v1 = client.CoreV1Api()
 
 
 @server.list_tools()
 async def handle_list_tools():
-    """Expose only one K8s tool for now."""
+    """List available tools"""
     return [
         types.Tool(
             name="get_pods",
@@ -43,9 +42,9 @@ async def handle_list_tools():
                 "properties": {
                     "namespace": {
                         "type": "string",
-                        "description": "Namespace to query (leave empty for all namespaces)"
+                        "description": "Namespace to query (leave empty for all namespaces)",
                     }
-                }
+                },
             },
         ),
     ]
@@ -84,46 +83,32 @@ async def handle_call_tool(name: str, arguments: dict | None):
         return [types.TextContent(type="text", text=f"Error: {str(e)}")]
 
 
+# --- Basic HTTP Routes (for health / info) ---
 async def handle_root(request):
-    return Response(json.dumps({"status": "ok", "name": "k8s-cluster-mcp"}), media_type="application/json")
+    return JSONResponse({"status": "ok", "name": "k8s-cluster-mcp"})
 
 
 async def handle_health(request):
-    return Response(json.dumps({"status": "healthy"}), media_type="application/json")
+    return JSONResponse({"status": "healthy"})
 
 
-async def handle_sse(scope, receive, send):
-    sse = SseServerTransport("/messages")
-    async with sse.connect_sse(scope, receive, send) as streams:
-        await server.run(
-            streams[0],
-            streams[1],
-            InitializationOptions(
-                server_name="k8s-cluster-mcp",
-                server_version="0.1.0",
-                capabilities=server.get_capabilities(
-                    notification_options=NotificationOptions(),
-                    experimental_capabilities={}
-                ),
+# --- MCP Transport via HTTP ---
+async def handle_mcp(request):
+    """HTTP-based MCP transport endpoint"""
+    body = await request.body()
+    transport = HttpServerTransport(request, body)
+    response = await server.handle_http_request(
+        transport,
+        InitializationOptions(
+            server_name="k8s-cluster-mcp",
+            server_version="0.2.0",
+            capabilities=server.get_capabilities(
+                notification_options=NotificationOptions(),
+                experimental_capabilities={},
             ),
-        )
-
-
-async def handle_messages(scope, receive, send):
-    sse = SseServerTransport("/messages")
-    async with sse.connect_sse(scope, receive, send) as streams:
-        await server.run(
-            streams[0],
-            streams[1],
-            InitializationOptions(
-                server_name="k8s-cluster-mcp",
-                server_version="0.1.0",
-                capabilities=server.get_capabilities(
-                    notification_options=NotificationOptions(),
-                    experimental_capabilities={}
-                ),
-            ),
-        )
+        ),
+    )
+    return response
 
 
 # --- Starlette App ---
@@ -131,8 +116,7 @@ app = Starlette(
     routes=[
         Route("/", endpoint=handle_root, methods=["GET"]),
         Route("/health", endpoint=handle_health, methods=["GET"]),
-        Mount("/sse", app=handle_sse),  # Use Mount for raw ASGI
-        Mount("/messages", app=handle_messages),  # Same for messages
+        Route("/mcp", endpoint=handle_mcp, methods=["POST"]),  # Main MCP endpoint
     ],
     middleware=[
         Middleware(
@@ -140,7 +124,7 @@ app = Starlette(
             allow_origins=["*"],
             allow_methods=["GET", "POST", "OPTIONS"],
             allow_headers=["*"],
-        )
+        ),
     ],
 )
 
