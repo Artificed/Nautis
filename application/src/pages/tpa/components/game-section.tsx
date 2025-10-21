@@ -55,7 +55,7 @@ export default function GameSection() {
         </motion.div>
 
         <motion.div
-          className="absolute bottom-1/4 left-1/5 w-32 h-32 border-4 border-amber-400/20 rounded-full"
+          className="absolute top-1/8 left-1/3 w-32 h-32 border-4 border-amber-300/20 rounded-full"
           animate={{
             rotate: [0, 360],
             scale: [1, 1.2, 1],
@@ -69,10 +69,10 @@ export default function GameSection() {
 
         {/* Top Right Puzzle Piece Decoration */}
         <motion.div
-          className="absolute top-1/5 right-1/4 w-32 h-32 opacity-30"
+          className="absolute top-1/4 right-1/4 w-32 h-32 opacity-30"
           animate={{
             rotate: [0, 360],
-            scale: [2.5, 2.8, 2.5],
+            scale: [2, 2.2, 2],
           }}
           transition={{
             duration: 20,
@@ -92,7 +92,7 @@ export default function GameSection() {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="mb-12 max-w-2xl"
+          className="mb-12 max-w-2xl pl-24"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -105,16 +105,16 @@ export default function GameSection() {
             </div>
           </motion.div>
 
-          <h1 className="text-7xl md:text-8xl font-black mb-6 bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent leading-tight">
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
             New Ideas
           </h1>
-          <p className="text-2xl text-gray-700 leading-relaxed">
+          <p className="text-xl md:text-2xl text-gray-700 leading-relaxed">
             Core principles for creating innovative and unique game experiences
           </p>
         </motion.div>
 
         {/* Scattered/Diagonal Card Layout */}
-        <div className="relative" style={{ minHeight: '600px' }}>
+        <div className="relative" style={{ minHeight: '300px' }}>
           
           {/* Card 1 - Top Left */}
           <motion.div
@@ -123,28 +123,29 @@ export default function GameSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             whileHover={{ rotate: 0, scale: 1.05 }}
             drag
+            dragConstraints={{ left: -100, right: 100, top: -100, bottom: 100 }}
             dragElastic={0.1}
             dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
-            className="absolute top-0 left-8 w-full md:w-[500px] group cursor-grab active:cursor-grabbing"
+            className="absolute top-0 left-1/4 -translate-x-1/2 w-full md:w-[420px] group cursor-grab active:cursor-grabbing"
           >
-            <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-gray-200/50 h-full overflow-hidden">
+            <div className="relative bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-200/50 h-full overflow-hidden">
               <motion.div
-                className={`absolute inset-0 bg-gradient-to-br ${designPrinciples[0].gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-3xl`}
+                className={`absolute inset-0 bg-gradient-to-br ${designPrinciples[0].gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-2xl`}
               />
 
-              <div className="relative z-10 flex items-start gap-6">
-                <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${designPrinciples[0].gradient} flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+              <div className="relative z-10 flex items-start gap-4">
+                <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${designPrinciples[0].gradient} flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
                   <div className="text-white">
                     {designPrinciples[0].icon}
                   </div>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-3xl font-bold mb-3 text-gray-900">
+                  <h3 className="text-xl font-bold mb-2 text-gray-900">
                     {designPrinciples[0].title}
                   </h3>
-                  <p className="text-lg text-gray-600 leading-relaxed">
+                  <p className="text-sm text-gray-600 leading-relaxed">
                     {designPrinciples[0].description}
                   </p>
                 </div>
@@ -166,28 +167,29 @@ export default function GameSection() {
             transition={{ duration: 0.6, delay: 0.5 }}
             whileHover={{ rotate: 0, scale: 1.05 }}
             drag
+            dragConstraints={{ left: -100, right: 100, top: -100, bottom: 100 }}
             dragElastic={0.1}
             dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
-            className="absolute top-16 right-0 w-full md:w-[550px] group cursor-grab active:cursor-grabbing"
+            className="absolute top-16 right-1/4 translate-x-1/2 w-full md:w-[420px] group cursor-grab active:cursor-grabbing"
           >
-            <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-gray-200/50 h-full overflow-hidden">
+            <div className="relative bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-200/50 h-full overflow-hidden">
               <motion.div
-                className={`absolute inset-0 bg-gradient-to-br ${designPrinciples[1].gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-3xl`}
+                className={`absolute inset-0 bg-gradient-to-br ${designPrinciples[1].gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-2xl`}
               />
 
-              <div className="relative z-10 flex items-start gap-6">
-                <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${designPrinciples[1].gradient} flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+              <div className="relative z-10 flex items-start gap-4">
+                <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${designPrinciples[1].gradient} flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
                   <div className="text-white">
                     {designPrinciples[1].icon}
                   </div>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-3xl font-bold mb-3 text-gray-900">
+                  <h3 className="text-xl font-bold mb-2 text-gray-900">
                     {designPrinciples[1].title}
                   </h3>
-                  <p className="text-lg text-gray-600 leading-relaxed">
+                  <p className="text-sm text-gray-600 leading-relaxed">
                     {designPrinciples[1].description}
                   </p>
                 </div>
