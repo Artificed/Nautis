@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useCursor } from "../../../common/shared/custom-cursor";
+import puzzlePiece from "../../../assets/puzzle-piece.svg";
 
 export default function GameSection() {
   const { setIsHovering } = useCursor();
@@ -33,171 +34,174 @@ export default function GameSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50 py-20">
-      {/* Unique Background Effects - Grid Pattern with Animated Lines */}
+      {/* Diagonal Background Pattern */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Animated grid lines */}
-        <div className="absolute inset-0" style={{ 
-          backgroundImage: `
-            linear-gradient(to right, rgba(251, 191, 36, 0.05) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(251, 191, 36, 0.05) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px'
-        }}></div>
-
-        {/* Pulsing corner accents */}
+        {/* Floating shapes */}
         <motion.div
-          className="absolute top-0 right-0 w-96 h-96 rounded-full bg-gradient-to-br from-purple-300/20 to-pink-300/10 blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-gradient-to-br from-cyan-300/20 to-blue-300/10 blur-3xl"
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 7,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-        />
-
-        {/* Floating geometric shapes */}
-        <motion.div
-          className="absolute top-1/4 left-1/6 w-20 h-20 border-2 border-amber-400/30"
+          className="absolute top-1/2 right-1/2 text-purple-400/15"
           animate={{
             rotate: [0, 180, 360],
-            y: [0, -30, 0],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/3 right-1/5 w-16 h-16 border-2 border-purple-400/30 rounded-full"
-          animate={{
-            scale: [1, 1.2, 1],
-            x: [0, 20, 0],
+            scale: [1, 1.1, 1],
           }}
           transition={{
             duration: 12,
             repeat: Infinity,
+            ease: "linear",
+          }}
+        >
+          <svg width="100" height="100" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+        </motion.div>
+
+        <motion.div
+          className="absolute bottom-1/4 left-1/5 w-32 h-32 border-4 border-amber-400/20 rounded-full"
+          animate={{
+            rotate: [0, 360],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
             ease: "easeInOut",
           }}
         />
+
+        {/* Top Right Puzzle Piece Decoration */}
         <motion.div
-          className="absolute top-1/2 right-1/4"
+          className="absolute top-1/5 right-1/4 w-32 h-32 opacity-30"
           animate={{
             rotate: [0, 360],
-            y: [0, 40, 0],
+            scale: [2.5, 2.8, 2.5],
           }}
           transition={{
-            duration: 18,
+            duration: 20,
             repeat: Infinity,
             ease: "linear",
           }}
         >
-          <div className="w-14 h-14 border-2 border-pink-400/30" style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}></div>
+          <img src={puzzlePiece} alt="" className="w-full h-full" />
         </motion.div>
       </div>
 
-      {/* Content */}
-      <div className="container mx-auto px-6 relative z-10">
+      {/* Main Content - Diagonal/Scattered Layout */}
+      <div className="container mx-auto px-6 relative z-10 max-w-7xl">
+        
+        {/* Header Section - Offset to the left */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="mb-12 max-w-2xl"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-block mb-4"
+            className="inline-block mb-6 mt-16"
           >
             <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full text-sm font-semibold tracking-wide shadow-lg">
               TPA GAME
             </div>
           </motion.div>
 
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
+          <h1 className="text-7xl md:text-8xl font-black mb-6 bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent leading-tight">
             New Ideas
           </h1>
-          <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-2xl text-gray-700 leading-relaxed">
             Core principles for creating innovative and unique game experiences
           </p>
         </motion.div>
 
-        {/* Design Principles Cards */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {designPrinciples.map((principle, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ 
-                opacity: 1, 
-                y: [0, -12, 0],
-              }}
-              transition={{ 
-                opacity: { duration: 0.6, delay: index * 0.2 },
-                y: {
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: index * 0.5,
-                }
-              }}
-              whileHover={{
-                scale: 1.02,
-                transition: { duration: 0.3 }
-              }}
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
-              className="relative group"
-            >
-              <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-10 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200/50 h-full overflow-hidden">
-                {/* Gradient overlay on hover */}
-                <motion.div
-                  className={`absolute inset-0 bg-gradient-to-br ${principle.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-2xl`}
-                />
+        {/* Scattered/Diagonal Card Layout */}
+        <div className="relative" style={{ minHeight: '600px' }}>
+          
+          {/* Card 1 - Top Left */}
+          <motion.div
+            initial={{ opacity: 0, y: 50, rotate: -5 }}
+            animate={{ opacity: 1, y: 0, rotate: -2 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            whileHover={{ rotate: 0, scale: 1.05 }}
+            drag
+            dragElastic={0.1}
+            dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+            className="absolute top-0 left-8 w-full md:w-[500px] group cursor-grab active:cursor-grabbing"
+          >
+            <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-gray-200/50 h-full overflow-hidden">
+              <motion.div
+                className={`absolute inset-0 bg-gradient-to-br ${designPrinciples[0].gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-3xl`}
+              />
 
-                {/* Icon */}
-                <div
-                  className="w-20 h-20 mb-6 relative z-10 text-white transition-transform duration-500 ease-out group-hover:rotate-[360deg]"
-                >
-                  <div className={`w-full h-full rounded-xl bg-gradient-to-br ${principle.gradient} flex items-center justify-center shadow-lg`}>
-                    {principle.icon}
+              <div className="relative z-10 flex items-start gap-6">
+                <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${designPrinciples[0].gradient} flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                  <div className="text-white">
+                    {designPrinciples[0].icon}
                   </div>
                 </div>
-
-                {/* Content */}
-                <div className="relative z-10">
-                  <h3 className="text-3xl font-bold mb-4 text-gray-900">
-                    {principle.title}
+                <div className="flex-1">
+                  <h3 className="text-3xl font-bold mb-3 text-gray-900">
+                    {designPrinciples[0].title}
                   </h3>
                   <p className="text-lg text-gray-600 leading-relaxed">
-                    {principle.description}
+                    {designPrinciples[0].description}
                   </p>
                 </div>
-
-                {/* Corner accent */}
-                <motion.div
-                  className={`absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br ${principle.gradient} opacity-0 group-hover:opacity-20 rounded-full blur-2xl transition-opacity duration-300`}
-                />
               </div>
-            </motion.div>
-          ))}
+
+              <motion.div
+                className={`absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r ${designPrinciples[0].gradient}`}
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              />
+            </div>
+          </motion.div>
+
+          {/* Card 2 - Bottom Right */}
+          <motion.div
+            initial={{ opacity: 0, y: 50, rotate: 5 }}
+            animate={{ opacity: 1, y: 0, rotate: 2 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            whileHover={{ rotate: 0, scale: 1.05 }}
+            drag
+            dragElastic={0.1}
+            dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+            className="absolute top-16 right-0 w-full md:w-[550px] group cursor-grab active:cursor-grabbing"
+          >
+            <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-gray-200/50 h-full overflow-hidden">
+              <motion.div
+                className={`absolute inset-0 bg-gradient-to-br ${designPrinciples[1].gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-3xl`}
+              />
+
+              <div className="relative z-10 flex items-start gap-6">
+                <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${designPrinciples[1].gradient} flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                  <div className="text-white">
+                    {designPrinciples[1].icon}
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-3xl font-bold mb-3 text-gray-900">
+                    {designPrinciples[1].title}
+                  </h3>
+                  <p className="text-lg text-gray-600 leading-relaxed">
+                    {designPrinciples[1].description}
+                  </p>
+                </div>
+              </div>
+
+              <motion.div
+                className={`absolute top-0 right-0 w-2 h-full bg-gradient-to-b ${designPrinciples[1].gradient}`}
+                initial={{ scaleY: 0 }}
+                animate={{ scaleY: 1 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+              />
+            </div>
+          </motion.div>
+
         </div>
       </div>
     </section>
