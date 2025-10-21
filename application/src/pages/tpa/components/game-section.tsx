@@ -128,7 +128,7 @@ export default function GameSection() {
             dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
-            className="absolute top-0 left-1/4 -translate-x-1/2 w-full md:w-[420px] group cursor-grab active:cursor-grabbing"
+            className="absolute top-0 left-1/4 -translate-x-1/2 w-full md:w-[480px] group cursor-grab active:cursor-grabbing"
           >
             <div className="relative bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-200/50 h-full overflow-hidden">
               <motion.div
@@ -142,10 +142,10 @@ export default function GameSection() {
                   </div>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold mb-2 text-gray-900">
+                  <h3 className="text-2xl font-bold mb-2 text-gray-900">
                     {designPrinciples[0].title}
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-md text-gray-600 leading-relaxed">
                     {designPrinciples[0].description}
                   </p>
                 </div>
@@ -172,7 +172,7 @@ export default function GameSection() {
             dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
-            className="absolute top-16 right-1/4 translate-x-1/2 w-full md:w-[420px] group cursor-grab active:cursor-grabbing"
+            className="absolute top-8 right-1/4 translate-x-1/2 w-full md:w-[470px] group cursor-grab active:cursor-grabbing"
           >
             <div className="relative bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-200/50 h-full overflow-hidden">
               <motion.div
@@ -186,10 +186,10 @@ export default function GameSection() {
                   </div>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold mb-2 text-gray-900">
+                  <h3 className="text-2xl font-bold mb-2 text-gray-900">
                     {designPrinciples[1].title}
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-md text-gray-600 leading-relaxed">
                     {designPrinciples[1].description}
                   </p>
                 </div>

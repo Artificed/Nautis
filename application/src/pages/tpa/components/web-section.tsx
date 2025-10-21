@@ -167,7 +167,7 @@ export default function WebSection() {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="left-1/5 lg:w-2/5 lg:sticky lg:top-32"
+            className="left-1/5 lg:w-2/5 lg:sticky lg:top-36"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -217,9 +217,9 @@ export default function WebSection() {
                 onMouseLeave={() => setIsHovering(false)}
                 className="absolute group cursor-grab active:cursor-grabbing"
                 style={{
-                  top: `${index * 220 - 30}px`,
+                  top: `${index * 210 - 20}px`,
                   left: index % 2 === 0 ? '0' : '5%',
-                  width: 'min(500px, 95%)',
+                  width: 'min(600px, 95%)',
                   rotate: index % 2 === 0 ? '-1deg' : '1deg',
                 }}
               >
@@ -244,13 +244,13 @@ export default function WebSection() {
 
                   {/* Text content */}
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-1 text-gray-900">
+                    <h3 className="text-2xl font-bold mb-1 text-gray-900">
                       {feature.title}
                     </h3>
-                    <p className={`text-sm font-semibold mb-3 bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
+                    <p className={`text-md font-semibold mb-3 bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
                       {feature.subtitle}
                     </p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
+                    <p className="text-gray-600 text-md leading-relaxed">
                       {feature.description}
                     </p>
                   </div>
