@@ -23,14 +23,33 @@ ingress:
 
 # Main node configuration
 main:
-  # Resource limits
+  # Resource limits - increased memory request for stability
   resources:
     requests:
-      cpu: 100m
-      memory: 128Mi
+      cpu: 200m
+      memory: 256Mi
     limits:
       cpu: 1000m
       memory: 1Gi
+  
+  # Liveness and readiness probes
+  livenessProbe:
+    httpGet:
+      path: /healthz
+      port: 5678
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+  
+  readinessProbe:
+    httpGet:
+      path: /healthz
+      port: 5678
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 3
 
   # Persistence for workflows and data
   persistence:
@@ -42,6 +61,9 @@ main:
   # Environment variables
   extraEnvVars:
     N8N_SECURE_COOKIE: "false"
+    DB_SQLITE_POOL_SIZE: "3"
+    N8N_BLOCK_ENV_ACCESS_IN_NODE: "false"
+    N8N_GIT_NODE_DISABLE_BARE_REPOS: "true"
 
 # Database configuration
 # Using default SQLite - fine for local development
