@@ -39,71 +39,8 @@ export default function NetworkSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50 py-20">
-      {/* Background Effects - Network/Mesh Theme */}
+            {/* Background Effects - Network/Mesh Theme */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Mesh grid pattern */}
-        <div className="absolute inset-0" style={{ 
-          backgroundImage: `
-            linear-gradient(to right, rgba(59, 130, 246, 0.03) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(59, 130, 246, 0.03) 1px, transparent 1px)
-          `,
-          backgroundSize: '80px 80px'
-        }}></div>
-
-        {/* Hexagon pattern overlay */}
-        <svg className="absolute inset-0 w-full h-full opacity-5">
-          <defs>
-            <pattern id="hexagons" width="100" height="87" patternUnits="userSpaceOnUse">
-              <path d="M50 0 L93.3 25 L93.3 62 L50 87 L6.7 62 L6.7 25 Z" fill="none" stroke="url(#hexGradient)" strokeWidth="1"/>
-            </pattern>
-            <linearGradient id="hexGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#3B82F6" />
-              <stop offset="100%" stopColor="#8B5CF6" />
-            </linearGradient>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#hexagons)" />
-        </svg>
-
-        {/* Animated connection nodes */}
-        <motion.div
-          className="absolute top-1/4 left-1/4 w-3 h-3 rounded-full bg-blue-400/50"
-          animate={{
-            scale: [1, 1.5, 1],
-            opacity: [0.5, 0.8, 0.5],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute top-1/3 right-1/3 w-3 h-3 rounded-full bg-purple-400/50"
-          animate={{
-            scale: [1, 1.5, 1],
-            opacity: [0.5, 0.8, 0.5],
-          }}
-          transition={{
-            duration: 3.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.5,
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/3 left-1/2 w-3 h-3 rounded-full bg-cyan-400/50"
-          animate={{
-            scale: [1, 1.5, 1],
-            opacity: [0.5, 0.8, 0.5],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-        />
-
         {/* Gradient orbs */}
         <motion.div
           className="absolute top-1/3 right-1/5 w-[32rem] h-[32rem] rounded-full bg-gradient-to-br from-blue-300/15 to-indigo-300/10 blur-3xl"
@@ -158,33 +95,27 @@ export default function NetworkSection() {
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 relative z-10 max-w-6xl">
+        
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-block mb-4"
-          >
-            <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-semibold tracking-wide shadow-lg">
-              TPA NETWORK
-            </div>
-          </motion.div>
-
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+          <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-semibold tracking-wide shadow-lg mb-4 inline-block">
+            TPA NETWORK
+          </div>
+          <h1 className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent mb-4">
             Infrastructure & Deployment
           </h1>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-700">
             Modern network architecture & Strategic deployment
           </p>
         </motion.div>
 
-        {/* Network Concepts Cards */}
+        {/* Simple Grid */}
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {networkConcepts.map((concept, index) => (
             <motion.div
@@ -192,77 +123,72 @@ export default function NetworkSection() {
               initial={{ opacity: 0, y: 50 }}
               animate={{ 
                 opacity: 1, 
-                y: [0, -12, 0],
+                y: 0,
               }}
               transition={{ 
-                opacity: { duration: 0.6, delay: index * 0.2 },
-                y: {
-                  duration: 3.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: index * 0.5,
-                }
+                duration: 0.6,
+                delay: index * 0.2,
               }}
-              whileHover={{
-                scale: 1.02,
-                transition: { duration: 0.3 }
-              }}
+              drag
+              dragConstraints={{ left: -50, right: 50, top: -50, bottom: 50 }}
+              dragElastic={0.1}
+              whileHover={{ scale: 1.02, y: -5 }}
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
-              className="relative group"
+              className="cursor-grab active:cursor-grabbing"
             >
-              <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-10 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200/50 h-full overflow-hidden">
-                {/* Gradient overlay on hover */}
-                <motion.div
-                  className={`absolute inset-0 bg-gradient-to-br ${concept.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-2xl`}
-                />
-
-                {/* Icon */}
-                <div
-                  className="w-20 h-20 mb-6 relative z-10 text-white transition-transform duration-500 ease-out group-hover:rotate-[360deg]"
-                >
-                  <div className={`w-full h-full rounded-xl bg-gradient-to-br ${concept.gradient} flex items-center justify-center shadow-lg`}>
-                    {concept.icon}
+              <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200/50 h-full overflow-hidden group">
+                
+                {/* Side gradient accent */}
+                <div className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${concept.gradient}`} />
+                
+                {/* Icon and title */}
+                <div className="flex items-start gap-4 mb-8">
+                  <motion.div
+                    className={`w-16 h-16 rounded-xl bg-gradient-to-br ${concept.gradient} flex items-center justify-center shadow-lg flex-shrink-0`}
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <div className="text-white">{concept.icon}</div>
+                  </motion.div>
+                  
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-1">
+                      {concept.title}
+                    </h3>
+                    <p className={`text-md font-semibold bg-gradient-to-r ${concept.gradient} bg-clip-text text-transparent`}>
+                      {concept.subtitle}
+                    </p>
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="relative z-10">
-                  <h3 className="text-3xl font-bold mb-2 text-gray-900">
-                    {concept.title}
-                  </h3>
-                  <p className={`text-sm font-semibold mb-4 bg-gradient-to-r ${concept.gradient} bg-clip-text text-transparent`}>
-                    {concept.subtitle}
-                  </p>
-                  <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                    {concept.description}
-                  </p>
+                {/* Description */}
+                <p className="text-md text-gray-600 leading-relaxed mt-2 mb-6">
+                  {concept.description}
+                </p>
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {concept.tags.map((tag, tagIndex) => (
-                      <motion.span
-                        key={tagIndex}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: index * 0.2 + tagIndex * 0.05 }}
-                        className="text-xs px-3 py-1 rounded-full bg-gray-100 text-gray-700 font-medium"
-                      >
-                        {tag}
-                      </motion.span>
-                    ))}
-                  </div>
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2">
+                  {concept.tags.map((tag, tagIndex) => (
+                    <span
+                      key={tagIndex}
+                      className="text-xs px-2.5 py-1 rounded-full bg-gray-100 text-gray-700 font-medium"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
 
-                {/* Corner accent */}
+                {/* Hover glow */}
                 <motion.div
-                  className={`absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br ${concept.gradient} opacity-0 group-hover:opacity-20 rounded-full blur-2xl transition-opacity duration-300`}
+                  className={`absolute inset-0 bg-gradient-to-br ${concept.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-2xl`}
                 />
               </div>
             </motion.div>
           ))}
         </div>
       </div>
+
     </section>
   );
 }

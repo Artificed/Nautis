@@ -210,7 +210,7 @@ export default function MobileSection() {
                     Weekly Sprint
                   </h2>
                 </div>
-                <p className="text-gray-600 text-lg leading-relaxed">
+                <p className="text-gray-600 text-md leading-relaxed">
                   Each week follows a consistent rhythm with collaborative meetings to ensure alignment, 
                   track progress, and maintain momentum throughout the development cycle.
                 </p>
@@ -231,8 +231,8 @@ export default function MobileSection() {
                       {activity.icon}
                     </div>
                     <div className="flex-1 pt-1">
-                      <div className="font-bold text-gray-900 text-xl mb-1">{activity.label}</div>
-                      <div className="text-gray-600">{activity.desc}</div>
+                      <div className="font-bold text-gray-900 text-lg mb-1">{activity.label}</div>
+                      <div className="text-gray-600 text-md">{activity.desc}</div>
                     </div>
                   </motion.div>
                 ))}
