@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useCursor } from "../../../common/shared/custom-cursor";
 import k8sLogo from "../../../assets/k8s-logo.png";
 import n8nLogo from "../../../assets/n8n-logo.png";
 import mcpLogo from "../../../assets/mcp-logo.png";
@@ -10,7 +9,6 @@ import outlookLogo from "../../../assets/outlook-logo.png";
 
 export default function ResearchHeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const { setIsHovering } = useCursor();
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {

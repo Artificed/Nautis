@@ -22,9 +22,12 @@ export default function ChatSection() {
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
   };
 
   useEffect(() => {
@@ -156,6 +159,7 @@ export default function ChatSection() {
 
             {/* Messages Area */}
             <div 
+              ref={messagesContainerRef}
               className="h-[540px] overflow-y-auto p-6 space-y-4 bg-gradient-to-b from-gray-50/50 to-white/50"
               onWheel={(e) => e.stopPropagation()}
               onTouchMove={(e) => e.stopPropagation()}
