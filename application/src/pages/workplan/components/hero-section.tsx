@@ -147,8 +147,8 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            A comprehensive timeline detailing my approach to delivering exceptional results
-            over the next 30 days as Assistant Development Officer
+            A comprehensive timeline detailing my approach to delivering great results
+            over the next 2 semesters as Assistant Development Officer
           </motion.p>
 
           <motion.div

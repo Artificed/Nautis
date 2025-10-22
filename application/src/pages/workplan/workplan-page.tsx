@@ -1,6 +1,8 @@
 import CustomCursor from "../../common/shared/custom-cursor";
 import Navbar from "../../common/components/navbar";
 import HeroSection from "./components/hero-section";
+import SemesterOneSection from "./components/semester-one-section";
+import SemesterTwoSection from "./components/semester-two-section";
 import Footer from "../../common/components/footer";
 
 export default function WorkplanPage() {
@@ -10,6 +12,14 @@ export default function WorkplanPage() {
       <div className="snap-container">
         <div className="snap-section">
           <HeroSection />
+        </div>
+
+        <div className="snap-section">
+          <SemesterOneSection />
+        </div>
+
+        <div className="snap-section">
+          <SemesterTwoSection />
         </div>
 
         <div className="snap-section">
