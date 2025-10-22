@@ -14,7 +14,7 @@ export default function ChatSection() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      text: "Hello! I'm the n8n cluster automation agent. Ask me about the current Kubernetes cluster status, deployments, or any automation workflows!",
+      text: "Hello! I'm the n8n cluster automation agent managing the host Kubernetes cluster. Ask me about the cluster status, deployments, or automation workflows!",
       sender: "ai",
       timestamp: new Date(),
     },
@@ -54,7 +54,7 @@ export default function ChatSection() {
     setTimeout(() => {
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: "I can help you check the cluster health, restart deployments, view pod status, and more. What would you like to know?",
+        text: "I can help you check the host cluster health, restart deployments, view pod status, and more. What would you like to know?",
         sender: "ai",
         timestamp: new Date(),
       };
@@ -299,4 +299,3 @@ export default function ChatSection() {
     </section>
   );
 }
-    
