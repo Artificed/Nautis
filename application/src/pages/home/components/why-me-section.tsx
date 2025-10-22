@@ -13,6 +13,7 @@ export default function WhyMeSection() {
   const { setIsHovering } = useCursor();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [isCenterHovered, setIsCenterHovered] = useState<boolean>(false);
   const animationFrameRef = useRef<number>(0);
   const timeRef = useRef<number>(0);
   const lastMouseMoveTime = useRef<number>(0);
@@ -146,7 +147,6 @@ export default function WhyMeSection() {
     const animate = () => {
       ctx.clearRect(0, 0, centerX * 2, centerY * 2);
 
-      // Draw orbit rings
       ctx.strokeStyle = 'rgba(251, 146, 60, 0.15)';
       ctx.lineWidth = 2;
       ctx.setLineDash([5, 5]);
@@ -160,7 +160,6 @@ export default function WhyMeSection() {
       ctx.stroke();
       ctx.setLineDash([]);
 
-      // Draw center hexagon
       const gradient = ctx.createLinearGradient(
         centerX - 80, centerY - 80,
         centerX + 80, centerY + 80
@@ -173,16 +172,13 @@ export default function WhyMeSection() {
       ctx.fillStyle = gradient;
       ctx.fill(outerHex);
 
-      // Inner white hexagon
       const innerHex = createHexagonPath(centerX, centerY, 76);
       ctx.fillStyle = 'white';
       ctx.fill(innerHex);
 
-      // Draw center SVG icon (user profile icon)
       const centerIconPath = "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z";
       drawSVGPath(centerIconPath, centerX, centerY, 48, '#fb923c');
 
-      // Draw pulsing hexagon
       const pulseRadius = 80 + Math.sin(timeRef.current * 0.03) * 8;
       const pulseAlpha = 0.3 + Math.sin(timeRef.current * 0.03) * 0.2;
       const pulseHex = createHexagonPath(centerX, centerY, pulseRadius);
@@ -190,13 +186,11 @@ export default function WhyMeSection() {
       ctx.lineWidth = 3;
       ctx.stroke(pulseHex);
 
-      // Draw orbiting icons
       strengths.forEach((strength, index) => {
         const angle = (index / strengths.length) * Math.PI * 2 + timeRef.current * 0.002;
         const x = centerX + Math.cos(angle) * orbitRadius;
         const y = centerY + Math.sin(angle) * orbitRadius;
 
-        // Icon circle background
         const iconGradient = ctx.createRadialGradient(x, y, 0, x, y, 30);
         iconGradient.addColorStop(0, strength.color + 'ff');
         iconGradient.addColorStop(1, strength.color + 'aa');
@@ -206,14 +200,12 @@ export default function WhyMeSection() {
         ctx.arc(x, y, 56, 0, Math.PI * 2);
         ctx.fill();
 
-        // White border
         ctx.beginPath();
         ctx.arc(x, y, 56, 0, Math.PI * 2);
         ctx.strokeStyle = 'white';
         ctx.lineWidth = 3;
         ctx.stroke();
 
-        // Draw SVG icon
         drawSVGPath(strength.icon, x, y, 28, 'white');
       });
 
@@ -246,6 +238,14 @@ export default function WhyMeSection() {
     const centerY = rect.height / 2;
     const orbitRadius = Math.min(centerX, centerY) * 0.7;
 
+    // Check if hovering over center hexagon
+    const distanceFromCenter = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
+    const isCenterHover = distanceFromCenter < 80;
+
+    if (isCenterHover !== isCenterHovered) {
+      setIsCenterHovered(isCenterHover);
+    }
+
     let foundHover = false;
     const currentTime = timeRef.current;
 
@@ -264,9 +264,10 @@ export default function WhyMeSection() {
       }
     }
 
-    if (foundHover !== isHoveringRef.current) {
-      isHoveringRef.current = foundHover;
-      setIsHovering(foundHover);
+    const anyHover = foundHover || isCenterHover;
+    if (anyHover !== isHoveringRef.current) {
+      isHoveringRef.current = anyHover;
+      setIsHovering(anyHover);
     }
 
     if (!foundHover && hoveredIndex !== null) {
@@ -276,6 +277,7 @@ export default function WhyMeSection() {
 
   const handleCanvasMouseLeave = () => {
     setHoveredIndex(null);
+    setIsCenterHovered(false);
     isHoveringRef.current = false;
     setIsHovering(false);
   };
@@ -324,9 +326,20 @@ export default function WhyMeSection() {
             onMouseMove={handleCanvasMouseMove}
             onMouseLeave={handleCanvasMouseLeave}
             className="w-full h-full"
-            style={{ cursor: hoveredIndex !== null ? 'pointer' : 'default' }}
+            style={{ cursor: hoveredIndex !== null || isCenterHovered ? 'pointer' : 'default' }}
           />
           
+          {isCenterHovered && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="absolute bottom-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-6 py-3 rounded-xl text-lg font-semibold shadow-2xl pointer-events-none whitespace-nowrap"
+            >
+              Passion
+            </motion.div>
+          )}
+
           {hoveredIndex !== null && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
