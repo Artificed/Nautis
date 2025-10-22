@@ -1,5 +1,6 @@
 import CustomCursor from "../../common/shared/custom-cursor";
 import Navbar from "../../common/components/navbar";
+import ResearchHeroSection from "./components/hero-section";
 import ChatSection from "./components/chat-section";
 
 export default function ResearchPage() {
@@ -7,6 +8,9 @@ export default function ResearchPage() {
     <CustomCursor>
       <Navbar />
       <div className="snap-container">
+        <div className="snap-section">
+          <ResearchHeroSection />
+        </div>
         <div className="snap-section">
           <ChatSection />
         </div>
