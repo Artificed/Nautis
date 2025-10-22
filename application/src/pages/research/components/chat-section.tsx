@@ -14,7 +14,7 @@ export default function ChatSection() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      text: "Hello! I'm your AI research assistant. How can I help you today?",
+      text: "Hello! I'm the n8n cluster automation agent. Ask me about the current Kubernetes cluster status, deployments, or any automation workflows!",
       sender: "ai",
       timestamp: new Date(),
     },
@@ -51,7 +51,7 @@ export default function ChatSection() {
     setTimeout(() => {
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: "This is a simulated response. Connect to your AI API to get real responses!",
+        text: "I can help you check the cluster health, restart deployments, view pod status, and more. What would you like to know?",
         sender: "ai",
         timestamp: new Date(),
       };
@@ -117,20 +117,20 @@ export default function ChatSection() {
               transition={{ duration: 0.6 }}
               className="inline-block"
             >
-              <span className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-indigo-700 bg-indigo-100 rounded-full">
-                AI Research Assistant
+              <span className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-rose-700 bg-rose-100 rounded-full">
+                n8n Automation Agent
               </span>
             </motion.div>
 
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
               Chat with{" "}
-              <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-transparent bg-clip-text">
-                AI
+              <span className="bg-gradient-to-r from-rose-600 via-pink-600 to-orange-600 text-transparent bg-clip-text">
+                n8n Agent
               </span>
             </h2>
 
             <p className="text-lg md:text-xl text-gray-600 mb-8">
-              Ask questions, get insights, and explore <br></br> research topics with our intelligent assistant
+              Monitor the cluster, automate tasks, and <br></br> control deployments with AI-powered assistance
             </p>
           </motion.div>
 
@@ -147,10 +147,10 @@ export default function ChatSection() {
             onTouchMove={(e) => e.stopPropagation()}
           >
             {/* Chat Header */}
-            <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 px-6 py-4">
+            <div className="bg-gradient-to-r from-rose-600 via-pink-600 to-orange-600 px-6 py-4">
               <div className="flex items-center gap-3">
                 <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                <h3 className="text-white font-semibold text-lg">AI Research Assistant</h3>
+                <h3 className="text-white font-semibold text-lg">n8n Automation Agent</h3>
               </div>
             </div>
 
@@ -173,13 +173,13 @@ export default function ChatSection() {
                     <div
                       className={`max-w-[75%] ${
                         message.sender === "user"
-                          ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
+                          ? "bg-gradient-to-r from-rose-600 to-pink-600 text-white"
                           : "bg-white border border-gray-200"
                       } rounded-2xl px-5 py-3 shadow-md`}
                     >
                       {message.sender === "ai" && (
                         <div className="flex items-center gap-2 mb-2">
-                          <div className="w-6 h-6 rounded-full bg-gradient-to-r from-indigo-400 to-purple-400 flex items-center justify-center">
+                          <div className="w-6 h-6 rounded-full bg-gradient-to-r from-rose-400 to-pink-400 flex items-center justify-center">
                             <svg
                               className="w-4 h-4 text-white"
                               fill="none"
@@ -194,7 +194,7 @@ export default function ChatSection() {
                               />
                             </svg>
                           </div>
-                          <span className="text-xs font-semibold text-gray-700">AI</span>
+                          <span className="text-xs font-semibold text-gray-700">n8n Agent</span>
                         </div>
                       )}
                       <p className={message.sender === "user" ? "text-white" : "text-gray-800"}>
@@ -202,7 +202,7 @@ export default function ChatSection() {
                       </p>
                       <p
                         className={`text-xs mt-1 ${
-                          message.sender === "user" ? "text-indigo-200" : "text-gray-500"
+                          message.sender === "user" ? "text-rose-200" : "text-gray-500"
                         }`}
                       >
                         {message.timestamp.toLocaleTimeString([], {
@@ -267,7 +267,7 @@ export default function ChatSection() {
                   type="submit"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-6 py-3 bg-gradient-to-r from-rose-600 to-pink-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   disabled={!inputValue.trim() || isTyping}
                   onMouseEnter={() => setIsHovering(true)}
                   onMouseLeave={() => setIsHovering(false)}
