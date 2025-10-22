@@ -135,9 +135,6 @@ export default function N8NAutomationSection() {
 
         {/* Horizontal Workflow Steps */}
         <div className="relative max-w-6xl mx-auto">
-          {/* Connecting line */}
-          <div className="absolute top-12 left-0 right-0 h-1 bg-gradient-to-r from-rose-300 via-pink-300 to-orange-300 opacity-30"></div>
-
           {/* Steps Grid */}
           <div className="grid grid-cols-5 gap-6">
             {steps.map((step, index) => (
@@ -152,11 +149,26 @@ export default function N8NAutomationSection() {
                 onMouseLeave={() => setIsHovering(false)}
                 className="relative"
               >
-                {/* Step Number Badge */}
-                <div className="flex justify-center mb-4">
+                {/* Step Number Badge with Arrow */}
+                <div className="flex justify-center items-center mb-4">
                   <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center text-white font-bold text-lg shadow-lg z-10`}>
                     {step.number}
                   </div>
+                  
+                  {/* Arrow to next step */}
+                  {index < steps.length - 1 && (
+                    <motion.div
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
+                      viewport={{ once: true }}
+                      className="absolute left-[calc(100%+0.5rem)]"
+                    >
+                      <svg className="w-8 h-8 text-rose-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </motion.div>
+                  )}
                 </div>
 
                 {/* Card */}
@@ -183,15 +195,6 @@ export default function N8NAutomationSection() {
                   </h3>
                   <p className="text-sm text-gray-600 leading-snug">{step.description}</p>
                 </div>
-
-                {/* Arrow between steps */}
-                {index < steps.length - 1 && (
-                  <div className="absolute top-12 -right-3 z-20">
-                    <svg className="w-6 h-6 text-rose-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                )}
               </motion.div>
             ))}
           </div>
