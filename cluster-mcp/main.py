@@ -633,9 +633,7 @@ async def handle_sse(request: Request):
     SSE (Server-Sent Events) endpoint for MCP clients.
     """
     sse = SseServerTransport("/messages")
-    await sse.handle_request(request.scope, request.receive, request._send)
-    # do NOT return Response(); the transport already handled it
-    return PlainTextResponse("", status_code=200)
+    return await sse.connect_sse(request)
 
 
 async def handle_messages(request: Request):
@@ -643,8 +641,7 @@ async def handle_messages(request: Request):
     POST endpoint for client -> server messages.
     """
     sse = SseServerTransport("/messages")
-    await sse.handle_request(request.scope, request.receive, request._send)
-    return PlainTextResponse("", status_code=200)
+    return await sse.handle_post_message(request)
 
 # Create Starlette app with CORS support
 app = Starlette(
