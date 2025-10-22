@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useCursor } from "../../../common/shared/custom-cursor";
+import openaiLogo from "../../../assets/openai-logo.svg";
 
 export default function LLMSection() {
   const { setIsHovering } = useCursor();
@@ -38,9 +39,9 @@ export default function LLMSection() {
               <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full blur-3xl opacity-30 scale-150"></div>
               <div className="relative bg-white rounded-3xl shadow-2xl p-12">
                 <img 
-                  src="/src/assets/openai-logo.svg" 
+                  src={openaiLogo} 
                   alt="OpenAI" 
-                  className="w-40 h-40"
+                  className="w-48 h-48"
                 />
               </div>
             </motion.div>

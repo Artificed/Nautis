@@ -1,6 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useCursor } from "../../../common/shared/custom-cursor";
+import k8sLogo from "../../../assets/k8s-logo.png";
+import n8nLogo from "../../../assets/n8n-logo.png";
+import mcpLogo from "../../../assets/mcp-logo.png";
+import notionLogo from "../../../assets/notion-logo.png";
+import openaiLogo from "../../../assets/openai-logo.svg";
+import outlookLogo from "../../../assets/outlook-logo.png";
 
 export default function ResearchHeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -66,7 +72,7 @@ export default function ResearchHeroSection() {
         }}
       >
         <div className="bg-white rounded-2xl shadow-lg p-6 backdrop-blur-sm bg-opacity-90">
-          <img src="/src/assets/k8s-logo.png" alt="Kubernetes" className="w-20 h-20" style={{ transform: 'rotate(-12deg)' }} />
+          <img src={k8sLogo} alt="Kubernetes" className="w-20 h-20" style={{ transform: 'rotate(-12deg)' }} />
         </div>
       </motion.div>
 
@@ -79,7 +85,7 @@ export default function ResearchHeroSection() {
         }}
       >
         <div className="bg-white rounded-2xl shadow-lg p-6 backdrop-blur-sm bg-opacity-90">
-          <img src="/src/assets/n8n-logo.png" alt="n8n" className="w-20 h-20" style={{ transform: 'rotate(6deg)' }} />
+          <img src={n8nLogo} alt="n8n" className="w-20 h-20" style={{ transform: 'rotate(6deg)' }} />
         </div>
       </motion.div>
 
@@ -92,7 +98,7 @@ export default function ResearchHeroSection() {
         }}
       >
         <div className="bg-white rounded-2xl shadow-lg p-3 backdrop-blur-sm bg-opacity-90">
-          <img src="/src/assets/mcp-logo.png" alt="MCP" className="w-24 h-24 rounded-xl" style={{ transform: 'rotate(-6deg)' }} />
+          <img src={mcpLogo} alt="MCP" className="w-24 h-24 rounded-xl" style={{ transform: 'rotate(-6deg)' }} />
         </div>
       </motion.div>
 
@@ -105,7 +111,7 @@ export default function ResearchHeroSection() {
         }}
       >
         <div className="bg-white rounded-2xl shadow-lg p-6 backdrop-blur-sm bg-opacity-90">
-          <img src="/src/assets/notion-logo.png" alt="Notion" className="w-18 h-18" style={{ transform: 'rotate(12deg)' }} />
+          <img src={notionLogo} alt="Notion" className="w-18 h-18" style={{ transform: 'rotate(12deg)' }} />
         </div>
       </motion.div>
 
@@ -118,7 +124,7 @@ export default function ResearchHeroSection() {
         }}
       >
         <div className="bg-white rounded-2xl shadow-lg p-6 backdrop-blur-sm bg-opacity-90">
-          <img src="/src/assets/openai-logo.svg" alt="OpenAI" className="w-24 h-24" style={{ transform: 'rotate(-3deg)' }} />
+          <img src={openaiLogo} alt="OpenAI" className="w-24 h-24" style={{ transform: 'rotate(-3deg)' }} />
         </div>
       </motion.div>
 
@@ -131,7 +137,7 @@ export default function ResearchHeroSection() {
         }}
       >
         <div className="bg-white rounded-2xl shadow-lg p-6 backdrop-blur-sm bg-opacity-90">
-          <img src="/src/assets/outlook-logo.png" alt="Outlook" className="w-20 h-20" style={{ transform: 'rotate(3deg)' }} />
+          <img src={outlookLogo} alt="Outlook" className="w-20 h-20" style={{ transform: 'rotate(3deg)' }} />
         </div>
       </motion.div>
 

@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { useCursor } from "../../../common/shared/custom-cursor";
+import k8sLogo from "../../../assets/k8s-logo.png";
+import mcpLogo from "../../../assets/mcp-logo.png";
 
 export default function KubernetesMCPSection() {
   const { setIsHovering } = useCursor();
@@ -64,7 +66,7 @@ export default function KubernetesMCPSection() {
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-3xl blur-2xl opacity-40 scale-110"></div>
                 <div className="relative bg-white rounded-3xl shadow-2xl p-10">
                   <img 
-                    src="/src/assets/k8s-logo.png" 
+                    src={k8sLogo} 
                     alt="Kubernetes" 
                     className="w-32 h-32"
                   />
@@ -108,7 +110,7 @@ export default function KubernetesMCPSection() {
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-violet-400 rounded-3xl blur-2xl opacity-40 scale-110"></div>
                 <div className="relative bg-white rounded-3xl shadow-2xl p-10">
                   <img 
-                    src="/src/assets/mcp-logo.png" 
+                    src={mcpLogo} 
                     alt="MCP" 
                     className="w-32 h-32 rounded-2xl"
                   />

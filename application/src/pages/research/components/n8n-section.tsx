@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
 import { useCursor } from "../../../common/shared/custom-cursor";
+import n8nLogo from "../../../assets/n8n-logo.png";
+import notionLogo from "../../../assets/notion-logo.png";
+import outlookLogo from "../../../assets/outlook-logo.png";
 
 export default function N8NAutomationSection() {
   const { setIsHovering } = useCursor();
@@ -43,14 +46,14 @@ export default function N8NAutomationSection() {
       number: 4,
       title: "Log to Notion",
       description: "Store execution records",
-      icon: <img src="/src/assets/notion-logo.png" alt="Notion" className="w-6 h-6" />,
+      icon: <img src={notionLogo} alt="Notion" className="w-6 h-6" />,
       color: "from-rose-500 to-orange-500",
     },
     {
       number: 5,
       title: "Alert System",
       description: "Email critical actions",
-      icon: <img src="/src/assets/outlook-logo.png" alt="Email" className="w-6 h-6" />,
+      icon: <img src={outlookLogo} alt="Email" className="w-6 h-6" />,
       color: "from-pink-500 to-orange-500",
     },
   ];
@@ -122,7 +125,7 @@ export default function N8NAutomationSection() {
             <div className="absolute inset-0 bg-gradient-to-r from-rose-400 to-pink-400 rounded-3xl blur-2xl opacity-40 scale-110"></div>
             <div className="relative bg-white rounded-2xl shadow-2xl p-10 border-2 border-rose-200">
               <img 
-                src="/src/assets/n8n-logo.png" 
+                src={n8nLogo} 
                 alt="n8n" 
                 className="w-32 h-32"
               />
