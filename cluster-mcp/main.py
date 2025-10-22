@@ -9,9 +9,15 @@ HOST = os.getenv("HOST", "0.0.0.0")
 
 # Load Kubernetes configuration
 try:
-    config.load_kube_config()
+    config.load_incluster_config()
+    print("Loaded in-cluster Kubernetes configuration")
 except Exception as e:
-    print(f"Warning: Could not load kube config: {e}")
+    print(f"Could not load in-cluster config: {e}")
+    try:
+        config.load_kube_config()
+        print("Loaded Kubernetes configuration from kubeconfig")
+    except Exception as e2:
+        print(f"Warning: Could not load kube config: {e2}")
 
 # Create the MCP server
 mcp = FastMCP(
