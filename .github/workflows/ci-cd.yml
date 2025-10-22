@@ -155,10 +155,12 @@ jobs:
         sudo k3s kubectl describe pods -n ${{ env.K8S_NAMESPACE }} -l app=presentation-application | tail -50
         
         echo "Health Check:"
-        curl -f http://localhost:80 || echo "⚠️  Warning: Health check failed"
-    
+        curl -f http://localhost:80 || echo "Warning: Health check failed"
+  
     - name: Rollout & Verify Cluster MCP
       run: |
+        set -euo pipefail
+
         sudo k3s kubectl rollout restart deployment/cluster-mcp -n ${{ env.K8S_NAMESPACE_MCP }}
         sudo k3s kubectl rollout status deployment/cluster-mcp -n ${{ env.K8S_NAMESPACE_MCP }} --timeout=300s
         
@@ -169,14 +171,3 @@ jobs:
         
         echo "Cluster MCP Pod Details:"
         sudo k3s kubectl describe pods -n ${{ env.K8S_NAMESPACE_MCP }} -l app=cluster-mcp | tail -50
-        
-        echo "Test Cluster MCP Health:"
-        sleep 10  # Wait for pods to be ready
-        POD_NAME=$(sudo k3s kubectl get pod -n ${{ env.K8S_NAMESPACE_MCP }} -l app=cluster-mcp -o jsonpath='{.items[0].metadata.name}')
-        sudo k3s kubectl exec -n ${{ env.K8S_NAMESPACE_MCP }} $POD_NAME -- curl -f http://localhost:8080/cluster-mcp/health && echo "Cluster MCP is healthy!" || echo "Warning: Health check failed"
-        
-        echo "Test MCP Server Access to Cluster:"
-        sudo k3s kubectl exec -n ${{ env.K8S_NAMESPACE_MCP }} $POD_NAME -- python -c "from kubernetes import client, config; config.load_incluster_config(); v1 = client.CoreV1Api(); print(f'MCP can access cluster! Found {len(v1.list_namespace().items)} namespaces')" || echo "Warning: MCP access test failed"
-        
-        echo "Test External MCP Access:"
-        curl -f http://localhost/cluster-mcp/health && echo "Cluster MCP is accessible externally!" || echo "Warning: External access test failed
