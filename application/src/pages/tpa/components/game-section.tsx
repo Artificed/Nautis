@@ -34,9 +34,7 @@ export default function GameSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50 py-20">
-      {/* Diagonal Background Pattern */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Floating shapes */}
         <motion.div
           className="absolute top-1/2 right-1/2 text-purple-400/15"
           animate={{
@@ -67,7 +65,6 @@ export default function GameSection() {
           }}
         />
 
-        {/* Top Right Puzzle Piece Decoration */}
         <motion.div
           className="absolute top-1/4 right-1/4 w-32 h-32 opacity-30"
           animate={{
@@ -84,10 +81,7 @@ export default function GameSection() {
         </motion.div>
       </div>
 
-      {/* Main Content - Diagonal/Scattered Layout */}
-      <div className="container mx-auto px-6 relative z-10 max-w-7xl">
-        
-        {/* Header Section - Offset to the left */}
+      <div className="container mx-auto px-6 relative z-10 max-w-7xl">        
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -113,10 +107,8 @@ export default function GameSection() {
           </p>
         </motion.div>
 
-        {/* Scattered/Diagonal Card Layout */}
         <div className="relative" style={{ minHeight: '300px' }}>
           
-          {/* Card 1 - Top Left */}
           <motion.div
             initial={{ opacity: 0, y: 50, rotate: -5 }}
             animate={{ opacity: 1, y: 0, rotate: -2 }}
@@ -160,7 +152,6 @@ export default function GameSection() {
             </div>
           </motion.div>
 
-          {/* Card 2 - Bottom Right */}
           <motion.div
             initial={{ opacity: 0, y: 50, rotate: 5 }}
             animate={{ opacity: 1, y: 0, rotate: 2 }}

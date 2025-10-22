@@ -49,7 +49,6 @@ export default function MobileSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50 py-20 px-6">
-      {/* Background Effects - Only floating orbs, no stripes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-1/4 right-1/6 w-80 h-80 rounded-full bg-gradient-to-br from-blue-300/20 to-purple-300/10 blur-3xl"
@@ -80,14 +79,9 @@ export default function MobileSection() {
         />
       </div>
 
-      {/* Main Content Grid */}
       <div className="container mx-auto relative z-10 max-w-7xl">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          
-          {/* LEFT SIDE */}
-          <div className="flex flex-col justify-center space-y-12 ml-14">
-            
-            {/* TOP LEFT - Badge and Title */}
+        <div className="grid lg:grid-cols-2 gap-16 items-center">          
+          <div className="flex flex-col justify-center space-y-12 ml-14">            
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -113,14 +107,12 @@ export default function MobileSection() {
               </p>
             </motion.div>
 
-          {/* BOTTOM LEFT - Project Stats with SVG icons */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
               className="space-y-8"
             >
-              {/* Groups */}
               <motion.div
                 whileHover={{ x: 5 }}
                 onMouseEnter={() => setIsHovering(true)}
@@ -141,7 +133,6 @@ export default function MobileSection() {
                 </div>
               </motion.div>
 
-              {/* Phase */}
               <motion.div
                 whileHover={{ x: 5 }}
                 onMouseEnter={() => setIsHovering(true)}
@@ -162,7 +153,6 @@ export default function MobileSection() {
                 </div>
               </motion.div>
 
-              {/* Weeks */}
               <motion.div
                 whileHover={{ x: 5 }}
                 onMouseEnter={() => setIsHovering(true)}
@@ -186,7 +176,6 @@ export default function MobileSection() {
 
             </div>
 
-          {/* RIGHT SIDE - Giant Sprint Meeting Card */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -198,7 +187,6 @@ export default function MobileSection() {
               onMouseLeave={() => setIsHovering(false)}
               className="relative bg-white/90 backdrop-blur-md rounded-3xl mt-6 p-10 shadow-2xl border-2 border-gray-200/50"
             >
-              {/* Card Header */}
               <div className="mb-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center shadow-lg">
@@ -216,7 +204,6 @@ export default function MobileSection() {
                 </p>
               </div>
 
-              {/* Sprint Activities - NO nested cards, just clean list */}
               <div className="space-y-6">
                 {sprintActivities.map((activity, index) => (
                   <motion.div
@@ -238,7 +225,6 @@ export default function MobileSection() {
                 ))}
               </div>
 
-              {/* Card Footer */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -253,7 +239,6 @@ export default function MobileSection() {
                 </div>
               </motion.div>
 
-              {/* Decorative corner elements */}
               <div className="absolute -top-6 -right-6 w-40 h-40 bg-gradient-to-br from-pink-400 to-purple-500 opacity-10 rounded-full blur-3xl" />
               <div className="absolute -bottom-6 -left-6 w-40 h-40 bg-gradient-to-br from-indigo-400 to-cyan-500 opacity-10 rounded-full blur-3xl" />
             </motion.div>

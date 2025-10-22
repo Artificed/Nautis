@@ -39,9 +39,7 @@ export default function NetworkSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50 py-20">
-            {/* Background Effects - Network/Mesh Theme */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Gradient orbs */}
         <motion.div
           className="absolute top-1/3 right-1/5 w-[32rem] h-[32rem] rounded-full bg-gradient-to-br from-blue-300/15 to-indigo-300/10 blur-3xl"
           animate={{
@@ -68,7 +66,6 @@ export default function NetworkSection() {
           }}
         />
 
-        {/* Flowing data lines */}
         <motion.div
           className="absolute top-1/4 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-blue-400/30 to-transparent"
           animate={{
@@ -94,10 +91,8 @@ export default function NetworkSection() {
         />
       </div>
 
-      {/* Content */}
       <div className="container mx-auto px-6 relative z-10 max-w-6xl">
         
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -115,7 +110,6 @@ export default function NetworkSection() {
           </p>
         </motion.div>
 
-        {/* Simple Grid */}
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {networkConcepts.map((concept, index) => (
             <motion.div
@@ -139,10 +133,8 @@ export default function NetworkSection() {
             >
               <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200/50 h-full overflow-hidden group">
                 
-                {/* Side gradient accent */}
                 <div className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${concept.gradient}`} />
                 
-                {/* Icon and title */}
                 <div className="flex items-start gap-4 mb-8">
                   <motion.div
                     className={`w-16 h-16 rounded-xl bg-gradient-to-br ${concept.gradient} flex items-center justify-center shadow-lg flex-shrink-0`}
@@ -162,12 +154,10 @@ export default function NetworkSection() {
                   </div>
                 </div>
 
-                {/* Description */}
                 <p className="text-md text-gray-600 leading-relaxed mt-2 mb-6">
                   {concept.description}
                 </p>
 
-                {/* Tags */}
                 <div className="flex flex-wrap gap-2">
                   {concept.tags.map((tag, tagIndex) => (
                     <span
@@ -179,7 +169,6 @@ export default function NetworkSection() {
                   ))}
                 </div>
 
-                {/* Hover glow */}
                 <motion.div
                   className={`absolute inset-0 bg-gradient-to-br ${concept.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-2xl`}
                 />

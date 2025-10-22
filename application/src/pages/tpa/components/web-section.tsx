@@ -52,9 +52,7 @@ export default function WebSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50 py-20">
-      {/* Background Effects - Network Theme */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Animated network nodes */}
         <motion.div
           className="absolute top-20 left-1/4 w-4 h-4 rounded-full bg-blue-400/40"
           animate={{
@@ -94,7 +92,6 @@ export default function WebSection() {
           }}
         />
 
-        {/* Connecting lines */}
         <svg className="absolute inset-0 w-full h-full" style={{ opacity: 0.1 }}>
           <motion.line
             x1="25%"
@@ -130,7 +127,6 @@ export default function WebSection() {
           </defs>
         </svg>
 
-        {/* Gradient orbs */}
         <motion.div
           className="absolute top-1/4 right-1/6 w-96 h-96 rounded-full bg-gradient-to-br from-blue-300/20 to-purple-300/10 blur-3xl"
           animate={{
@@ -158,11 +154,9 @@ export default function WebSection() {
         />
       </div>
 
-      {/* Content */}
       <div className="container mx-auto px-6 relative z-10 max-w-7xl">
         <div className="flex flex-col lg:flex-row items-start gap-60">
           
-          {/* Left side - Header */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -188,7 +182,6 @@ export default function WebSection() {
             </p>
           </motion.div>
 
-          {/* Right side - Cascading/Staggered Card Layout */}
           <div className="lg:w-3/5 relative" style={{ minHeight: '620px' }}>
             {modernAIFeatures.map((feature, index) => (
               <motion.div
@@ -224,14 +217,11 @@ export default function WebSection() {
                 }}
               >
               <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200/50 h-full overflow-hidden">
-                {/* Gradient overlay on hover */}
                 <motion.div
                   className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-2xl`}
                 />
 
-                {/* Content wrapper */}
                 <div className="relative z-10 flex items-start gap-4">
-                  {/* Icon */}
                   <motion.div
                     className={`w-16 h-16 rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center shadow-lg flex-shrink-0`}
                     whileHover={{ rotate: 360, scale: 1.1 }}
@@ -242,7 +232,6 @@ export default function WebSection() {
                     </div>
                   </motion.div>
 
-                  {/* Text content */}
                   <div className="flex-1">
                     <h3 className="text-2xl font-bold mb-1 text-gray-900">
                       {feature.title}
@@ -256,12 +245,10 @@ export default function WebSection() {
                   </div>
                 </div>
 
-                {/* Decorative corner glow */}
                 <motion.div
                   className={`absolute -top-8 -right-8 w-32 h-32 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-20 rounded-full blur-2xl transition-opacity duration-300`}
                 />
 
-                {/* Number indicator */}
                 <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-gray-100/80 backdrop-blur-sm flex items-center justify-center border border-gray-200/50">
                   <span className="text-sm font-bold text-gray-400">
                     {index + 1}
