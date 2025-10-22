@@ -77,7 +77,7 @@ routes = [
     Route("/", endpoint=lambda request: Response("OK", media_type="text/plain")),
     Route("/health", endpoint=lambda request: Response(json.dumps({"status":"healthy"}), media_type="application/json"), methods=["GET"]),
     Route("/sse", endpoint=handle_sse, methods=["GET"]),
-    Mount("/messages", app=sse_transport.handle_post_message, methods=["POST"])
+    Mount("/messages", app=sse_transport.handle_post_message)
 ]
 
 app = Starlette(
