@@ -629,46 +629,48 @@ async def handle_root(request):
 
 
 async def handle_sse(request: Request):
-    """Bridge Starlette request to ASGI-style SSE handler."""
-    async def asgi_handler(scope, receive, send):
-        sse = SseServerTransport("/messages")
-        async with sse.connect_sse(scope, receive, send) as streams:
-            await server.run(
-                streams[0],
-                streams[1],
-                InitializationOptions(
-                    server_name="k8s-cluster-mcp",
-                    server_version="0.1.0",
-                    capabilities=server.get_capabilities(
-                        notification_options=NotificationOptions(),
-                        experimental_capabilities={},
-                    ),
+    """
+    SSE (Server-Sent Events) endpoint for MCP clients.
+    This bridges the Starlette request to the MCP server's SSE transport.
+    """
+    sse = SseServerTransport("/messages")
+    async with sse.connect_sse(request.scope, request.receive, request._send) as streams:
+        await server.run(
+            streams[0],
+            streams[1],
+            InitializationOptions(
+                server_name="k8s-cluster-mcp",
+                server_version="0.1.0",
+                capabilities=server.get_capabilities(
+                    notification_options=NotificationOptions(),
+                    experimental_capabilities={},
                 ),
-            )
+            ),
+        )
+    # Return a harmless empty response to satisfy Starlette
+    return Response(status_code=204)
 
-    # Run the ASGI handler manually
-    await asgi_handler(request.scope, request.receive, request._send)
-    
 
 async def handle_messages(request: Request):
-    """Bridge Starlette request to ASGI-style POST handler."""
-    async def asgi_handler(scope, receive, send):
-        sse = SseServerTransport("/messages")
-        async with sse.connect_post(scope, receive, send) as streams:
-            await server.run(
-                streams[0],
-                streams[1],
-                InitializationOptions(
-                    server_name="k8s-cluster-mcp",
-                    server_version="0.1.0",
-                    capabilities=server.get_capabilities(
-                        notification_options=NotificationOptions(),
-                        experimental_capabilities={},
-                    ),
+    """
+    POST endpoint used for sending messages from MCP clients.
+    """
+    sse = SseServerTransport("/messages")
+    async with sse.connect_post(request.scope, request.receive, request._send) as streams:
+        await server.run(
+            streams[0],
+            streams[1],
+            InitializationOptions(
+                server_name="k8s-cluster-mcp",
+                server_version="0.1.0",
+                capabilities=server.get_capabilities(
+                    notification_options=NotificationOptions(),
+                    experimental_capabilities={},
                 ),
-            )
-
-    await asgi_handler(request.scope, request.receive, request._send)
+            ),
+        )
+    # Again, return an empty response to make Starlette happy
+    return Response(status_code=204)
 
 
 # Create Starlette app with CORS support
