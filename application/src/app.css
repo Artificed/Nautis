@@ -71,6 +71,10 @@ h1, h2, h3 {
   animation-delay: 4s;
 }
 
+.animation-delay-5000 {
+  animation-delay: 5s;
+}
+
 @keyframes gradient-shift {
   0%, 100% {
     background-position: 0% 50%;
