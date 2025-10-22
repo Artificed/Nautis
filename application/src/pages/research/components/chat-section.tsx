@@ -38,7 +38,6 @@ export default function ChatSection() {
     e.preventDefault();
     if (!inputValue.trim()) return;
 
-    // Add user message
     const userMessage: Message = {
       id: Date.now().toString(),
       text: inputValue,
@@ -50,7 +49,6 @@ export default function ChatSection() {
     setInputValue("");
     setIsTyping(true);
 
-    // Simulate AI response (replace with actual API call)
     setTimeout(() => {
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -65,14 +63,11 @@ export default function ChatSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50">
-      {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Glowing orbs */}
         <div className="absolute top-20 left-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-orange-200/30 to-amber-200/20 blur-3xl animate-pulse-slow"></div>
         <div className="absolute bottom-1/4 right-1/5 w-[28rem] h-[28rem] rounded-full bg-gradient-to-br from-purple-200/25 to-pink-200/20 blur-3xl animate-pulse-slow animation-delay-2000"></div>
         <div className="absolute top-1/2 left-1/3 w-80 h-80 rounded-full bg-gradient-to-br from-cyan-200/20 to-blue-200/15 blur-3xl animate-pulse-slow animation-delay-4000"></div>
 
-        {/* Floating particles */}
         <motion.div
           className="absolute top-32 right-1/4 w-2 h-2 rounded-full bg-orange-400/60"
           animate={{
@@ -102,10 +97,8 @@ export default function ChatSection() {
         />
       </div>
 
-      {/* Main Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-28 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center">
-          {/* Left Side - Title and Description */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -137,7 +130,6 @@ export default function ChatSection() {
             </p>
           </motion.div>
 
-          {/* Right Side - Chat Container */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
