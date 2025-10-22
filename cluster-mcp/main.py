@@ -648,8 +648,7 @@ async def handle_sse(request: Request):
 
     # Run the ASGI handler manually
     await asgi_handler(request.scope, request.receive, request._send)
-    return Response(status_code=200)
-
+    
 
 async def handle_messages(request: Request):
     """Bridge Starlette request to ASGI-style POST handler."""
@@ -670,7 +669,6 @@ async def handle_messages(request: Request):
             )
 
     await asgi_handler(request.scope, request.receive, request._send)
-    return Response(status_code=200)
 
 
 # Create Starlette app with CORS support
