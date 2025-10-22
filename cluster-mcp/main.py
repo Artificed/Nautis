@@ -7,7 +7,6 @@ import json
 PORT = int(os.getenv("PORT", "8080"))
 HOST = os.getenv("HOST", "0.0.0.0")
 
-# Load Kubernetes configuration
 try:
     config.load_incluster_config()
     print("Loaded in-cluster Kubernetes configuration")
@@ -19,7 +18,6 @@ except Exception as e:
     except Exception as e2:
         print(f"Warning: Could not load kube config: {e2}")
 
-# Create the MCP server
 mcp = FastMCP(
     name="Kubernetes Cluster MCP Server",
     instructions="MCP server for querying and managing Kubernetes cluster resources.",
@@ -27,13 +25,8 @@ mcp = FastMCP(
     port=PORT,
 )
 
-# Kubernetes Cluster Information Tools
-
 @mcp.tool()
 def get_cluster_info() -> Dict[str, Any]:
-    """
-    Get basic information about the Kubernetes cluster including version and server info.
-    """
     try:
         v1 = client.VersionApi()
         version_info = v1.get_code()
@@ -56,9 +49,6 @@ def get_cluster_info() -> Dict[str, Any]:
 
 @mcp.tool()
 def list_namespaces() -> List[Dict[str, Any]]:
-    """
-    List all namespaces in the cluster.
-    """
     try:
         core_v1 = client.CoreV1Api()
         namespaces = core_v1.list_namespace()
@@ -77,12 +67,6 @@ def list_namespaces() -> List[Dict[str, Any]]:
 
 @mcp.tool()
 def list_pods(namespace: str = "default") -> List[Dict[str, Any]]:
-    """
-    List all pods in a specific namespace.
-    
-    Args:
-        namespace: The namespace to query (default: "default")
-    """
     try:
         core_v1 = client.CoreV1Api()
         pods = core_v1.list_namespaced_pod(namespace=namespace)
@@ -111,12 +95,6 @@ def list_pods(namespace: str = "default") -> List[Dict[str, Any]]:
 
 @mcp.tool()
 def list_services(namespace: str = "default") -> List[Dict[str, Any]]:
-    """
-    List all services in a specific namespace.
-    
-    Args:
-        namespace: The namespace to query (default: "default")
-    """
     try:
         core_v1 = client.CoreV1Api()
         services = core_v1.list_namespaced_service(namespace=namespace)
@@ -146,12 +124,6 @@ def list_services(namespace: str = "default") -> List[Dict[str, Any]]:
 
 @mcp.tool()
 def list_deployments(namespace: str = "default") -> List[Dict[str, Any]]:
-    """
-    List all deployments in a specific namespace.
-    
-    Args:
-        namespace: The namespace to query (default: "default")
-    """
     try:
         apps_v1 = client.AppsV1Api()
         deployments = apps_v1.list_namespaced_deployment(namespace=namespace)
@@ -174,9 +146,6 @@ def list_deployments(namespace: str = "default") -> List[Dict[str, Any]]:
 
 @mcp.tool()
 def list_nodes() -> List[Dict[str, Any]]:
-    """
-    List all nodes in the cluster with their status and capacity information.
-    """
     try:
         core_v1 = client.CoreV1Api()
         nodes = core_v1.list_node()
@@ -206,14 +175,6 @@ def list_nodes() -> List[Dict[str, Any]]:
 
 @mcp.tool()
 def get_pod_logs(pod_name: str, namespace: str = "default", tail_lines: int = 100) -> str:
-    """
-    Get logs from a specific pod.
-    
-    Args:
-        pod_name: Name of the pod
-        namespace: The namespace of the pod (default: "default")
-        tail_lines: Number of lines to retrieve from the end of logs (default: 100)
-    """
     try:
         core_v1 = client.CoreV1Api()
         logs = core_v1.read_namespaced_pod_log(
@@ -227,12 +188,6 @@ def get_pod_logs(pod_name: str, namespace: str = "default", tail_lines: int = 10
 
 @mcp.tool()
 def list_ingresses(namespace: str = "default") -> List[Dict[str, Any]]:
-    """
-    List all ingresses in a specific namespace.
-    
-    Args:
-        namespace: The namespace to query (default: "default")
-    """
     try:
         networking_v1 = client.NetworkingV1Api()
         ingresses = networking_v1.list_namespaced_ingress(namespace=namespace)
