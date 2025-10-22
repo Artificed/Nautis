@@ -56,65 +56,83 @@ export default function ResearchHeroSection() {
         ></div>
       </div>
 
-      {/* Scattered Logo Elements with spin on hover */}
+      {/* Scattered Logo Cards with tilt on hover and floating animation */}
       <motion.div
         className="absolute top-1/6 left-1/6 cursor-pointer"
-        whileHover={{ rotate: 360, scale: 1.2 }}
-        transition={{ duration: 0.6 }}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
+        style={{ rotate: 12 }}
+        animate={{ y: [0, -15, 0] }}
+        transition={{ 
+          y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+        }}
       >
-        <img src="/src/assets/k8s-logo.png" alt="Kubernetes" className="w-20 h-20" />
+        <div className="bg-white rounded-2xl shadow-lg p-6 backdrop-blur-sm bg-opacity-90">
+          <img src="/src/assets/k8s-logo.png" alt="Kubernetes" className="w-20 h-20" style={{ transform: 'rotate(-12deg)' }} />
+        </div>
       </motion.div>
 
       <motion.div
         className="absolute top-1/5 right-1/6 cursor-pointer"
-        whileHover={{ rotate: -360, scale: 1.2 }}
-        transition={{ duration: 0.6 }}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
+        style={{ rotate: -6 }}
+        animate={{ y: [0, -20, 0] }}
+        transition={{ 
+          y: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }
+        }}
       >
-        <img src="/src/assets/n8n-logo.png" alt="n8n" className="w-20 h-20" />
+        <div className="bg-white rounded-2xl shadow-lg p-6 backdrop-blur-sm bg-opacity-90">
+          <img src="/src/assets/n8n-logo.png" alt="n8n" className="w-20 h-20" style={{ transform: 'rotate(6deg)' }} />
+        </div>
       </motion.div>
 
       <motion.div
-        className="absolute bottom-1/5 left-1/8 cursor-pointer"
-        whileHover={{ rotate: 360, scale: 1.2 }}
-        transition={{ duration: 0.6 }}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
+        className="absolute bottom-1/6 left-1/8 cursor-pointer"
+        style={{ rotate: 6 }}
+        animate={{ y: [0, -18, 0] }}
+        transition={{ 
+          y: { duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }
+        }}
       >
-        <img src="/src/assets/mcp-logo.png" alt="MCP" className="w-24 h-24 rounded-3xl" />
+        <div className="bg-white rounded-2xl shadow-lg p-3 backdrop-blur-sm bg-opacity-90">
+          <img src="/src/assets/mcp-logo.png" alt="MCP" className="w-24 h-24 rounded-xl" style={{ transform: 'rotate(-6deg)' }} />
+        </div>
       </motion.div>
 
       <motion.div
-        className="absolute bottom-1/6 right-1/6 cursor-pointer"
-        whileHover={{ rotate: -360, scale: 1.2 }}
-        transition={{ duration: 0.6 }}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
+        className="absolute bottom-1/8 right-1/6 cursor-pointer"
+        style={{ rotate: -12 }}
+        animate={{ y: [0, -12, 0] }}
+        transition={{ 
+          y: { duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }
+        }}
       >
-        <img src="/src/assets/notion-logo.png" alt="Notion" className="w-18 h-18" />
+        <div className="bg-white rounded-2xl shadow-lg p-6 backdrop-blur-sm bg-opacity-90">
+          <img src="/src/assets/notion-logo.png" alt="Notion" className="w-18 h-18" style={{ transform: 'rotate(12deg)' }} />
+        </div>
       </motion.div>
 
       <motion.div
         className="absolute top-5/12 right-1/8 translate-y-10 cursor-pointer"
-        whileHover={{ rotate: 360, scale: 1.2 }}
-        transition={{ duration: 0.6 }}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
+        style={{ rotate: 3 }}
+        animate={{ y: [0, -22, 0] }}
+        transition={{ 
+          y: { duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 2 }
+        }}
       >
-        <img src="/src/assets/openai-logo.svg" alt="OpenAI" className="w-24 h-24" />
+        <div className="bg-white rounded-2xl shadow-lg p-6 backdrop-blur-sm bg-opacity-90">
+          <img src="/src/assets/openai-logo.svg" alt="OpenAI" className="w-24 h-24" style={{ transform: 'rotate(-3deg)' }} />
+        </div>
       </motion.div>
 
       <motion.div
         className="absolute top-5/12 left-40 cursor-pointer"
-        whileHover={{ rotate: -360, scale: 1.2 }}
-        transition={{ duration: 0.6 }}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
+        style={{ rotate: -3 }}
+        animate={{ y: [0, -16, 0] }}
+        transition={{ 
+          y: { duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 2.5 }
+        }}
       >
-        <img src="/src/assets/outlook-logo.png" alt="Outlook" className="w-20 h-20" />
+        <div className="bg-white rounded-2xl shadow-lg p-6 backdrop-blur-sm bg-opacity-90">
+          <img src="/src/assets/outlook-logo.png" alt="Outlook" className="w-20 h-20" style={{ transform: 'rotate(3deg)' }} />
+        </div>
       </motion.div>
 
       {/* Main Content */}
