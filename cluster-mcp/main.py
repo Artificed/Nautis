@@ -1,7 +1,7 @@
 import json
 from starlette.applications import Starlette
 from starlette.requests import Request
-from starlette.responses import PlainTextResponse, Response
+from starlette.responses import JSONResponse, PlainTextResponse, Response
 from starlette.routing import Route, Mount
 from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
@@ -16,31 +16,29 @@ from kubernetes.client.rest import ApiException
 # Initialize MCP server
 server = Server("k8s-cluster-mcp")
 
-# Kubernetes config
+# Load Kubernetes configuration
 try:
     config.load_kube_config()
-    print("Loaded kube-config")
+    print("✅ Loaded kube-config (local mode)")
 except Exception:
     try:
         config.load_incluster_config()
-        print("Loaded in-cluster config")
+        print("✅ Loaded in-cluster config")
     except Exception as e:
-        print(f"Warning: Could not load Kubernetes config: {e}")
+        print(f"⚠️ Warning: Could not load Kubernetes config: {e}")
 
 v1 = client.CoreV1Api()
 
 def format_timestamp(ts):
-    if ts:
-        return ts.strftime("%Y-%m-%d %H:%M:%S UTC")
-    return "N/A"
+    return ts.strftime("%Y-%m-%d %H:%M:%S UTC") if ts else "N/A"
 
 @server.list_tools()
 async def handle_list_tools():
     return [
         types.Tool(
             name="get_namespaces",
-            description="Get list of all namespaces in the cluster",
-            inputSchema={"type":"object","properties":{}},
+            description="List all namespaces in the Kubernetes cluster",
+            inputSchema={"type": "object", "properties": {}},
         ),
     ]
 
@@ -60,30 +58,35 @@ async def handle_call_tool(name: str, arguments: dict | None):
             return [types.TextContent(type="text", text=json.dumps(info, indent=2))]
         except ApiException as e:
             return [types.TextContent(type="text", text=f"K8s API error: {e.status} {e.reason}")]
-    else:
-        return [types.TextContent(type="text", text=f"Unknown tool: {name}")]
+    return [types.TextContent(type="text", text=f"Unknown tool: {name}")]
 
-# Create transport
-sse_transport = SseServerTransport("/messages")
+# Create SSE transport — now with full path prefix
+sse_transport = SseServerTransport("/cluster-mcp/messages")
 
+# SSE endpoint under full prefix
 async def handle_sse(request: Request):
     async with sse_transport.connect_sse(request.scope, request.receive, request._send) as (read_stream, write_stream):
-        # Run the MCP server loop which handles incoming messages and sends responses
         await server.run(read_stream, write_stream, server.create_initialization_options())
     return PlainTextResponse("", status_code=200)
 
-# Mount messages endpoint directly as ASGI app
+# Starlette routes — all prefixed with /cluster-mcp
 routes = [
-    Route("/", endpoint=lambda request: Response("OK", media_type="text/plain")),
-    Route("/health", endpoint=lambda request: Response(json.dumps({"status":"healthy"}), media_type="application/json"), methods=["GET"]),
-    Route("/sse", endpoint=handle_sse, methods=["GET"]),
-    Mount("/messages", app=sse_transport.handle_post_message)
+    Route("/cluster-mcp", endpoint=lambda _: PlainTextResponse("MCP server is running")),
+    Route("/cluster-mcp/health", endpoint=lambda _: JSONResponse({"status": "healthy"})),
+    Route("/cluster-mcp/sse", endpoint=handle_sse, methods=["GET"]),
+    Mount("/cluster-mcp/messages", app=sse_transport.handle_post_message)
 ]
 
-app = Starlette(
-    routes=routes,
-    middleware=[Middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["GET","POST","OPTIONS"], allow_headers=["*"])]
-)
+middleware = [
+    Middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_methods=["GET", "POST", "OPTIONS"],
+        allow_headers=["*"]
+    )
+]
+
+app = Starlette(routes=routes, middleware=middleware)
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8080, log_level="info")
+    uvicorn.run("main:app", host="0.0.0.0", port=8080, log_level="info")
