@@ -8,7 +8,7 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
     traefik.ingress.kubernetes.io/router.priority: "10"
-    traefik.ingress.kubernetes.io/router.middlewares: "cluster-mcp-mcp-headers@kubernetescrd"
+    traefik.ingress.kubernetes.io/router.middlewares: "cluster-mcp-mcp-headers@kubernetescrd,cluster-mcp-mcp-strip-prefix@kubernetescrd"
 spec:
   rules:
   - http:

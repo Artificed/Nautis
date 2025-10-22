@@ -13,3 +13,13 @@ spec:
       Cache-Control: "no-cache"
     customRequestHeaders:
       X-Forwarded-Proto: "http"
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: mcp-strip-prefix
+  namespace: cluster-mcp
+spec:
+  stripPrefix:
+    prefixes:
+      - /cluster-mcp
