@@ -3,19 +3,214 @@ import { useCursor } from "../../../common/shared/custom-cursor";
 import k8sLogo from "../../../assets/k8s-logo.png";
 import mcpLogo from "../../../assets/mcp-logo.png";
 
+const particleConfigs = Array.from({ length: 30 }, () => ({
+  left: Math.random() * 100,
+  top: Math.random() * 100,
+  duration: 3 + Math.random() * 4,
+  delay: Math.random() * 5,
+}));
+
 export default function KubernetesMCPSection() {
   const { setIsHovering } = useCursor();
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50">
-      {/* Background floating elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-32 left-24 w-32 h-32 rounded-3xl bg-gradient-to-br from-blue-50 to-indigo-50 opacity-80 blur-xl animate-float"></div>
-        <div className="absolute bottom-24 right-32 w-28 h-28 rounded-3xl bg-gradient-to-br from-purple-50 to-violet-50 opacity-70 blur-xl animate-float-slower animation-delay-2000"></div>
+        <motion.div
+          className="absolute top-20 left-1/4"
+          animate={{
+            y: [0, -30, 0],
+            x: [0, 20, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <div className="relative">
+            <div className="w-4 h-4 bg-blue-400 rounded-full shadow-lg shadow-blue-500/50" />
+            <div className="absolute inset-0 w-4 h-4 bg-blue-400 rounded-full animate-ping opacity-75" />
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="absolute top-1/3 right-1/4"
+          animate={{
+            y: [0, 40, 0],
+            x: [0, -25, 0],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        >
+          <div className="relative">
+            <div className="w-3 h-3 bg-purple-400 rounded-full shadow-lg shadow-purple-500/50" />
+            <div className="absolute inset-0 w-3 h-3 bg-purple-400 rounded-full animate-ping opacity-75" />
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="absolute bottom-1/4 left-1/3"
+          animate={{
+            y: [0, -35, 0],
+            x: [0, 30, 0],
+          }}
+          transition={{
+            duration: 9,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+        >
+          <div className="relative">
+            <div className="w-3.5 h-3.5 bg-indigo-400 rounded-full shadow-lg shadow-indigo-500/50" />
+            <div className="absolute inset-0 w-3.5 h-3.5 bg-indigo-400 rounded-full animate-ping opacity-75" />
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="absolute bottom-1/3 right-1/3"
+          animate={{
+            y: [0, 25, 0],
+            x: [0, -20, 0],
+          }}
+          transition={{
+            duration: 11,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1.5
+          }}
+        >
+          <div className="relative">
+            <div className="w-3 h-3 bg-cyan-400 rounded-full shadow-lg shadow-cyan-500/50" />
+            <div className="absolute inset-0 w-3 h-3 bg-cyan-400 rounded-full animate-ping opacity-75" />
+          </div>
+        </motion.div>
+
+        <svg className="absolute inset-0 w-full h-full" style={{ zIndex: -1 }}>
+          <motion.line
+            x1="25%"
+            y1="20%"
+            x2="75%"
+            y2="33%"
+            stroke="url(#lineGradient1)"
+            strokeWidth="2"
+            strokeDasharray="5,5"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 0.3 }}
+            transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+          />
+          <motion.line
+            x1="75%"
+            y1="33%"
+            x2="66%"
+            y2="66%"
+            stroke="url(#lineGradient2)"
+            strokeWidth="2"
+            strokeDasharray="5,5"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 0.3 }}
+            transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", delay: 0.5 }}
+          />
+          <motion.line
+            x1="33%"
+            y1="75%"
+            x2="66%"
+            y2="66%"
+            stroke="url(#lineGradient3)"
+            strokeWidth="2"
+            strokeDasharray="5,5"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 0.3 }}
+            transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", delay: 1 }}
+          />
+          <defs>
+            <linearGradient id="lineGradient1">
+              <stop offset="0%" stopColor="#3b82f6" />
+              <stop offset="100%" stopColor="#8b5cf6" />
+            </linearGradient>
+            <linearGradient id="lineGradient2">
+              <stop offset="0%" stopColor="#8b5cf6" />
+              <stop offset="100%" stopColor="#6366f1" />
+            </linearGradient>
+            <linearGradient id="lineGradient3">
+              <stop offset="0%" stopColor="#6366f1" />
+              <stop offset="100%" stopColor="#06b6d4" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {particleConfigs.map((config, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-4 h-4 bg-blue-200 rounded-full"
+            style={{
+              left: `${config.left}%`,
+              top: `${config.top}%`,
+            }}
+            animate={{
+              y: [0, -100, -200],
+              opacity: [0, 1, 0],
+              scale: [0, 1, 0.5],
+            }}
+            transition={{
+              duration: config.duration,
+              repeat: Infinity,
+              delay: config.delay,
+              ease: "easeOut"
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute top-1/4 right-20 w-64 h-64 rounded-full bg-gradient-to-br from-blue-200/30 to-transparent blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 left-20 w-72 h-72 rounded-full bg-gradient-to-br from-purple-200/30 to-transparent blur-3xl"
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
+        <motion.div
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-gradient-to-br from-orange-200/25 to-transparent blur-3xl"
+          animate={{
+            scale: [1, 1.4, 1],
+            opacity: [0.2, 0.4, 0.2],
+            rotate: [0, 180, 360],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-8 pt-8">
-        {/* Section Badge */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -28,7 +223,6 @@ export default function KubernetesMCPSection() {
           </span>
         </motion.div>
 
-        {/* Main Title */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -41,10 +235,8 @@ export default function KubernetesMCPSection() {
           </span>
         </motion.h2>
 
-        {/* Logo Connection Visual */}
         <div className="relative mb-16">
           <div className="flex items-center justify-center gap-16 md:gap-32">
-            {/* Kubernetes Logo */}
             <motion.div
               initial={{ opacity: 0, x: -100 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -74,20 +266,18 @@ export default function KubernetesMCPSection() {
               </motion.div>
             </motion.div>
 
-            {/* Connection Line with animated dots */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-3">
               <motion.div
                 animate={{ x: [-20, 20, -20] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 className="flex gap-2"
               >
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
-                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-blue-50 rounded-full"></div>
+                <div className="w-2 h-2 bg-indigo-50 rounded-full"></div>
+                <div className="w-2 h-2 bg-purple-50 rounded-full"></div>
               </motion.div>
             </div>
 
-            {/* MCP Logo */}
             <motion.div
               initial={{ opacity: 0, x: 100 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -119,7 +309,6 @@ export default function KubernetesMCPSection() {
             </motion.div>
           </div>
 
-          {/* Connecting Line */}
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
@@ -130,7 +319,6 @@ export default function KubernetesMCPSection() {
           ></motion.div>
         </div>
 
-        {/* Description */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -141,9 +329,7 @@ export default function KubernetesMCPSection() {
           A powerful Model Context Protocol server providing intelligent tools for seamless Kubernetes cluster management and automation
         </motion.p>
 
-        {/* Feature Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {/* Card 1 - Extract Information */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -176,7 +362,6 @@ export default function KubernetesMCPSection() {
             </div>
           </motion.div>
 
-          {/* Card 2 - Control Operations */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

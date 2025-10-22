@@ -40,14 +40,12 @@ export default function ResearchHeroSection() {
       ref={sectionRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50"
     >
-      {/* Large rotating gradient orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-gradient-to-br from-orange-200/30 to-rose-200/30 blur-3xl animate-rotate-gradient"></div>
         <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-purple-200/25 to-blue-200/25 blur-3xl animate-rotate-gradient animation-delay-3000"></div>
         <div className="absolute top-1/3 left-1/2 w-80 h-80 rounded-full bg-gradient-to-br from-amber-200/20 to-yellow-200/20 blur-3xl animate-pulse-slow"></div>
       </div>
 
-      {/* Background floating elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
           className="absolute top-20 right-32 w-32 h-32 rounded-3xl bg-gradient-to-br from-purple-50 to-blue-50 opacity-80 blur-xl animate-float transition-transform duration-300"
@@ -75,7 +73,6 @@ export default function ResearchHeroSection() {
         ></div>
       </div>
 
-      {/* Animated geometric shapes */}
       <motion.div
         className="absolute top-1/5 left-1/3 w-24 h-24"
         animate={{
@@ -227,7 +224,6 @@ export default function ResearchHeroSection() {
         </svg>
       </motion.div>
 
-      {/* Floating particles/dots */}
       {[...Array(8)].map((_, i) => (
         <motion.div
           key={i}
@@ -251,7 +247,6 @@ export default function ResearchHeroSection() {
         />
       ))}
 
-      {/* Connection lines between particles */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20">
         <motion.line
           x1="20%"
@@ -305,7 +300,6 @@ export default function ResearchHeroSection() {
         />
       </svg>
 
-      {/* Scattered Logo Cards with tilt on hover and floating animation */}
       <motion.div
         className="absolute top-1/6 left-1/6 cursor-pointer"
         style={{ rotate: 12 }}
@@ -384,9 +378,7 @@ export default function ResearchHeroSection() {
         </div>
       </motion.div>
 
-      {/* Main Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-8 text-center">
-        {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -394,7 +386,6 @@ export default function ResearchHeroSection() {
           className="inline-flex items-center gap-2 mb-8"
         >
           <div className="relative">
-            {/* Pulsing glow effect */}
             <motion.div 
               className="absolute inset-0 bg-gradient-to-r from-orange-400 to-rose-400 rounded-full blur-lg"
               animate={{
@@ -413,7 +404,6 @@ export default function ResearchHeroSection() {
           </div>
         </motion.div>
 
-        {/* Title */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -422,7 +412,6 @@ export default function ResearchHeroSection() {
         >
           <span className="bg-gradient-to-r pb-2 from-orange-600 via-rose-600 to-purple-600 bg-clip-text text-transparent relative inline-block">
             Kubernetes Cluster Management
-            {/* Subtle shine effect */}
             <motion.span
               className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0"
               animate={{
@@ -451,7 +440,6 @@ export default function ResearchHeroSection() {
           with AI-Powered Automation
         </motion.h2>
 
-        {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
