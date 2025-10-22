@@ -10,13 +10,13 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME_APP: ghcr.io/artificed/astdev-presentation/presentation-application
   IMAGE_NAME_MCP: ghcr.io/artificed/astdev-presentation/cluster-mcp
-  IMAGE_NAME_AUTOMATION: ghcr.io/artificed/astdev-presentation/automation-server
+  # IMAGE_NAME_AUTOMATION: ghcr.io/artificed/astdev-presentation/automation-server
   APPLICATION_DIR: ./application
   MCP_DIR: ./cluster-mcp
-  AUTOMATION_DIR: ./automation-server
+  # AUTOMATION_DIR: ./automation-server
   K8S_NAMESPACE: astdev-presentation
   K8S_NAMESPACE_MCP: cluster-mcp
-  K8S_NAMESPACE_AUTOMATION: automation-server
+  # K8S_NAMESPACE_AUTOMATION: automation-server
   DEPLOYMENT_NAME: presentation-application
 
 jobs:
@@ -99,23 +99,23 @@ jobs:
         tags: ${{ steps.meta-mcp.outputs.tags }}
         labels: ${{ steps.meta-mcp.outputs.labels }}
 
-    - name: Extract metadata (Automation Server)
-      id: meta-automation
-      uses: docker/metadata-action@v5
-      with:
-        images: ${{ env.IMAGE_NAME_AUTOMATION }}
-        tags: |
-          type=ref,event=branch
-          type=sha,prefix={{branch}}-
-          type=raw,value=latest,enable={{is_default_branch}}
+    # - name: Extract metadata (Automation Server)
+    #   id: meta-automation
+    #   uses: docker/metadata-action@v5
+    #   with:
+    #     images: ${{ env.IMAGE_NAME_AUTOMATION }}
+    #     tags: |
+    #       type=ref,event=branch
+    #       type=sha,prefix={{branch}}-
+    #       type=raw,value=latest,enable={{is_default_branch}}
     
-    - name: Build & Push Automation Server
-      uses: docker/build-push-action@v5
-      with:
-        context: ${{ env.AUTOMATION_DIR }}
-        push: true
-        tags: ${{ steps.meta-automation.outputs.tags }}
-        labels: ${{ steps.meta-automation.outputs.labels }}
+    # - name: Build & Push Automation Server
+    #   uses: docker/build-push-action@v5
+    #   with:
+    #     context: ${{ env.AUTOMATION_DIR }}
+    #     push: true
+    #     tags: ${{ steps.meta-automation.outputs.tags }}
+    #     labels: ${{ steps.meta-automation.outputs.labels }}
 
   deploy:
     name: Deploy to VM
@@ -131,7 +131,7 @@ jobs:
         # Use k3s kubectl directly to avoid kubeconfig issues
         sudo k3s kubectl apply -f k8s/application/namespace.yaml
         sudo k3s kubectl apply -f k8s/cluster-mcp/namespace.yaml
-        sudo k3s kubectl apply -f k8s/automation-server/namespace.yaml
+        # sudo k3s kubectl apply -f k8s/automation-server/namespace.yaml
 
     - name: Configure Registry Secrets
       run: |
@@ -153,14 +153,14 @@ jobs:
           --namespace=${{ env.K8S_NAMESPACE_MCP }} \
           --dry-run=client -o yaml | sudo k3s kubectl apply -f -
         
-        # Secret for automation-server namespace
-        sudo k3s kubectl create secret docker-registry ghcr-secret \
-          --docker-server=ghcr.io \
-          --docker-username=${{ github.actor }} \
-          --docker-password=${{ secrets.GITHUB_TOKEN }} \
-          --docker-email=${{ github.actor }}@users.noreply.github.com \
-          --namespace=${{ env.K8S_NAMESPACE_AUTOMATION }} \
-          --dry-run=client -o yaml | sudo k3s kubectl apply -f -
+        # # Secret for automation-server namespace
+        # sudo k3s kubectl create secret docker-registry ghcr-secret \
+        #   --docker-server=ghcr.io \
+        #   --docker-username=${{ github.actor }} \
+        #   --docker-password=${{ secrets.GITHUB_TOKEN }} \
+        #   --docker-email=${{ github.actor }}@users.noreply.github.com \
+        #   --namespace=${{ env.K8S_NAMESPACE_AUTOMATION }} \
+        #   --dry-run=client -o yaml | sudo k3s kubectl apply -f -
     
     - name: Apply Application Manifests
       run: |
@@ -176,13 +176,13 @@ jobs:
         sudo k3s kubectl apply -f k8s/cluster-mcp/middleware.yaml
         sudo k3s kubectl apply -f k8s/cluster-mcp/ingress.yaml
     
-    - name: Apply Automation Server Manifests
-      run: |
-        sudo k3s kubectl apply -f k8s/automation-server/rbac.yaml
-        sudo k3s kubectl apply -f k8s/automation-server/deployment.yaml
-        sudo k3s kubectl apply -f k8s/automation-server/service.yaml
-        sudo k3s kubectl apply -f k8s/automation-server/middleware.yaml
-        sudo k3s kubectl apply -f k8s/automation-server/ingress.yaml
+    # - name: Apply Automation Server Manifests
+    #   run: |
+    #     sudo k3s kubectl apply -f k8s/automation-server/rbac.yaml
+    #     sudo k3s kubectl apply -f k8s/automation-server/deployment.yaml
+    #     sudo k3s kubectl apply -f k8s/automation-server/service.yaml
+    #     sudo k3s kubectl apply -f k8s/automation-server/middleware.yaml
+    #     sudo k3s kubectl apply -f k8s/automation-server/ingress.yaml
     
     - name: Rollout & Verify Application
       run: |
@@ -223,24 +223,24 @@ jobs:
         echo "Test External MCP Access:"
         curl -f http://localhost/cluster-mcp/health && echo "✅ Cluster MCP is accessible externally!" || echo "⚠️  Warning: External access test failed"
     
-    - name: Rollout & Verify Automation Server
-      run: |
-        sudo k3s kubectl rollout restart deployment/automation-server -n ${{ env.K8S_NAMESPACE_AUTOMATION }}
-        sudo k3s kubectl rollout status deployment/automation-server -n ${{ env.K8S_NAMESPACE_AUTOMATION }} --timeout=300s
-        
-        echo "Automation Server Deployment Status:"
-        sudo k3s kubectl get pods -n ${{ env.K8S_NAMESPACE_AUTOMATION }}
-        sudo k3s kubectl get svc -n ${{ env.K8S_NAMESPACE_AUTOMATION }}
-        sudo k3s kubectl get ingress -n ${{ env.K8S_NAMESPACE_AUTOMATION }}
-        
-        echo "Automation Server Pod Details:"
-        sudo k3s kubectl describe pods -n ${{ env.K8S_NAMESPACE_AUTOMATION }} -l app=automation-server | tail -50
-        
-        echo "Test Automation Server Health:"
-        sleep 10  # Wait for pods to be ready
-        POD_NAME=$(sudo k3s kubectl get pod -n ${{ env.K8S_NAMESPACE_AUTOMATION }} -l app=automation-server -o jsonpath='{.items[0].metadata.name}')
-        sudo k3s kubectl exec -n ${{ env.K8S_NAMESPACE_AUTOMATION }} $POD_NAME -- curl -f http://localhost:8000/health && echo "✅ Automation Server is healthy!" || echo "⚠️  Warning: Health check failed"
-        
-        echo "Test Automation Server K8s Access:"
-        sudo k3s kubectl exec -n ${{ env.K8S_NAMESPACE_AUTOMATION }} $POD_NAME -- curl -f http://localhost:8000/api/namespaces && echo "✅ Automation Server can access K8s API!" || echo "⚠️  Warning: K8s API access test failed"
+    # - name: Rollout & Verify Automation Server
+    #   run: |
+    #     sudo k3s kubectl rollout restart deployment/automation-server -n ${{ env.K8S_NAMESPACE_AUTOMATION }}
+    #     sudo k3s kubectl rollout status deployment/automation-server -n ${{ env.K8S_NAMESPACE_AUTOMATION }} --timeout=300s
+    #     
+    #     echo "Automation Server Deployment Status:"
+    #     sudo k3s kubectl get pods -n ${{ env.K8S_NAMESPACE_AUTOMATION }}
+    #     sudo k3s kubectl get svc -n ${{ env.K8S_NAMESPACE_AUTOMATION }}
+    #     sudo k3s kubectl get ingress -n ${{ env.K8S_NAMESPACE_AUTOMATION }}
+    #     
+    #     echo "Automation Server Pod Details:"
+    #     sudo k3s kubectl describe pods -n ${{ env.K8S_NAMESPACE_AUTOMATION }} -l app=automation-server | tail -50
+    #     
+    #     echo "Test Automation Server Health:"
+    #     sleep 10  # Wait for pods to be ready
+    #     POD_NAME=$(sudo k3s kubectl get pod -n ${{ env.K8S_NAMESPACE_AUTOMATION }} -l app=automation-server -o jsonpath='{.items[0].metadata.name}')
+    #     sudo k3s kubectl exec -n ${{ env.K8S_NAMESPACE_AUTOMATION }} $POD_NAME -- curl -f http://localhost:8000/health && echo "✅ Automation Server is healthy!" || echo "⚠️  Warning: Health check failed"
+    #     
+    #     echo "Test Automation Server K8s Access:"
+    #     sudo k3s kubectl exec -n ${{ env.K8S_NAMESPACE_AUTOMATION }} $POD_NAME -- curl -f http://localhost:8000/api/namespaces && echo "✅ Automation Server can access K8s API!" || echo "⚠️  Warning: K8s API access test failed"
 
