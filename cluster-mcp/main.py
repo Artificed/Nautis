@@ -7,7 +7,7 @@ from mcp.server import NotificationOptions, Server
 from mcp.server.sse import SseServerTransport
 from starlette.applications import Starlette
 from starlette.routing import Route
-from starlette.responses import Response
+from starlette.responses import Response, PlainTextResponse
 from starlette.middleware import Middleware
 from starlette.requests import Request
 from starlette.responses import Response
@@ -631,47 +631,20 @@ async def handle_root(request):
 async def handle_sse(request: Request):
     """
     SSE (Server-Sent Events) endpoint for MCP clients.
-    This bridges the Starlette request to the MCP server's SSE transport.
     """
     sse = SseServerTransport("/messages")
-    async with sse.connect_sse(request.scope, request.receive, request._send) as streams:
-        await server.run(
-            streams[0],
-            streams[1],
-            InitializationOptions(
-                server_name="k8s-cluster-mcp",
-                server_version="0.1.0",
-                capabilities=server.get_capabilities(
-                    notification_options=NotificationOptions(),
-                    experimental_capabilities={},
-                ),
-            ),
-        )
-    # Return a harmless empty response to satisfy Starlette
-    return Response(status_code=204)
+    await sse.handle_request(request.scope, request.receive, request._send)
+    # do NOT return Response(); the transport already handled it
+    return PlainTextResponse("", status_code=200)
 
 
 async def handle_messages(request: Request):
     """
-    POST endpoint used for sending messages from MCP clients.
+    POST endpoint for client -> server messages.
     """
     sse = SseServerTransport("/messages")
-    async with sse.connect_post(request.scope, request.receive, request._send) as streams:
-        await server.run(
-            streams[0],
-            streams[1],
-            InitializationOptions(
-                server_name="k8s-cluster-mcp",
-                server_version="0.1.0",
-                capabilities=server.get_capabilities(
-                    notification_options=NotificationOptions(),
-                    experimental_capabilities={},
-                ),
-            ),
-        )
-    # Again, return an empty response to make Starlette happy
-    return Response(status_code=204)
-
+    await sse.handle_request(request.scope, request.receive, request._send)
+    return PlainTextResponse("", status_code=200)
 
 # Create Starlette app with CORS support
 app = Starlette(
