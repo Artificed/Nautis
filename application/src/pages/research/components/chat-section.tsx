@@ -141,7 +141,11 @@ export default function ChatSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-          <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden border border-gray-200/50">
+          <div 
+            className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden border border-gray-200/50"
+            onWheel={(e) => e.stopPropagation()}
+            onTouchMove={(e) => e.stopPropagation()}
+          >
             {/* Chat Header */}
             <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 px-6 py-4">
               <div className="flex items-center gap-3">
@@ -151,7 +155,11 @@ export default function ChatSection() {
             </div>
 
             {/* Messages Area */}
-            <div className="h-[540px] overflow-y-auto p-6 space-y-4 bg-gradient-to-b from-gray-50/50 to-white/50">
+            <div 
+              className="h-[540px] overflow-y-auto p-6 space-y-4 bg-gradient-to-b from-gray-50/50 to-white/50"
+              onWheel={(e) => e.stopPropagation()}
+              onTouchMove={(e) => e.stopPropagation()}
+            >
               <AnimatePresence>
                 {messages.map((message, index) => (
                   <motion.div
@@ -240,7 +248,11 @@ export default function ChatSection() {
             </div>
 
             {/* Input Area */}
-            <div className="bg-white border-t border-gray-200 p-4">
+            <div 
+              className="bg-white border-t border-gray-200 p-4"
+              onWheel={(e) => e.stopPropagation()}
+              onTouchMove={(e) => e.stopPropagation()}
+            >
               <form onSubmit={handleSendMessage} className="flex gap-3">
                 <input
                   type="text"
