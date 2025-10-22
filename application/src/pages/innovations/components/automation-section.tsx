@@ -1,5 +1,6 @@
 import { useCursor } from "../../../common/shared/custom-cursor";
 import { motion } from "framer-motion";
+import n8nLogo from "../../../assets/n8n-logo.png";
 
 export default function AutomationSection() {
     const { setIsHovering } = useCursor();
@@ -264,7 +265,7 @@ export default function AutomationSection() {
 
                 {/* Logo inside card */}
                 <motion.img
-                    src="/src/assets/n8n-logo.png"
+                    src={n8nLogo}
                     alt="n8n Logo"
                     className="relative z-10 w-64 h-64 object-contain mx-auto"
                     whileHover={{

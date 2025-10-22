@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useCursor } from "../../../common/shared/custom-cursor";
 import { useMemo, useState } from "react";
+import vibeCodingImage from "../../../assets/vibe-coding.jpeg";
 
 export default function VibeCodingSection() {
   const { setIsHovering } = useCursor();
@@ -296,7 +297,7 @@ export default function VibeCodingSection() {
               />
 
               <motion.img
-                src="/src/assets/vibe-coding.jpeg"
+                src={vibeCodingImage}
                 alt="Vibe Coding Prevention"
                 className="relative z-10 w-full h-64 object-cover rounded-2xl"
                 style={{ backfaceVisibility: "hidden" }}

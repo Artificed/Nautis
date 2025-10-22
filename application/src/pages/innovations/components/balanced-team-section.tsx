@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useCursor } from "../../../common/shared/custom-cursor";
 import { useMemo, useState } from "react";
+import projectImage from "../../../assets/project.jpg";
 
 export default function BalancedTeamSection() {
   const { setIsHovering } = useCursor();
@@ -346,7 +347,7 @@ export default function BalancedTeamSection() {
 
               {/* Project image */}
               <motion.img
-                src="/src/assets/project.jpg"
+                src={projectImage}
                 alt="Balanced Team Distribution"
                 className="relative z-10 w-full h-64 object-cover rounded-2xl"
                 style={{ backfaceVisibility: "hidden" }}
