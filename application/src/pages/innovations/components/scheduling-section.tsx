@@ -37,14 +37,11 @@ export default function SchedulingSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50">
-      {/* Orbital Rings / Time Theme Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Glowing nebula effect */}
         <div className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-orange-200/30 to-amber-200/20 blur-3xl animate-pulse-slow"></div>
         <div className="absolute bottom-1/4 left-1/5 w-[32rem] h-[32rem] rounded-full bg-gradient-to-br from-purple-200/25 to-pink-200/20 blur-3xl animate-pulse-slow animation-delay-2000"></div>
         <div className="absolute top-1/2 left-1/3 w-80 h-80 rounded-full bg-gradient-to-br from-cyan-200/20 to-blue-200/15 blur-3xl animate-pulse-slow animation-delay-4000"></div>
 
-        {/* Clock hands inspired elements */}
         <motion.div
           className="absolute top-1/4 left-1/6 w-1 h-24 bg-gradient-to-b from-transparent via-orange-400/60 to-transparent origin-bottom"
           animate={{ rotate: 360 }}
@@ -56,7 +53,6 @@ export default function SchedulingSection() {
           transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
         />
 
-        {/* Time markers - like clock numbers */}
         {[...Array(12)].map((_, i) => (
           <motion.div
             key={i}
@@ -76,7 +72,6 @@ export default function SchedulingSection() {
           />
         ))}
 
-        {/* Floating time particles */}
         <motion.div
           className="absolute top-1/5 right-1/4 w-3 h-3 rounded-full bg-orange-400/50"
           animate={{
@@ -119,7 +114,6 @@ export default function SchedulingSection() {
           }}
         />
 
-        {/* Calendar grid inspired pattern */}
         <svg className="absolute inset-0 w-full h-full opacity-10">
           <defs>
             <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
@@ -129,7 +123,6 @@ export default function SchedulingSection() {
           <rect width="100%" height="100%" fill="url(#grid)" />
         </svg>
 
-        {/* Orbiting small shapes */}
         <motion.div
           className="absolute top-1/3 right-1/5 w-8 h-8 border-2 border-orange-400/40 rounded-full"
           animate={{
@@ -157,7 +150,6 @@ export default function SchedulingSection() {
           }}
         />
 
-        {/* Star-like twinkles */}
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={`star-${i}`}
@@ -179,7 +171,6 @@ export default function SchedulingSection() {
           />
         ))}
 
-        {/* Energy waves */}
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-orange-400/10"
           animate={{
@@ -208,7 +199,6 @@ export default function SchedulingSection() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 py-20">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -260,7 +250,6 @@ export default function SchedulingSection() {
           </h1>
         </motion.div>
 
-        {/* Features Grid */}
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {schedulingFeatures.map((feature, index) => (
             <motion.div
@@ -315,7 +304,6 @@ export default function SchedulingSection() {
                   </p>
                 </div>
 
-                {/* Ripple effect */}
                 <motion.div
                   className="absolute inset-0 rounded-3xl"
                   initial={{ scale: 0, opacity: 0 }}

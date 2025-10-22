@@ -7,7 +7,6 @@ export default function VibeCodingSection() {
   const { setIsHovering } = useCursor();
   const [isSpinning, setIsSpinning] = useState(false);
 
-  // Memoize random values to prevent re-calculation on re-render
   const animationConfig = useMemo(() => ({
     codeLines: Array.from({ length: 8 }, () => ({
       duration: 8 + Math.random() * 4,
@@ -71,14 +70,11 @@ export default function VibeCodingSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50">
-      {/* Code Matrix / Binary Background Theme */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Glowing orbs */}
         <div className="absolute top-20 left-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-red-200/30 to-orange-200/20 blur-3xl animate-pulse-slow"></div>
         <div className="absolute bottom-1/4 right-1/5 w-[30rem] h-[30rem] rounded-full bg-gradient-to-br from-rose-200/25 to-pink-200/20 blur-3xl animate-pulse-slow animation-delay-2000"></div>
         <div className="absolute top-1/2 left-1/3 w-80 h-80 rounded-full bg-gradient-to-br from-amber-200/20 to-yellow-200/15 blur-3xl animate-pulse-slow animation-delay-4000"></div>
 
-        {/* Falling code lines */}
         {animationConfig.codeLines.map((config, i) => (
           <motion.div
             key={`code-line-${i}`}
@@ -108,7 +104,6 @@ export default function VibeCodingSection() {
           </motion.div>
         ))}
 
-        {/* Warning symbols */}
         <motion.div
           className="absolute top-1/4 right-1/5"
           animate={{
@@ -128,7 +123,6 @@ export default function VibeCodingSection() {
           </svg>
         </motion.div>
 
-        {/* Binary rain effect */}
         {animationConfig.binaryRain.map((config, i) => (
           <motion.div
             key={`binary-${i}`}
@@ -154,7 +148,6 @@ export default function VibeCodingSection() {
           </motion.div>
         ))}
 
-        {/* Floating brackets */}
         <motion.div
           className="absolute bottom-1/3 left-1/4 text-6xl font-mono text-orange-400/20"
           animate={{
@@ -185,7 +178,6 @@ export default function VibeCodingSection() {
           {'< />'}
         </motion.div>
 
-        {/* Pulsing error dots */}
         {animationConfig.errorDots.map((config, i) => (
           <motion.div
             key={`error-dot-${i}`}
@@ -210,7 +202,6 @@ export default function VibeCodingSection() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Side - Title & Image */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -261,7 +252,6 @@ export default function VibeCodingSection() {
               ))}
             </h1>
 
-            {/* Image Card */}
             <motion.div
               className="relative group p-6 rounded-3xl bg-gradient-to-br from-white/80 to-white/60 backdrop-blur-md shadow-xl border border-white/30 overflow-hidden"
               initial={{ opacity: 0, scale: 0.8 }}
@@ -286,7 +276,6 @@ export default function VibeCodingSection() {
               }}
               onMouseLeave={() => {
                 setIsHovering(false);
-                // Let the animation complete before resetting
                 setTimeout(() => setIsSpinning(false), 1200);
               }}
               style={{ transformStyle: "preserve-3d" }}
@@ -367,7 +356,7 @@ export default function VibeCodingSection() {
                     </div>
                   </div>
 
-                  {/* Ripple effect */}
+
                   <motion.div
                     className="absolute inset-0 rounded-3xl"
                     initial={{ scale: 0, opacity: 0 }}

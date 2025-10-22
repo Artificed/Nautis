@@ -1,23 +1,22 @@
 import { motion } from "framer-motion";
 import { useCursor } from "../../../common/shared/custom-cursor";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import projectImage from "../../../assets/project.jpg";
+
+const animationConfig = {
+  nodes: Array.from({ length: 12 }, () => ({
+    duration: 3 + Math.random() * 2,
+    delay: Math.random() * 3.6,
+  })),
+  userIcons: Array.from({ length: 6 }, (_, i) => ({
+    duration: 6 + i,
+    delay: i * 0.8,
+  })),
+};
 
 export default function BalancedTeamSection() {
   const { setIsHovering } = useCursor();
   const [isSpinning, setIsSpinning] = useState(false);
-
-  // Memoize random values to prevent re-calculation on re-render
-  const animationConfig = useMemo(() => ({
-    nodes: Array.from({ length: 12 }, () => ({
-      duration: 3 + Math.random() * 2,
-      delay: Math.random() * 3.6,
-    })),
-    userIcons: Array.from({ length: 6 }, (_, i) => ({
-      duration: 6 + i,
-      delay: i * 0.8,
-    })),
-  }), []);
 
   const features = [
     {
@@ -61,14 +60,11 @@ export default function BalancedTeamSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50">
-      {/* Network / Connection Background Theme */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Glowing orbs */}
         <div className="absolute top-20 right-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-indigo-200/30 to-blue-200/20 blur-3xl animate-pulse-slow"></div>
         <div className="absolute bottom-1/4 left-1/5 w-[32rem] h-[32rem] rounded-full bg-gradient-to-br from-teal-200/25 to-emerald-200/20 blur-3xl animate-pulse-slow animation-delay-2000"></div>
         <div className="absolute top-1/2 right-1/3 w-80 h-80 rounded-full bg-gradient-to-br from-purple-200/20 to-pink-200/15 blur-3xl animate-pulse-slow animation-delay-4000"></div>
 
-        {/* Network nodes */}
         {(() => {
           const positions = [
             { x: '15%', y: '20%' },
@@ -107,7 +103,6 @@ export default function BalancedTeamSection() {
           ));
         })()}
 
-        {/* Connection lines */}
         <svg className="absolute inset-0 w-full h-full opacity-20">
           <motion.line
             x1="15%"
@@ -194,7 +189,6 @@ export default function BalancedTeamSection() {
           </defs>
         </svg>
 
-        {/* Floating user icons */}
         {animationConfig.userIcons.map((config, i) => (
           <motion.div
             key={`user-${i}`}
@@ -221,7 +215,6 @@ export default function BalancedTeamSection() {
           </motion.div>
         ))}
 
-        {/* Balance scales */}
         <motion.div
           className="absolute top-1/4 left-1/6"
           animate={{
@@ -241,7 +234,6 @@ export default function BalancedTeamSection() {
           </svg>
         </motion.div>
 
-        {/* Geometric shapes representing groups */}
         <motion.div
           className="absolute bottom-1/3 right-1/5 w-20 h-20 border-2 border-teal-400/30 rounded-lg"
           animate={{
@@ -258,7 +250,6 @@ export default function BalancedTeamSection() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Side - Title & Image */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -309,7 +300,6 @@ export default function BalancedTeamSection() {
               ))}
             </h1>
 
-            {/* Image Card */}
             <motion.div
               className="relative group p-6 rounded-3xl bg-gradient-to-br from-white/80 to-white/60 backdrop-blur-md shadow-xl border border-white/30 overflow-hidden"
               initial={{ opacity: 0, scale: 0.8 }}
@@ -334,18 +324,15 @@ export default function BalancedTeamSection() {
               }}
               onMouseLeave={() => {
                 setIsHovering(false);
-                // Let the animation complete before resetting
                 setTimeout(() => setIsSpinning(false), 1200);
               }}
               style={{ transformStyle: "preserve-3d" }}
             >
-              {/* Glow effect on hover */}
               <motion.div
                 className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-300/30 to-teal-300/20 opacity-0 group-hover:opacity-100 blur-lg"
                 transition={{ duration: 0.4 }}
               />
 
-              {/* Project image */}
               <motion.img
                 src={projectImage}
                 alt="Balanced Team Distribution"
@@ -355,7 +342,6 @@ export default function BalancedTeamSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right Side - Features */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -418,7 +404,6 @@ export default function BalancedTeamSection() {
                     </div>
                   </div>
 
-                  {/* Ripple effect */}
                   <motion.div
                     className="absolute inset-0 rounded-3xl"
                     initial={{ scale: 0, opacity: 0 }}

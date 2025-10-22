@@ -61,14 +61,11 @@ export default function FeedbackFormSection() {
   
     return (
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50">
-        {/* Tech Circuit / Data Flow Background Theme */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Glowing orbs */}
           <div className="absolute top-20 right-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-orange-200/30 to-amber-200/20 blur-3xl animate-pulse-slow"></div>
           <div className="absolute bottom-1/4 left-1/5 w-[28rem] h-[28rem] rounded-full bg-gradient-to-br from-purple-200/25 to-pink-200/20 blur-3xl animate-pulse-slow animation-delay-2000"></div>
           <div className="absolute top-1/2 right-1/3 w-80 h-80 rounded-full bg-gradient-to-br from-cyan-200/20 to-blue-200/15 blur-3xl animate-pulse-slow animation-delay-4000"></div>
 
-          {/* Flowing particles */}
           <motion.div
             className="absolute top-32 left-1/4 w-3 h-3 rounded-full bg-orange-400/60"
             animate={{
@@ -125,7 +122,6 @@ export default function FeedbackFormSection() {
             }}
           />
 
-          {/* Circuit board lines */}
           <svg className="absolute inset-0 w-full h-full opacity-20">
             <motion.line
               x1="10%"
@@ -201,7 +197,6 @@ export default function FeedbackFormSection() {
             </defs>
           </svg>
 
-          {/* Geometric shapes */}
           <motion.div
             className="absolute top-1/4 left-1/6 w-20 h-20 border-2 border-orange-400/30"
             animate={{
@@ -227,7 +222,6 @@ export default function FeedbackFormSection() {
             }}
           />
 
-          {/* Data nodes */}
           <motion.div
             className="absolute top-1/3 left-1/3 w-4 h-4 bg-orange-400/50 rounded-full"
             animate={{
@@ -262,7 +256,6 @@ export default function FeedbackFormSection() {
             }}
           />
 
-          {/* Floating hexagons */}
           <motion.div
             className="absolute top-20 right-1/5"
             animate={{
@@ -308,7 +301,6 @@ export default function FeedbackFormSection() {
         </div>
   
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 py-20">
-          {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -414,7 +406,6 @@ export default function FeedbackFormSection() {
                     </p>
                   </div>
   
-                  {/* Ripple effect */}
                   <motion.div
                     className="absolute inset-0 rounded-3xl"
                     initial={{ scale: 0, opacity: 0 }}
@@ -432,7 +423,6 @@ export default function FeedbackFormSection() {
             ))}
           </div>
   
-          {/* Additional Info */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

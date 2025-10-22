@@ -36,14 +36,11 @@ export default function AutomationSection() {
   
     return (
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50">
-        {/* Mechanical Gears / Energy Waves Background Theme */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Glowing energy waves */}
           <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-amber-400/20 to-orange-500/10 blur-3xl animate-pulse-slow"></div>
           <div className="absolute bottom-1/3 right-1/4 w-[30rem] h-[30rem] rounded-full bg-gradient-to-br from-yellow-500/15 to-amber-600/10 blur-3xl animate-pulse-slow animation-delay-2000"></div>
           <div className="absolute top-1/2 right-1/5 w-72 h-72 rounded-full bg-gradient-to-br from-orange-400/20 to-red-500/10 blur-3xl animate-pulse-slow animation-delay-4000"></div>
 
-          {/* Rotating Gears */}
           <motion.div
             className="absolute top-32 left-1/6"
             animate={{ rotate: 360 }}
@@ -110,7 +107,6 @@ export default function AutomationSection() {
             </svg>
           </motion.div>
 
-          {/* Mechanical cogs small */}
           <motion.div
             className="absolute top-1/3 left-1/4 opacity-20"
             animate={{ rotate: -360 }}
@@ -133,7 +129,6 @@ export default function AutomationSection() {
             </svg>
           </motion.div>
 
-          {/* Floating mechanical parts */}
           <motion.div
             className="absolute top-1/5 right-1/6 w-12 h-12 border-4 border-amber-400/20 rounded-sm"
             animate={{
@@ -160,7 +155,6 @@ export default function AutomationSection() {
             }}
           />
 
-          {/* Hexagonal wireframes */}
           <motion.div
             className="absolute top-20 left-1/3 opacity-20"
             animate={{
@@ -192,7 +186,6 @@ export default function AutomationSection() {
   
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-left">
-            {/* Left Side - Title & Logo */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -239,7 +232,6 @@ export default function AutomationSection() {
                 ))}
               </h1>
   
-              {/* n8n Logo Card */}
                 <motion.div
                 className="relative group p-8 rounded-3xl bg-gradient-to-br white backdrop-blur-md shadow-xl border border-white/30"
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -257,13 +249,11 @@ export default function AutomationSection() {
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
                 >
-                {/* Glow effect on hover */}
                 <motion.div
                     className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/30 to-transparent opacity-0 group-hover:opacity-100 blur-lg"
                     transition={{ duration: 0.4 }}
                 />
 
-                {/* Logo inside card */}
                 <motion.img
                     src={n8nLogo}
                     alt="n8n Logo"
@@ -277,7 +267,6 @@ export default function AutomationSection() {
                 </motion.div>
             </motion.div>
   
-            {/* Right Side - Features */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -340,7 +329,6 @@ export default function AutomationSection() {
                       </div>
                     </div>
   
-                    {/* Ripple effect */}
                     <motion.div
                       className="absolute inset-0 rounded-3xl"
                       initial={{ scale: 0, opacity: 0 }}
