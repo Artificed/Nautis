@@ -4,6 +4,14 @@ import n8nLogo from "../../../assets/n8n-logo.png";
 import notionLogo from "../../../assets/notion-logo.png";
 import outlookLogo from "../../../assets/outlook-logo.png";
 
+const particleConfigs = Array.from({ length: 40 }, () => ({
+  left: Math.random() * 100,
+  top: Math.random() * 100,
+  duration: 3 + Math.random() * 5,
+  delay: Math.random() * 4,
+  size: 1 + Math.random() * 2,
+}));
+
 export default function N8NAutomationSection() {
   const { setIsHovering } = useCursor();
 
@@ -60,14 +68,192 @@ export default function N8NAutomationSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50 pt-8">
-      {/* Background floating elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute w-full h-full"
+          animate={{
+            background: [
+              'radial-gradient(circle at 30% 20%, rgba(251, 113, 133, 0.15) 0%, transparent 50%)',
+              'radial-gradient(circle at 70% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 50%)',
+              'radial-gradient(circle at 50% 50%, rgba(251, 113, 133, 0.15) 0%, transparent 50%)',
+            ],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
+      </div>
+
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute top-1/4 right-1/5 w-96 h-96 rounded-full bg-gradient-to-br from-rose-200/40 to-transparent blur-3xl"
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.3, 0.6, 0.3],
+            x: [0, 50, 0],
+            y: [0, -30, 0],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute bottom-1/3 left-1/6 w-[28rem] h-[28rem] rounded-full bg-gradient-to-br from-pink-200/35 to-transparent blur-3xl"
+          animate={{
+            scale: [1, 1.4, 1],
+            opacity: [0.3, 0.5, 0.3],
+            x: [0, -40, 0],
+            y: [0, 40, 0],
+          }}
+          transition={{
+            duration: 14,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
+        <motion.div
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[32rem] h-[32rem] rounded-full bg-gradient-to-br from-orange-200/30 to-transparent blur-3xl"
+          animate={{
+            scale: [1, 1.5, 1],
+            opacity: [0.2, 0.4, 0.2],
+            rotate: [0, 180, 360],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      </div>
+
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {particleConfigs.map((particle, i) => (
+          <motion.div
+            key={`particle-${i}`}
+            className="absolute rounded-full bg-gradient-to-br from-rose-400 to-pink-400"
+            style={{
+              left: `${particle.left}%`,
+              top: `${particle.top}%`,
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
+            }}
+            animate={{
+              y: [0, -80, 0],
+              x: [0, Math.sin(i) * 30, 0],
+              opacity: [0.2, 0.8, 0.2],
+              scale: [2, 3, 2],
+            }}
+            transition={{
+              duration: particle.duration,
+              repeat: Infinity,
+              delay: particle.delay,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+      </div>
+
+      <motion.div
+        className="absolute top-24 left-1/5 w-20 h-20 border-2 border-rose-400/30 rounded-xl"
+        animate={{
+          rotate: [0, 360],
+          scale: [1, 1.2, 1],
+        }}
+        transition={{
+          duration: 18,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+      />
+      <motion.div
+        className="absolute bottom-28 right-1/4 w-16 h-16 border-2 border-pink-400/30"
+        style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}
+        animate={{
+          rotate: [0, -360],
+          scale: [1, 1.3, 1],
+        }}
+        transition={{
+          duration: 22,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+      />
+      <motion.div
+        className="absolute top-1/3 right-1/6 w-14 h-14 rounded-full border-2 border-orange-400/30"
+        animate={{
+          scale: [1, 1.5, 1],
+          opacity: [0.3, 0.7, 0.3],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+        <svg className="absolute w-full h-full">
+          <motion.path
+            d="M 20,50 Q 50,30 80,50"
+            stroke="url(#workflowGradient1)"
+            strokeWidth="2"
+            fill="none"
+            strokeDasharray="5,5"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: [0, 1, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+          />
+          <motion.path
+            d="M 10,70 Q 50,85 90,70"
+            stroke="url(#workflowGradient2)"
+            strokeWidth="2"
+            fill="none"
+            strokeDasharray="5,5"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: [0, 1, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "linear", delay: 1 }}
+          />
+          <motion.path
+            d="M 30,30 L 70,70"
+            stroke="url(#workflowGradient3)"
+            strokeWidth="2"
+            fill="none"
+            strokeDasharray="5,5"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: [0, 1, 0] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "linear", delay: 2 }}
+          />
+          <defs>
+            <linearGradient id="workflowGradient1">
+              <stop offset="0%" stopColor="#fb7185" stopOpacity="0" />
+              <stop offset="50%" stopColor="#fb7185" stopOpacity="1" />
+              <stop offset="100%" stopColor="#fb7185" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="workflowGradient2">
+              <stop offset="0%" stopColor="#ec4899" stopOpacity="0" />
+              <stop offset="50%" stopColor="#ec4899" stopOpacity="1" />
+              <stop offset="100%" stopColor="#ec4899" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="workflowGradient3">
+              <stop offset="0%" stopColor="#f97316" stopOpacity="0" />
+              <stop offset="50%" stopColor="#f97316" stopOpacity="1" />
+              <stop offset="100%" stopColor="#f97316" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-24 right-24 w-32 h-32 rounded-3xl bg-gradient-to-br from-rose-50 to-pink-50 opacity-80 blur-xl animate-float"></div>
         <div className="absolute bottom-32 left-32 w-28 h-28 rounded-3xl bg-gradient-to-br from-orange-50 to-amber-50 opacity-70 blur-xl animate-float-slower animation-delay-2000"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-8">
-        {/* Section Badge */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -80,7 +266,6 @@ export default function N8NAutomationSection() {
           </span>
         </motion.div>
 
-        {/* Main Title */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -103,7 +288,6 @@ export default function N8NAutomationSection() {
           Autonomous cluster management powered by n8n and AI
         </motion.p>
 
-        {/* Centered n8n Logo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -133,9 +317,7 @@ export default function N8NAutomationSection() {
           </motion.div>
         </motion.div>
 
-        {/* Horizontal Workflow Steps */}
         <div className="relative max-w-6xl mx-auto">
-          {/* Steps Grid */}
           <div className="grid grid-cols-5 gap-6">
             {steps.map((step, index) => (
               <motion.div
@@ -149,13 +331,11 @@ export default function N8NAutomationSection() {
                 onMouseLeave={() => setIsHovering(false)}
                 className="relative"
               >
-                {/* Step Number Badge with Arrow */}
                 <div className="flex justify-center items-center mb-4">
                   <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center text-white font-bold text-lg shadow-lg z-10`}>
                     {step.number}
                   </div>
                   
-                  {/* Arrow to next step */}
                   {index < steps.length - 1 && (
                     <motion.div
                       initial={{ opacity: 0, x: -10 }}
@@ -171,20 +351,17 @@ export default function N8NAutomationSection() {
                   )}
                 </div>
 
-                {/* Card */}
                 <div className={`${
                   step.highlight 
                     ? 'bg-gradient-to-br from-orange-50 to-rose-50 border-2 border-orange-300' 
                     : 'bg-white border-2 border-gray-200'
                 } rounded-xl shadow-md p-5 hover:shadow-xl transition-all min-h-[180px] flex flex-col`}>
-                  {/* Icon */}
                   <div className={`w-10 h-10 rounded-lg ${
                     step.highlight ? 'bg-orange-100' : 'bg-gray-100'
                   } flex items-center justify-center text-gray-700 mb-3`}>
                     {step.icon}
                   </div>
 
-                  {/* Content */}
                   <h3 className="text-base font-bold text-gray-800 mb-2">
                     {step.title}
                     {step.highlight && (
