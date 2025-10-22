@@ -21,12 +21,6 @@ from kubernetes.client.rest import ApiException
 # Initialize the MCP server
 server = Server("k8s-cluster-mcp")
 
-@server.middleware("http")
-async def log_requests(request, call_next):
-    response = await call_next(request)
-    print(f"{request.method} {request.url.path} -> {response.status_code}")
-    return response
-
 # Load Kubernetes configuration
 try:
     config.load_kube_config()
@@ -698,6 +692,11 @@ app = Starlette(
     ]
 )
 
+@app.middleware("http")
+async def log_requests(request, call_next):
+    response = await call_next(request)
+    print(f"{request.method} {request.url.path} -> {response.status_code}")
+    return response
 
 if __name__ == "__main__":
     # Run the HTTP server
