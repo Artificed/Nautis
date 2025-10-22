@@ -14,14 +14,14 @@ export default function KubernetesMCPSection() {
         <div className="absolute bottom-24 right-32 w-28 h-28 rounded-3xl bg-gradient-to-br from-purple-50 to-violet-50 opacity-70 blur-xl animate-float-slower animation-delay-2000"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-8 py-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-8 pt-8">
         {/* Section Badge */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-6"
         >
           <span className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold text-sm tracking-wide shadow-lg">
             Core Infrastructure
@@ -42,7 +42,7 @@ export default function KubernetesMCPSection() {
         </motion.h2>
 
         {/* Logo Connection Visual */}
-        <div className="relative mb-20">
+        <div className="relative mb-16">
           <div className="flex items-center justify-center gap-16 md:gap-32">
             {/* Kubernetes Logo */}
             <motion.div
@@ -136,7 +136,7 @@ export default function KubernetesMCPSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
           viewport={{ once: true }}
-          className="text-center text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-16 leading-relaxed"
+          className="text-center text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed"
         >
           A powerful Model Context Protocol server providing intelligent tools for seamless Kubernetes cluster management and automation
         </motion.p>
@@ -164,16 +164,12 @@ export default function KubernetesMCPSection() {
                 <h3 className="text-xl font-bold text-gray-800 mb-3">Extract Cluster Information</h3>
                 <ul className="space-y-2 text-gray-600">
                   <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
+                    <span className="text-blue-500">•</span>
                     <span>Query pod status, health, and resource utilization</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
+                    <span className="text-blue-500">•</span>
                     <span>Retrieve deployment configurations and service endpoints</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
-                    <span>Monitor cluster events and resource metrics in real-time</span>
                   </li>
                 </ul>
               </div>
@@ -202,16 +198,12 @@ export default function KubernetesMCPSection() {
                 <h3 className="text-xl font-bold text-gray-800 mb-3">Cluster Control Operations</h3>
                 <ul className="space-y-2 text-gray-600">
                   <li className="flex items-start gap-2">
-                    <span className="text-purple-500 mt-1">•</span>
+                    <span className="text-purple-500">•</span>
                     <span>Restart deployments and rolling updates with zero downtime</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-purple-500 mt-1">•</span>
+                    <span className="text-purple-500">•</span>
                     <span>Clean up unused pods and optimize resource allocation</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-purple-500 mt-1">•</span>
-                    <span>Scale workloads and manage container lifecycles dynamically</span>
                   </li>
                 </ul>
               </div>
