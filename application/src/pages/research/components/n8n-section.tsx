@@ -59,7 +59,7 @@ export default function N8NAutomationSection() {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50 py-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50 pt-8">
       {/* Background floating elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-24 right-24 w-32 h-32 rounded-3xl bg-gradient-to-br from-rose-50 to-pink-50 opacity-80 blur-xl animate-float"></div>
@@ -73,9 +73,9 @@ export default function N8NAutomationSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-8"
+          className="text-center mb-6"
         >
-          <span className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-rose-500 to-pink-500 text-white font-semibold text-sm tracking-wide shadow-lg">
+          <span className="inline-block px-5 rounded-full bg-gradient-to-r from-rose-500 to-pink-500 text-white font-semibold text-sm tracking-wide shadow-lg">
             Workflow Automation
           </span>
         </motion.div>
@@ -98,7 +98,7 @@ export default function N8NAutomationSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
           viewport={{ once: true }}
-          className="text-center text-lg text-gray-600 max-w-2xl mx-auto mb-16 leading-relaxed"
+          className="text-center text-lg text-gray-600 max-w-2xl mx-auto mb-14 leading-relaxed"
         >
           Autonomous cluster management powered by n8n and AI
         </motion.p>
@@ -109,7 +109,7 @@ export default function N8NAutomationSection() {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
-          className="flex justify-center mb-16"
+          className="flex justify-center mb-14"
         >
           <motion.div
             animate={{ 
