@@ -129,7 +129,6 @@ export default function AchievementSection() {
           }}
         />
         
-        {/* Floating geometric shapes */}
         <motion.div 
           className="absolute top-32 left-24 w-40 h-40 rounded-3xl bg-gradient-to-br from-orange-200/50 to-amber-200/40 opacity-60 blur-lg"
           animate={{
@@ -214,7 +213,6 @@ export default function AchievementSection() {
           }}
         />
         
-        {/* Small sparkle elements */}
         <motion.div 
           className="absolute top-1/2 right-1/4 w-12 h-12 rounded-full bg-gradient-to-br from-orange-300/60 to-rose-300/50 opacity-70 blur-sm"
           animate={{
@@ -243,7 +241,6 @@ export default function AchievementSection() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-8 py-16 w-full">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -271,7 +268,6 @@ export default function AchievementSection() {
           </motion.p>
         </motion.div>
 
-        {/* Carousel Container */}
         <motion.div 
           className="relative flex items-center justify-center gap-6 min-h-[600px]"
           initial={{ opacity: 0, scale: 0.95 }}
@@ -279,7 +275,6 @@ export default function AchievementSection() {
           transition={{ duration: 0.8, delay: 0.3 }}
           viewport={{ once: true }}
         >
-          {/* Previous Button */}
           <motion.button
             onClick={() => handleManualPaginate(-1)}
             onMouseEnter={() => setIsHovering(true)}
@@ -298,7 +293,6 @@ export default function AchievementSection() {
             </svg>
           </motion.button>
 
-          {/* Cards Container - Fixed width to show exactly 3 cards */}
           <motion.div 
             className="overflow-hidden px-4"
             initial={{ opacity: 0, y: 30 }}
@@ -324,7 +318,6 @@ export default function AchievementSection() {
                   className="relative bg-white/70 backdrop-blur-md rounded-3xl shadow-lg overflow-hidden border border-orange-200/30 group hover:shadow-xl transition-all duration-500 hover:-translate-y-3 flex flex-col flex-shrink-0"
                   style={{ width: '320px', height: '520px' }}
                 >
-                  {/* Image Section */}
                   <div className="relative overflow-hidden rounded-t-3xl" style={{ height: '280px' }}>
                     <motion.img
                       src={achievement.image}
@@ -335,13 +328,11 @@ export default function AchievementSection() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                     
-                    {/* Year Badge */}
                     <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
                       <span className="text-orange-600 font-bold text-sm">{achievement.year}</span>
                     </div>
                   </div>
 
-                  {/* Text Section */}
                   <div className="p-6 flex flex-col flex-grow">
                     <h3 className="text-lg font-bold mb-3 text-gray-800 leading-tight" style={{ height: '3.5rem', overflow: 'hidden' }}>
                       {achievement.title}
@@ -351,7 +342,6 @@ export default function AchievementSection() {
                       {achievement.description}
                     </p>
 
-                    {/* Link Button */}
                     <a
                       href={achievement.link}
                       target="_blank"
@@ -367,7 +357,6 @@ export default function AchievementSection() {
                     </a>
                   </div>
 
-                  {/* Decorative Elements */}
                   <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-orange-200/20 to-rose-200/20 rounded-full blur-2xl pointer-events-none"></div>
                   <div className="absolute bottom-0 left-0 w-28 h-28 bg-gradient-to-tr from-amber-200/20 to-pink-200/20 rounded-full blur-2xl pointer-events-none"></div>
                 </motion.div>

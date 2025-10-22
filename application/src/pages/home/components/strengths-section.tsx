@@ -111,7 +111,6 @@ export default function StrengthsSection() {
       id="strengths"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50"
     >
-      {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 right-32 w-96 h-96 rounded-full bg-gradient-to-br from-teal-100/10 to-emerald-100/10 blur-3xl animate-float"></div>
         <div className="absolute bottom-32 left-32 w-[28rem] h-[28rem] rounded-full bg-gradient-to-br from-purple-100/25 to-pink-100/20 blur-3xl animate-float-slower animation-delay-2000"></div>
@@ -123,7 +122,6 @@ export default function StrengthsSection() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 py-20">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -143,7 +141,6 @@ export default function StrengthsSection() {
           </p>
         </motion.div>
 
-        {/* Toggle Tabs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
