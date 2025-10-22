@@ -34,7 +34,7 @@ spec:
           periodSeconds: 30
         readinessProbe:
           httpGet:
-            path: /cluster-mcp//health
+            path: /cluster-mcp/health
             port: http
           initialDelaySeconds: 5
           periodSeconds: 10
