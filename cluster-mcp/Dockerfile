@@ -5,7 +5,7 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-RUN pip install --no-cache-dir mcp uvicorn
+RUN pip install --no-cache-dir mcp uvicorn kubernetes
 
 COPY main.py /app/main.py
 
