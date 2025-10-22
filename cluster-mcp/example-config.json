@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "k8s-cluster": {
-      "url": "http://10.22.78.232/cluster-mcp",
-      "transport": "sse"
-    }
-  }
-}

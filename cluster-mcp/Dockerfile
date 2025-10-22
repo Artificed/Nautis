@@ -1,18 +1,16 @@
-FROM python:3.11-slim
+FROM python:3.12-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1
+RUN pip install --no-cache-dir mcp uvicorn
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl git && \
-    rm -rf /var/lib/apt/lists/*
+COPY main.py /app/main.py
 
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir "git+https://github.com/modelcontextprotocol/python-sdk.git@main" && \
-    pip install --no-cache-dir kubernetes starlette uvicorn
+EXPOSE 8080
+ENV PORT=8080
+ENV HOST=0.0.0.0
 
-COPY main.py .
-
-CMD ["python", "main.py"]
+CMD ["python", "-u", "main.py"]

@@ -10,7 +10,7 @@ spec:
   selector:
     app: cluster-mcp
   ports:
-  - name: mcp
+  - name: http
     port: 8080
-    targetPort: 8080
+    targetPort: http
     protocol: TCP
