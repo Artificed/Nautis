@@ -66,7 +66,7 @@ export default function LLMSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <div className="mb-6">
+            <div className="mb-2">
               <span className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-emerald-400 to-teal-400 text-white font-semibold text-sm tracking-wide shadow-lg mb-4">
                 Large Language Models
               </span>
@@ -74,12 +74,12 @@ export default function LLMSection() {
 
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
               <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                Intelligent Automation
+                AI-Powered Decision Making
               </span>
             </h2>
 
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              Leveraging cutting-edge AI to transform cluster management and operational workflows
+              OpenAI's language models power the n8n automation agent, enabling it to understand cluster state, make intelligent decisions, and communicate actions in plain English. The agent combines real-time cluster data with AI reasoning for maintenance.
             </p>
 
             {/* Key Points */}
@@ -97,9 +97,9 @@ export default function LLMSection() {
                   1
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-800 mb-1">Natural Language Operations</h3>
+                  <h3 className="font-semibold text-gray-800 mb-1">Automated Cluster Analysis</h3>
                   <p className="text-gray-600 text-sm">
-                    Execute complex Kubernetes commands using conversational AI, reducing learning curve and operational friction
+                    The n8n agent fetches cluster metrics daily and uses OpenAI to analyze health, performance, and potential issues
                   </p>
                 </div>
               </motion.div>
@@ -117,9 +117,9 @@ export default function LLMSection() {
                   2
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-800 mb-1">Predictive Troubleshooting</h3>
+                  <h3 className="font-semibold text-gray-800 mb-1">Intelligent Action Decisions</h3>
                   <p className="text-gray-600 text-sm">
-                    AI-powered analysis of logs and metrics to identify issues before they impact production systems
+                    AI determines optimal actions like restarting unhealthy pods, scaling deployments, or cleaning up unused resources
                   </p>
                 </div>
               </motion.div>
@@ -128,7 +128,7 @@ export default function LLMSection() {
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
-                viewport={{ once: true }}
+                viewport={{ once: true }}   
                 className="flex items-start gap-4 group"
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
@@ -137,9 +137,9 @@ export default function LLMSection() {
                   3
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-800 mb-1">Intelligent Resource Optimization</h3>
+                  <h3 className="font-semibold text-gray-800 mb-1">Natural Language Communication</h3>
                   <p className="text-gray-600 text-sm">
-                    Machine learning models suggest optimal resource allocation and scaling strategies based on usage patterns
+                    Chat interface allows you to query cluster status, request actions, and get insights in plain English
                   </p>
                 </div>
               </motion.div>
@@ -157,9 +157,9 @@ export default function LLMSection() {
                   4
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-800 mb-1">Context-Aware Documentation</h3>
+                  <h3 className="font-semibold text-gray-800 mb-1">Automated Logging & Alerts</h3>
                   <p className="text-gray-600 text-sm">
-                    Generate real-time explanations and documentation tailored to your specific cluster configuration
+                    All decisions and actions are logged to Notion, with critical actions triggering email notifications
                   </p>
                 </div>
               </motion.div>
