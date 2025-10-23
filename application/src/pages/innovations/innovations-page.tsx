@@ -31,10 +31,6 @@ export default function InnovationsPage() {
         <div className="snap-section">
           <BalancedTeamSection />
         </div>
-
-        <div className="snap-section">
-          <Footer />
-        </div>
       </div>
     </CustomCursor>
   );

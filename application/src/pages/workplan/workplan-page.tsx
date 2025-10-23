@@ -31,10 +31,6 @@ export default function WorkplanPage() {
         <div className="snap-section">
           <SemesterTwoDetailsSection />
         </div>
-
-        <div className="snap-section">
-          <Footer />
-        </div>
       </div>
     </CustomCursor>
   );

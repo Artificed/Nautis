@@ -26,10 +26,6 @@ export default function TPAPage() {
         <div className="snap-section">
           <MobileSection />
         </div>
-
-        <div className="snap-section">
-          <Footer />
-        </div>
       </div>
     </CustomCursor>
   );
