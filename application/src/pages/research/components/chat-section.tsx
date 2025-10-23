@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCursor } from "../../../common/shared/custom-cursor";
+import axios from "axios";
 
 interface Message {
   id: string;
@@ -46,19 +47,38 @@ export default function ChatSection() {
     };
 
     setMessages((prev) => [...prev, userMessage]);
+    const messageText = inputValue;
     setInputValue("");
     setIsTyping(true);
 
-    setTimeout(() => {
+    try {
+      const response = await axios.post(
+        "http://10.22.78.232:32267/webhook/3808c0b7-e65c-40d5-90fa-3cc45d618bf3",
+        {
+          sessionId: "devops-session",
+          input: messageText,
+        }
+      );
+      
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: "I can help you check the host cluster health, restart deployments, view pod status, and more. What would you like to know?",
+        text: response.data.output || response.data.message || "I received your message. How can I help you with the cluster?",
         sender: "ai",
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, aiMessage]);
+    } catch (error) {
+      console.error("Error calling webhook:", error);
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: "Sorry, I'm having trouble connecting to the automation agent. Please try again later.",
+        sender: "ai",
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
       setIsTyping(false);
-    }, 1500);
+    }
   };
 
   return (
@@ -141,7 +161,6 @@ export default function ChatSection() {
             onWheel={(e) => e.stopPropagation()}
             onTouchMove={(e) => e.stopPropagation()}
           >
-            {/* Chat Header */}
             <div className="bg-gradient-to-r from-rose-600 via-pink-600 to-orange-600 px-6 py-4">
               <div className="flex items-center gap-3">
                 <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
@@ -149,7 +168,6 @@ export default function ChatSection() {
               </div>
             </div>
 
-            {/* Messages Area */}
             <div 
               ref={messagesContainerRef}
               className="h-[540px] overflow-y-auto p-6 space-y-4 bg-gradient-to-b from-gray-50/50 to-white/50"
@@ -211,7 +229,6 @@ export default function ChatSection() {
                 ))}
               </AnimatePresence>
 
-              {/* Typing Indicator */}
               {isTyping && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
@@ -243,7 +260,6 @@ export default function ChatSection() {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Input Area */}
             <div 
               className="bg-white border-t border-gray-200 p-4"
               onWheel={(e) => e.stopPropagation()}
