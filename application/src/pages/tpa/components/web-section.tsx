@@ -8,7 +8,7 @@ export default function WebSection() {
     {
       title: "Agent Integration",
       subtitle: "Workflow Automation",
-      description: "Connect AI agents with hundreds of services using n8n. Build complex AI pipelines with visual workflow automation and no-code interfaces.",
+      description: "Utilize tools like n8n to build modern AI pipelines with visual workflow automation and no-code interfaces.",
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <circle cx="12" cy="12" r="3" />
@@ -22,7 +22,7 @@ export default function WebSection() {
     {
       title: "Model Context Protocol",
       subtitle: "MCP Standard",
-      description: "Implement standardized context sharing between AI models and tools, enabling seamless integration and improved accuracy across different AI systems.",
+      description: "Implement standardized context sharing between AI models and tools, enabling integration across different AI systems.",
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <rect x="3" y="3" width="7" height="7" />
@@ -182,7 +182,7 @@ export default function WebSection() {
             </p>
           </motion.div>
 
-          <div className="lg:w-3/5 relative" style={{ minHeight: '620px' }}>
+          <div className="lg:w-3/5 relative" style={{ minHeight: '630px' }}>
             {modernAIFeatures.map((feature, index) => (
               <motion.div
                 key={index}

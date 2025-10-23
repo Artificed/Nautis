@@ -39,9 +39,12 @@ export default function NetworkSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50 py-20">
+      
+      {/* Simple clean background effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Large gradient blobs */}
         <motion.div
-          className="absolute top-1/3 right-1/5 w-[32rem] h-[32rem] rounded-full bg-gradient-to-br from-blue-300/15 to-indigo-300/10 blur-3xl"
+          className="absolute top-1/4 right-1/5 w-[32rem] h-[32rem] rounded-full bg-gradient-to-br from-blue-200/30 to-indigo-200/20 blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3],
@@ -53,7 +56,7 @@ export default function NetworkSection() {
           }}
         />
         <motion.div
-          className="absolute bottom-1/3 left-1/5 w-[28rem] h-[28rem] rounded-full bg-gradient-to-br from-emerald-300/15 to-teal-300/10 blur-3xl"
+          className="absolute bottom-1/4 left-1/5 w-[36rem] h-[36rem] rounded-full bg-gradient-to-br from-emerald-200/25 to-teal-200/15 blur-3xl"
           animate={{
             scale: [1, 1.3, 1],
             opacity: [0.3, 0.5, 0.3],
@@ -65,28 +68,83 @@ export default function NetworkSection() {
             delay: 1,
           }}
         />
+        <motion.div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[28rem] h-[28rem] rounded-full bg-gradient-to-br from-purple-200/20 to-indigo-200/50 blur-xl"
+          animate={{
+            scale: [1, 1.15, 1],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+        />
 
         <motion.div
-          className="absolute top-1/4 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-blue-400/30 to-transparent"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[36rem] h-[36rem] rounded-full bg-gradient-to-br from-purple-300/10 to-indigo-300/10 blur-3xl"
           animate={{
-            x: ['-100%', '100%'],
+            scale: [1, 1.15, 1],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+        />
+
+        <motion.div
+          className="absolute top-20 left-20 w-32 h-32 rounded-2xl bg-gradient-to-br from-blue-100/40 to-indigo-100/30 opacity-80 blur-xl rotate-12"
+          animate={{
+            y: [0, -30, 0],
+            rotate: [12, 25, 12],
           }}
           transition={{
             duration: 6,
             repeat: Infinity,
-            ease: "linear",
+            ease: "easeInOut",
           }}
         />
         <motion.div
-          className="absolute bottom-1/3 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-purple-400/30 to-transparent"
+          className="absolute top-40 right-32 w-24 h-24 rounded-full bg-gradient-to-br from-emerald-100/35 to-teal-100/25 opacity-75 blur-lg"
           animate={{
-            x: ['100%', '-100%'],
+            y: [0, 40, 0],
+            x: [0, -20, 0],
           }}
           transition={{
             duration: 7,
             repeat: Infinity,
-            ease: "linear",
+            ease: "easeInOut",
             delay: 1,
+          }}
+        />
+        <motion.div
+          className="absolute bottom-32 right-20 w-28 h-28 rounded-xl bg-gradient-to-br from-purple-100/40 to-indigo-100/30 opacity-70 blur-xl rotate-45"
+          animate={{
+            y: [0, -25, 0],
+            rotate: [45, 60, 45],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+        />
+        <motion.div
+          className="absolute bottom-40 left-40 w-36 h-36 rounded-3xl bg-gradient-to-br from-cyan-100/35 to-blue-100/25 opacity-65 blur-xl -rotate-12"
+          animate={{
+            y: [0, 35, 0],
+            rotate: [-12, 3, -12],
+          }}
+          transition={{
+            duration: 9,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 3,
           }}
         />
       </div>
@@ -102,7 +160,7 @@ export default function NetworkSection() {
           <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-semibold tracking-wide shadow-lg mb-4 inline-block">
             TPA NETWORK
           </div>
-          <h1 className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent mb-4">
+          <h1 className="text-6xl md:text-7xl font-bold bg-gradient-to-r pb-2 from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent mb-4">
             Infrastructure & Deployment
           </h1>
           <p className="text-xl text-gray-700">

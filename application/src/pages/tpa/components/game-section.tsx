@@ -8,7 +8,7 @@ export default function GameSection() {
   const designPrinciples = [
     {
       title: "Distinct Case Ideas",
-      description: "Each game concept explores unique mechanics and genres, ensuring no overlap in core gameplay loops or player experiences.",
+      description: "Each game concept explores unique mechanics and genres, ensuring minimal overlap in gameplay.",
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M12 2L2 7l10 5 10-5-10-5z" />
@@ -100,10 +100,10 @@ export default function GameSection() {
           </motion.div>
 
           <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
-            New Ideas
+            Fresh Ideas
           </h1>
           <p className="text-xl md:text-2xl text-gray-700 leading-relaxed">
-            Core principles for creating innovative and unique game experiences
+            Every TPA will have its own unique theme
           </p>
         </motion.div>
 
@@ -122,7 +122,7 @@ export default function GameSection() {
             onMouseLeave={() => setIsHovering(false)}
             className="absolute top-0 left-1/4 -translate-x-1/2 w-full md:w-[480px] group cursor-grab active:cursor-grabbing"
           >
-            <div className="relative bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-200/50 h-full overflow-hidden">
+            <div className="relative bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-gray-200/50 h-full overflow-hidden">
               <motion.div
                 className={`absolute inset-0 bg-gradient-to-br ${designPrinciples[0].gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-2xl`}
               />
@@ -163,9 +163,9 @@ export default function GameSection() {
             dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
-            className="absolute top-8 right-1/4 translate-x-1/2 w-full md:w-[470px] group cursor-grab active:cursor-grabbing"
+            className="absolute top-8 right-1/4 translate-x-1/2 w-full md:w-[500px] group cursor-grab active:cursor-grabbing"
           >
-            <div className="relative bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-200/50 h-full overflow-hidden">
+            <div className="relative bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-gray-200/50 h-full overflow-hidden">
               <motion.div
                 className={`absolute inset-0 bg-gradient-to-br ${designPrinciples[1].gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-2xl`}
               />
