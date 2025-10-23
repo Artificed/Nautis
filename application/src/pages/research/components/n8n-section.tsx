@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useCursor } from "../../../common/shared/custom-cursor";
 import n8nLogo from "../../../assets/n8n-logo.png";
 import notionLogo from "../../../assets/notion-logo.png";
-import outlookLogo from "../../../assets/outlook-logo.png";
+import gmailLogo from "../../../assets/gmail-logo.png";
 
 const particleConfigs = Array.from({ length: 40 }, () => ({
   left: Math.random() * 100,
@@ -61,7 +61,7 @@ export default function N8NAutomationSection() {
       number: 5,
       title: "Alert System",
       description: "Email critical actions",
-      icon: <img src={outlookLogo} alt="Email" className="w-6 h-6" />,
+      icon: <img src={gmailLogo} alt="Email" className="w-6 h-6" />,
       color: "from-pink-500 to-orange-500",
     },
   ];

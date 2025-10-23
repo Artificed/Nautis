@@ -5,7 +5,7 @@ import n8nLogo from "../../../assets/n8n-logo.png";
 import mcpLogo from "../../../assets/mcp-logo.png";
 import notionLogo from "../../../assets/notion-logo.png";
 import openaiLogo from "../../../assets/openai-logo.svg";
-import outlookLogo from "../../../assets/outlook-logo.png";
+import gmailLogo from "../../../assets/gmail-logo.png";
 
 export default function ResearchHeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -373,8 +373,8 @@ export default function ResearchHeroSection() {
           y: { duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 2.5 }
         }}
       >
-        <div className="bg-white rounded-2xl shadow-lg p-6 backdrop-blur-sm bg-opacity-90">
-          <img src={outlookLogo} alt="Outlook" className="w-20 h-20" style={{ transform: 'rotate(3deg)' }} />
+        <div className="bg-white rounded-2xl shadow-lg p-4 backdrop-blur-sm bg-opacity-90">
+          <img src={gmailLogo} alt="Outlook" className="w-20 h-20" style={{ transform: 'rotate(3deg)' }} />
         </div>
       </motion.div>
 
