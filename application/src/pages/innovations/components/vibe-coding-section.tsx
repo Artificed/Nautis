@@ -25,43 +25,37 @@ export default function VibeCodingSection() {
 
   const features = [
     {
-      title: "Code Quality Analysis",
-      description: "Automated detection of rushed, unstructured, or poorly documented code",
+      title: "GitHub Submission Review",
+      description: "Collect the assistant's code submission from their GitHub repository for initial assessment",
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M9 12h6" />
-          <path d="M9 16h6" />
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-          <polyline points="14 2 14 8 20 8" />
-          <path d="M12 18v-6" />
+          <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+          <path d="M9 18c-4.51 2-5-2-7-2" />
         </svg>
       ),
       gradient: "from-red-200 to-rose-200",
     },
     {
-      title: "Pattern Recognition",
-      description: "Identifies rushed coding patterns, inconsistent naming, and lack of best practices",
+      title: "Strategic Feature Removal",
+      description: "Deliberately remove one or two key features from the submitted code",
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-          <polyline points="7.5 4.21 12 6.81 16.5 4.21" />
-          <polyline points="7.5 19.79 7.5 14.6 3 12" />
-          <polyline points="21 12 16.5 14.6 16.5 19.79" />
-          <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-          <line x1="12" y1="22.08" x2="12" y2="12" />
+          <polyline points="3 6 5 6 21 6" />
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+          <line x1="10" y1="11" x2="10" y2="17" />
+          <line x1="14" y1="11" x2="14" y2="17" />
         </svg>
       ),
       gradient: "from-orange-200 to-amber-200",
     },
     {
-      title: "Feedback Generation",
-      description: "Provides constructive feedback and suggestions for code improvement",
+      title: "Live Coding Challenge",
+      description: "During presentation, the assistant must live code the removed features to prove genuine understanding",
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-          <path d="M8 10h.01" />
-          <path d="M12 10h.01" />
-          <path d="M16 10h.01" />
+          <polyline points="16 18 22 12 16 6" />
+          <polyline points="8 6 2 12 8 18" />
+          <line x1="12" y1="2" x2="12" y2="22" />
         </svg>
       ),
       gradient: "from-blue-200 to-cyan-200",

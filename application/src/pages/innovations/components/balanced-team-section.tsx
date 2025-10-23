@@ -21,7 +21,7 @@ export default function BalancedTeamSection() {
   const features = [
     {
       title: "Performance Analysis",
-      description: "Evaluates individual performance metrics and contribution history",
+      description: "Evaluate individual performance based on previous TPA and their track record",
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <line x1="18" y1="20" x2="18" y2="10" />
@@ -32,8 +32,8 @@ export default function BalancedTeamSection() {
       gradient: "from-indigo-200 to-blue-200",
     },
     {
-      title: "Smart Distribution",
-      description: "Intelligently distributes high, medium, and low performers across all teams",
+      title: "Distribution Plan",
+      description: "Distribute high, medium, and low performers across all teams",
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
