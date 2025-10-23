@@ -266,7 +266,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.1 }}
             >
-              I'm also a passionate programmer and{" "}
+              I'm also a {" "}
               <motion.span 
                 className="font-semibold text-gray-800 relative group cursor-pointer"
                 whileHover={{ scale: 1.05 }}
@@ -274,7 +274,7 @@ export default function HeroSection() {
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
               >
-                AI enthusiast
+                Devops and AI enthusiast
                 <span className="absolute inset-0 bg-gradient-to-r from-purple-100 to-pink-100 opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10 rounded"></span>
               </motion.span>
               , bringing innovative solutions to life with a keen eye for creating engaging experiences.

@@ -9,15 +9,31 @@ interface Strength {
   color: string;
 }
 
+interface FloatingShape {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  size: number;
+  rotation: number;
+  rotationSpeed: number;
+  color: string;
+  opacity: number;
+  shape: 'circle' | 'hexagon' | 'square' | 'triangle';
+}
+
 export default function WhyMeSection() {
   const { setIsHovering } = useCursor();
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const shapeCanvasRef = useRef<HTMLCanvasElement>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isCenterHovered, setIsCenterHovered] = useState<boolean>(false);
   const animationFrameRef = useRef<number>(0);
+  const shapeAnimationRef = useRef<number>(0);
   const timeRef = useRef<number>(0);
   const lastMouseMoveTime = useRef<number>(0);
   const isHoveringRef = useRef<boolean>(false);
+  const shapesRef = useRef<FloatingShape[]>([]);
 
   const strengths: Strength[] = [
     {
@@ -223,6 +239,150 @@ export default function WhyMeSection() {
     };
   }, []);
 
+  // Floating shapes animation
+  useEffect(() => {
+    const canvas = shapeCanvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d', { alpha: true });
+    if (!ctx) return;
+
+    const shapeColors = [
+      { fill: 'rgba(251, 146, 60, 0.15)', stroke: 'rgba(251, 146, 60, 0.3)' },  // orange
+      { fill: 'rgba(251, 113, 133, 0.15)', stroke: 'rgba(251, 113, 133, 0.3)' }, // rose
+      { fill: 'rgba(251, 191, 36, 0.15)', stroke: 'rgba(251, 191, 36, 0.3)' },  // amber
+      { fill: 'rgba(244, 114, 182, 0.15)', stroke: 'rgba(244, 114, 182, 0.3)' }, // pink
+    ];
+
+    const shapeTypes: ('circle' | 'hexagon' | 'square' | 'triangle')[] = ['circle', 'hexagon', 'square', 'triangle'];
+
+    const initShapes = () => {
+      const rect = canvas.getBoundingClientRect();
+      const shapeCount = 15;
+      shapesRef.current = [];
+
+      for (let i = 0; i < shapeCount; i++) {
+        const colorSet = shapeColors[Math.floor(Math.random() * shapeColors.length)];
+        shapesRef.current.push({
+          x: Math.random() * rect.width,
+          y: Math.random() * rect.height,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          size: Math.random() * 60 + 30,
+          rotation: Math.random() * Math.PI * 2,
+          rotationSpeed: (Math.random() - 0.5) * 0.005,
+          color: colorSet.fill,
+          opacity: Math.random() * 0.3 + 0.2,
+          shape: shapeTypes[Math.floor(Math.random() * shapeTypes.length)],
+        });
+      }
+    };
+
+    const updateCanvasSize = () => {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio;
+      
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+      
+      if (shapesRef.current.length === 0) {
+        initShapes();
+      }
+    };
+
+    updateCanvasSize();
+    window.addEventListener('resize', updateCanvasSize);
+
+    const drawShape = (shape: FloatingShape) => {
+      ctx.save();
+      ctx.translate(shape.x, shape.y);
+      ctx.rotate(shape.rotation);
+      ctx.globalAlpha = shape.opacity;
+
+      // Add glow effect
+      ctx.shadowBlur = 20;
+      ctx.shadowColor = shape.color;
+
+      ctx.fillStyle = shape.color;
+      ctx.strokeStyle = shape.color.replace(/[\d.]+\)/, '0.5)');
+      ctx.lineWidth = 2;
+
+      switch (shape.shape) {
+        case 'circle':
+          ctx.beginPath();
+          ctx.arc(0, 0, shape.size / 2, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+          break;
+
+        case 'hexagon':
+          ctx.beginPath();
+          for (let i = 0; i < 6; i++) {
+            const angle = (Math.PI / 3) * i;
+            const x = (shape.size / 2) * Math.cos(angle);
+            const y = (shape.size / 2) * Math.sin(angle);
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+          break;
+
+        case 'square':
+          ctx.beginPath();
+          ctx.rect(-shape.size / 2, -shape.size / 2, shape.size, shape.size);
+          ctx.fill();
+          ctx.stroke();
+          break;
+
+        case 'triangle':
+          ctx.beginPath();
+          ctx.moveTo(0, -shape.size / 2);
+          ctx.lineTo(shape.size / 2, shape.size / 2);
+          ctx.lineTo(-shape.size / 2, shape.size / 2);
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+          break;
+      }
+
+      ctx.restore();
+    };
+
+    const animateShapes = () => {
+      const rect = canvas.getBoundingClientRect();
+      ctx.clearRect(0, 0, rect.width, rect.height);
+
+      shapesRef.current.forEach((shape) => {
+        // Update position
+        shape.x += shape.vx;
+        shape.y += shape.vy;
+        shape.rotation += shape.rotationSpeed;
+
+        // Wrap around edges
+        if (shape.x < -shape.size) shape.x = rect.width + shape.size;
+        if (shape.x > rect.width + shape.size) shape.x = -shape.size;
+        if (shape.y < -shape.size) shape.y = rect.height + shape.size;
+        if (shape.y > rect.height + shape.size) shape.y = -shape.size;
+
+        drawShape(shape);
+      });
+
+      shapeAnimationRef.current = requestAnimationFrame(animateShapes);
+    };
+
+    animateShapes();
+
+    return () => {
+      window.removeEventListener('resize', updateCanvasSize);
+      if (shapeAnimationRef.current) {
+        cancelAnimationFrame(shapeAnimationRef.current);
+      }
+    };
+  }, []);
+
   const handleCanvasMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const now = performance.now();
     if (now - lastMouseMoveTime.current < 16) return;
@@ -286,6 +446,12 @@ export default function WhyMeSection() {
     <section
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-rose-50"
     >
+      {/* Floating shapes canvas */}
+      <canvas
+        ref={shapeCanvasRef}
+        className="absolute inset-0 w-full h-full pointer-events-none z-[1]"
+      />
+      
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 right-32 w-96 h-96 rounded-full bg-gradient-to-br from-orange-200/30 to-rose-200/20 blur-3xl animate-float"></div>
         <div className="absolute bottom-32 left-32 w-[28rem] h-[28rem] rounded-full bg-gradient-to-br from-amber-200/25 to-orange-200/20 blur-3xl animate-float-slower animation-delay-2000"></div>
@@ -310,7 +476,7 @@ export default function WhyMeSection() {
             Why Me?
           </h2>
           <p className="text-xl md:text-2xl text-gray-700 leading-relaxed">
-            A combination of technical excellence, unwavering dedication, and a proven track record of delivering exceptional results.
+            A combination of technical excellence, unwavering dedication, and a proven track record of delivering great results.
           </p>
         </motion.div>
 
