@@ -8,84 +8,43 @@ export default function SemesterTwoDetailsSection() {
     {
       month: "September - October 2026",
       activities: [
+        "Analyze Semester 1 performance metrics and feedback",
         "Execute TPA Network 26-1 and TPA Game 26-2",
-        "Deploy Outlook Scheduler integration",
-        "Analyze semester-1 performance data",
-        "Refine processes based on lessons learned"
+        "Implement Presentation Schedule Checker",
       ]
     },
     {
       month: "November - December 2026",
       activities: [
-        "Support TPA Mobile 26-1 and TPA Web 26-2",
-        "Implement Presentation Schedule Checker",
-        "End-of-year team retrospective",
-        "Plan scalability improvements for 2027"
+        "Conduct TPA Mobile 26-1 and TPA Web 26-2",
+        "Fine-tune automated scheduling and conflict detection",
+        "End-of-year team retrospective and process review"
       ]
     },
     {
-      month: "January - February 2027",
+      month: "January 2027",
       activities: [
-        "Oversee TPA Desktop 26-2",
-        "Conduct comprehensive year-end review",
-        "Document best practices and playbooks",
-        "Prepare transition materials for successors"
+        "Oversee TPA Desktop 26-2 execution",
+        "Conduct comprehensive year-end evaluation"
       ]
-    }
-  ];
-
-  const strategicInitiatives = [
-    {
-      initiative: "Process Optimization",
-      actions: [
-        "Analyze automation impact metrics",
-        "Identify bottlenecks in TPA execution",
-        "Implement process improvements",
-        "Reduce manual intervention by 40%"
-      ],
-      timeline: "September - November 2026"
     },
     {
-      initiative: "Scalability Planning",
-      actions: [
-        "Stress-test scheduling system with concurrent TPAs",
-        "Build knowledge base for common issues",
-        "Create self-service documentation",
-        "Establish assistant mentorship program"
-      ],
-      timeline: "October - December 2026"
-    },
-    {
-      initiative: "Integration & Automation",
-      actions: [
-        "Integrate Outlook Scheduler with existing tools",
-        "Automate presentation schedule conflict detection",
-        "Create unified dashboard for all metrics",
-        "Enable real-time notifications system"
-      ],
-      timeline: "September - January 2027"
-    },
-    {
-      initiative: "Knowledge Transfer",
-      actions: [
-        "Document all systems and processes",
-        "Create video tutorials for key workflows",
-        "Build onboarding materials for new assistants",
-        "Establish feedback loop for improvements"
-      ],
-      timeline: "December 2026 - February 2027"
+      month: "February 2027",
+      activities: [
+        "Oversee TPA Desktop 26-2 execution",
+        "Document all systems, processes, and best practices",
+        "Prepare transition materials and knowledge transfer"
+      ]
     }
   ];
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50 py-20">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Unique gradient spheres - completely different placement */}
         <div className="absolute top-32 left-16 w-[34rem] h-[34rem] rounded-full bg-gradient-to-br from-violet-200/23 to-purple-200/18 blur-3xl animate-pulse-slow"></div>
         <div className="absolute bottom-16 right-32 w-[38rem] h-[38rem] rounded-full bg-gradient-to-br from-fuchsia-200/20 to-pink-200/16 blur-3xl animate-pulse-slow animation-delay-2500"></div>
         <div className="absolute top-2/3 right-1/4 w-[28rem] h-[28rem] rounded-full bg-gradient-to-br from-indigo-200/19 to-violet-200/14 blur-3xl animate-pulse-slow animation-delay-4500"></div>
 
-        {/* Circular orbit particles */}
         <motion.div
           className="absolute top-1/4 left-1/3"
           animate={{
@@ -139,7 +98,6 @@ export default function SemesterTwoDetailsSection() {
           />
         </motion.div>
 
-        {/* Bezier curve paths */}
         <svg className="absolute inset-0 w-full h-full opacity-32">
           <motion.path
             d="M 100,100 C 300,50 500,150 700,100 S 1100,50 1300,100"
@@ -160,7 +118,6 @@ export default function SemesterTwoDetailsSection() {
             transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
           />
 
-          {/* Pulsing stars */}
           <motion.path
             d="M 300,200 L 310,220 L 330,225 L 310,235 L 305,255 L 295,235 L 275,230 L 295,220 Z"
             fill="none"
@@ -188,7 +145,6 @@ export default function SemesterTwoDetailsSection() {
             transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
           />
 
-          {/* Growing/shrinking rectangles */}
           <motion.rect
             x="40%"
             y="20%"
@@ -221,7 +177,6 @@ export default function SemesterTwoDetailsSection() {
           </defs>
         </svg>
 
-        {/* Spiraling squares */}
         <motion.div
           className="absolute top-1/5 left-1/6 w-16 h-16 border-2 border-violet-400/45"
           animate={{
@@ -238,7 +193,6 @@ export default function SemesterTwoDetailsSection() {
           }}
         />
 
-        {/* Radiating glow dots */}
         <motion.div
           className="absolute top-2/5 right-1/5 w-7 h-7 bg-violet-500/50 rounded-full"
           animate={{
@@ -285,14 +239,13 @@ export default function SemesterTwoDetailsSection() {
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-amber-600 via-orange-600 to-rose-600 bg-clip-text text-transparent mb-4">
-            Odd Semester - Detailed Breakdown
+            Odd Semester - Breakdown
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Advanced execution with optimization, scalability planning, and knowledge transfer focus
+            My execution plan for Odd Semester 2026/2027
           </p>
         </motion.div>
 
-        {/* Strategic Initiatives */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -302,7 +255,7 @@ export default function SemesterTwoDetailsSection() {
         >
           <h3 className="text-3xl font-bold text-gray-800 mb-8 text-center">Strategic Initiatives</h3>
           <div className="grid md:grid-cols-2 gap-6">
-            {strategicInitiatives.map((initiative, index) => (
+            {monthlyBreakdown.map((initiative, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -314,12 +267,11 @@ export default function SemesterTwoDetailsSection() {
                 onMouseLeave={() => setIsHovering(false)}
                 className="relative p-6 rounded-2xl bg-gradient-to-br from-orange-100/80 to-rose-100/80 backdrop-blur-sm shadow-lg"
               >
-                <h4 className="text-xl font-bold text-gray-800 mb-2">{initiative.initiative}</h4>
                 <div className="text-xs font-semibold text-orange-600 mb-3">
-                  Timeline: {initiative.timeline}
+                  {initiative.month}
                 </div>
                 <ul className="space-y-2">
-                  {initiative.actions.map((action, actionIndex) => (
+                  {initiative.activities.map((action, actionIndex) => (
                     <li key={actionIndex} className="flex items-start gap-2 text-sm">
                       <span className="text-orange-500 mt-1">→</span>
                       <span className="text-gray-700">{action}</span>
