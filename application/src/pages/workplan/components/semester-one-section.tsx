@@ -21,7 +21,7 @@ export default function SemesterOneSection() {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-orange-50 to-amber-50">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-40 left-1/3 w-[32rem] h-[32rem] rounded-full bg-gradient-to-br from-indigo-200/25 to-purple-200/15 blur-3xl animate-pulse-slow"></div>
         <div className="absolute bottom-40 right-1/4 w-[36rem] h-[36rem] rounded-full bg-gradient-to-br from-rose-200/20 to-orange-200/15 blur-3xl animate-pulse-slow animation-delay-3000"></div>

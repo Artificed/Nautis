@@ -18,7 +18,7 @@ export default function SemesterTwoSection() {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-orange-50 to-amber-50">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Background blurs - positioned differently from Semester 1 */}
         <div className="absolute top-1/2 right-1/6 w-[30rem] h-[30rem] rounded-full bg-gradient-to-br from-orange-200/22 to-amber-200/18 blur-3xl animate-pulse-slow"></div>
