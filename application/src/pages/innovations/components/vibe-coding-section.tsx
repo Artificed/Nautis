@@ -36,7 +36,7 @@ export default function VibeCodingSection() {
       gradient: "from-red-200 to-rose-200",
     },
     {
-      title: "Strategic Feature Removal",
+      title: "Feature Removal",
       description: "Deliberately remove one or two key features from the submitted code",
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -49,8 +49,8 @@ export default function VibeCodingSection() {
       gradient: "from-orange-200 to-amber-200",
     },
     {
-      title: "Live Coding Challenge",
-      description: "During presentation, the assistant must live code the removed features to prove genuine understanding",
+      title: "Live Coding",
+      description: "During presentation, assistants must live code the removed features to prove genuine understanding",
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <polyline points="16 18 22 12 16 6" />
