@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+/* Hide scrollbar for textarea */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 html {
   font-size: 115%;
 }
