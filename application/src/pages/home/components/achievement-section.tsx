@@ -1,6 +1,8 @@
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useCursor } from "../../../common/shared/custom-cursor";
+import beeraileImg from "../../../assets/beeraile.png";
+import diagnoaiImg from "../../../assets/diagnoai.png";
 
 interface Achievement {
   title: string;
@@ -21,36 +23,36 @@ export default function AchievementSection() {
       title: "Microsoft AI for Accessibility 2024",
       year: "2024",
       description: "Finalist Round",
-      image: "https://picsum.photos/300?random=1",
-      link: "https://github.com/Artificed",
+      image: beeraileImg,
+      link: "https://github.com/kelvinandreas/Beeraile",
     },
     {
       title: "Codefest Nextgen Agents Hackathon",
       year: "2024",
       description: "Competitor",
-      image: "https://picsum.photos/300?random=2",
-      link: "https://github.com/Artificed",
+      image: diagnoaiImg,
+      link: "https://github.com/codefest-bluejack-slc/DiagnoAI",
     },
     {
       title: "SLC Awards Even 2024/2025",
       year: "2024/25",
       description: "Best Assistant",
       image: "https://picsum.photos/300?random=3",
-      link: "https://github.com/Artificed",
+      link: "https://www.instagram.com/p/DN5JpF9Etkl/?igsh=MXFyNmJoam43eDQzYw==",
     },
     {
       title: "SLC Awards Even 2024/2025",
       year: "2024/25",
       description: "Best TPA",
       image: "https://picsum.photos/300?random=4",
-      link: "https://github.com/Artificed",
+      link: "https://www.instagram.com/p/DN5JpF9Etkl/?igsh=MXFyNmJoam43eDQzYw==",
     },
     {
       title: "SLC Awards Even 2024/2025",
       year: "2024/25",
       description: "Best Qualification",
       image: "https://picsum.photos/300?random=5",
-      link: "https://github.com/Artificed",
+      link: "https://www.instagram.com/p/DN5JpF9Etkl/?igsh=MXFyNmJoam43eDQzYw==",
     },
   ];
 
