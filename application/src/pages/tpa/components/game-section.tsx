@@ -103,7 +103,7 @@ export default function GameSection() {
             Fresh Ideas
           </h1>
           <p className="text-xl md:text-2xl text-gray-700 leading-relaxed">
-            Every TPA will have its own unique theme and concept
+            Every TPA will have its own unique idea, theme and concept
           </p>
         </motion.div>
 
