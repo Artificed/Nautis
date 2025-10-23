@@ -352,7 +352,7 @@ export default function FeedbackFormSection() {
             </h1>
           </motion.div>
   
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
             {formFeatures.map((feature, index) => (
               <motion.div
                 key={feature.title}

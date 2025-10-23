@@ -7,7 +7,7 @@ export default function SchedulingSection() {
   const schedulingFeatures = [
     {
       title: "Presentation Schedule Checker",
-      description: "Real-time presentation schedule validation and conflict detection system",
+      description: "Presentation schedule validation and conflict detection for easier scheduling",
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
@@ -22,7 +22,7 @@ export default function SchedulingSection() {
     },
     {
       title: "Scheduling Priority",
-      description: "Intelligent priority management system for optimal presentation scheduling",
+      description: "Priority management system for optimal presentation scheduling",
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M12 2L2 7l10 5 10-5-10-5z" />
@@ -211,7 +211,7 @@ export default function SchedulingSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="inline-block mb-8"
+            className="inline-block mb-10"
             >
               <span className="px-4 py-2 bg-gradient-to-r from-orange-200 to-amber-200 rounded-full text-orange-900 font-semibold text-sm">
                 Innovation #3
@@ -250,7 +250,7 @@ export default function SchedulingSection() {
           </h1>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mt-10">
           {schedulingFeatures.map((feature, index) => (
             <motion.div
               key={feature.title}
