@@ -48,7 +48,7 @@ export default function GameSection() {
           }}
         >
           <svg width="100" height="100" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
           </svg>
         </motion.div>
 
@@ -81,7 +81,7 @@ export default function GameSection() {
         </motion.div>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10 max-w-7xl">        
+      <div className="container mx-auto px-6 relative z-10 max-w-7xl">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -103,12 +103,12 @@ export default function GameSection() {
             Fresh Ideas
           </h1>
           <p className="text-xl md:text-2xl text-gray-700 leading-relaxed">
-            Every TPA will have its own unique theme
+            Every TPA will have its own unique theme and concept
           </p>
         </motion.div>
 
         <div className="relative" style={{ minHeight: '300px' }}>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 50, rotate: -5 }}
             animate={{ opacity: 1, y: 0, rotate: -2 }}
