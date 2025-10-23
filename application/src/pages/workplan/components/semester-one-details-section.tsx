@@ -76,7 +76,6 @@ export default function SemesterOneDetailsSection() {
           }}
         />
 
-        {/* Wave-like SVG paths */}
         <svg className="absolute inset-0 w-full h-full opacity-30">
           <motion.path
             d="M 0,200 Q 200,100 400,200 T 800,200 T 1200,200"
@@ -106,7 +105,6 @@ export default function SemesterOneDetailsSection() {
             transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 3 }}
           />
 
-          {/* Expanding circles */}
           <motion.circle
             cx="25%"
             cy="30%"
@@ -155,7 +153,6 @@ export default function SemesterOneDetailsSection() {
           </defs>
         </svg>
 
-        {/* Floating hexagons */}
         <motion.div
           className="absolute top-1/4 right-1/5"
           animate={{
@@ -179,7 +176,6 @@ export default function SemesterOneDetailsSection() {
           </svg>
         </motion.div>
 
-        {/* Orbiting small dots */}
         <motion.div
           className="absolute top-1/3 left-1/4 w-6 h-6 bg-cyan-400/50 rounded-full"
           animate={{
@@ -208,7 +204,6 @@ export default function SemesterOneDetailsSection() {
           }}
         />
 
-        {/* Additional dancing particles */}
         <motion.div
           className="absolute top-1/6 left-2/3 w-3 h-3 rounded-full bg-sky-400/60"
           animate={{
@@ -239,7 +234,6 @@ export default function SemesterOneDetailsSection() {
           }}
         />
 
-        {/* Spinning triangles */}
         <motion.div
           className="absolute top-2/5 right-1/4"
           animate={{
@@ -285,7 +279,6 @@ export default function SemesterOneDetailsSection() {
           </svg>
         </motion.div>
 
-        {/* Pulsing diamond shapes */}
         <motion.div
           className="absolute top-1/2 right-1/6 w-8 h-8 bg-cyan-500/40 rotate-45"
           animate={{
@@ -314,7 +307,6 @@ export default function SemesterOneDetailsSection() {
           }}
         />
 
-        {/* Glowing rings with expanding effect */}
         <motion.div
           className="absolute top-3/5 left-1/6 w-9 h-9 bg-blue-500/45 rounded-full"
           animate={{
@@ -351,7 +343,6 @@ export default function SemesterOneDetailsSection() {
           }}
         />
 
-        {/* Crossed lines animation */}
         <motion.div
           className="absolute top-1/3 right-1/3 w-20 h-1 bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent"
           animate={{
@@ -403,14 +394,14 @@ export default function SemesterOneDetailsSection() {
                 onMouseLeave={() => setIsHovering(false)}
                 className="relative p-6 rounded-2xl bg-gradient-to-br from-indigo-100/80 to-purple-100/80 backdrop-blur-sm shadow-lg"
               >
-                <div className="mb-4 text-lg font-semibold text-indigo-600">
+                <div className="mb-3 text-lg font-semibold text-indigo-600">
                   {resp.month}
                 </div>
-                <ul className="space-y-2">
+                <ul className="space-y-3">
                   {resp.activities.map((task, taskIndex) => (
-                    <li key={taskIndex} className="flex items-start gap-2 text-sm">
-                      <span className="text-purple-500 mt-1">✓</span>
-                      <span className="text-gray-700">{task}</span>
+                    <li key={taskIndex} className="flex items-start gap-3 text-md">
+                      <span className="text-purple-500 mt-0.5 flex-shrink-0">✓</span>
+                      <span className="text-gray-700 leading-relaxed">{task}</span>
                     </li>
                   ))}
                 </ul>

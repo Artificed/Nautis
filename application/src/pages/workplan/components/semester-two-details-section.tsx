@@ -236,7 +236,7 @@ export default function SemesterTwoDetailsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-12"
+          className="text-center mb-10"
         >
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-amber-600 via-orange-600 to-rose-600 bg-clip-text text-transparent mb-4">
             Odd Semester - Breakdown
@@ -251,9 +251,8 @@ export default function SemesterTwoDetailsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mb-16"
         >
-          <h3 className="text-3xl font-bold text-gray-800 mb-8 text-center">Strategic Initiatives</h3>
+          <h3 className="text-3xl font-bold text-gray-800 mb-8 text-center items-center">Strategic Initiatives</h3>
           <div className="grid md:grid-cols-2 gap-6">
             {monthlyBreakdown.map((initiative, index) => (
               <motion.div
@@ -267,14 +266,14 @@ export default function SemesterTwoDetailsSection() {
                 onMouseLeave={() => setIsHovering(false)}
                 className="relative p-6 rounded-2xl bg-gradient-to-br from-orange-100/80 to-rose-100/80 backdrop-blur-sm shadow-lg"
               >
-                <div className="text-xs font-semibold text-orange-600 mb-3">
+                <div className="text-md font-semibold text-orange-600 mb-3">
                   {initiative.month}
                 </div>
-                <ul className="space-y-2">
+                <ul className="space-y-3">
                   {initiative.activities.map((action, actionIndex) => (
-                    <li key={actionIndex} className="flex items-start gap-2 text-sm">
-                      <span className="text-orange-500 mt-1">→</span>
-                      <span className="text-gray-700">{action}</span>
+                    <li key={actionIndex} className="flex items-start gap-3 text-md">
+                      <span className="text-orange-500 mt-0.5 flex-shrink-0">→</span>
+                      <span className="text-gray-700 leading-relaxed">{action}</span>
                     </li>
                   ))}
                 </ul>

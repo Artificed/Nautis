@@ -20,12 +20,10 @@ export default function SemesterTwoSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Background blurs - positioned differently from Semester 1 */}
         <div className="absolute top-1/2 right-1/6 w-[30rem] h-[30rem] rounded-full bg-gradient-to-br from-orange-200/22 to-amber-200/18 blur-3xl animate-pulse-slow"></div>
         <div className="absolute bottom-1/4 left-1/3 w-[35rem] h-[35rem] rounded-full bg-gradient-to-br from-yellow-200/20 to-orange-200/16 blur-3xl animate-pulse-slow animation-delay-3000"></div>
         <div className="absolute top-1/6 left-1/2 w-[26rem] h-[26rem] rounded-full bg-gradient-to-br from-amber-200/18 to-yellow-200/14 blur-3xl animate-pulse-slow animation-delay-5000"></div>
 
-        {/* Zigzag moving particles */}
         <motion.div
           className="absolute top-16 left-1/3 w-3 h-3 rounded-full bg-orange-400/65"
           animate={{
@@ -71,7 +69,6 @@ export default function SemesterTwoSection() {
           }}
         />
 
-        {/* Infinity loop SVG paths */}
         <svg className="absolute inset-0 w-full h-full opacity-28">
           <motion.path
             d="M 100,300 C 200,100 400,500 600,300 C 800,100 1000,500 1100,300"
@@ -101,7 +98,6 @@ export default function SemesterTwoSection() {
             transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 4 }}
           />
 
-          {/* Morphing ellipses */}
           <motion.ellipse
             cx="35%"
             cy="40%"
@@ -167,7 +163,6 @@ export default function SemesterTwoSection() {
           </defs>
         </svg>
 
-        {/* Bouncing pentagons */}
         <motion.div
           className="absolute top-1/5 right-1/3 w-32 h-32"
           animate={{
@@ -215,7 +210,6 @@ export default function SemesterTwoSection() {
           </svg>
         </motion.div>
 
-        {/* Pulsating rings */}
         <motion.div
           className="absolute top-1/4 left-1/4 w-7 h-7 bg-orange-500/55 rounded-full"
           animate={{
@@ -270,7 +264,6 @@ export default function SemesterTwoSection() {
           }}
         />
 
-        {/* Spinning crescents */}
         <motion.div
           className="absolute top-3/5 left-1/6"
           animate={{
@@ -316,7 +309,6 @@ export default function SemesterTwoSection() {
           </svg>
         </motion.div>
 
-        {/* Octagon spiraling */}
         <motion.div
           className="absolute top-1/3 right-1/5"
           animate={{
@@ -383,7 +375,6 @@ export default function SemesterTwoSection() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {/* Left Card - TPA Schedule */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -439,7 +430,6 @@ export default function SemesterTwoSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right Card - Innovations */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
