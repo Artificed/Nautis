@@ -4,41 +4,29 @@ import { useCursor } from "../../../common/shared/custom-cursor";
 export default function SemesterOneDetailsSection() {
   const { setIsHovering } = useCursor();
 
-  const monthlyBreakdown = [
-    {
-      month: "January 2026",
-      activities: [
-        "Recruit and onboard new assistant developers",
-        "Conduct initial team training sessions",
-        "Set up semester goals and KPIs",
-        "Launch Feedback Form System for TPA events"
-      ]
-    },
+  const responsibilities = [
     {
       month: "February 2026",
       activities: [
-        "Monitor TPA Desktop 25-2 preparation",
-        "Implement Balanced Group Distribution system",
-        "Weekly code review sessions with assistants",
-        "Analyze feedback from previous semester"
+        "Analyze feedback from previous semester",
+        "Adjusting to new tasks",
+        "Finishing TPA Network 25-2",
       ]
     },
     {
       month: "March - April 2026",
       activities: [
-        "Support TPA Desktop 25-2 execution",
-        "Deploy Docs Checker Automation",
-        "Initiate TPA Game 26-1 planning",
-        "Mid-semester performance reviews"
+        "Conduct TPA Desktop 25-2 and TPA Game 26-1",
+        "Implementing the new feedback form system",
+        "Testing new scheduling system for presentation",
       ]
     },
     {
       month: "May - June 2026",
       activities: [
         "Oversee TPA Mobile 25-2 and TPA Web 26-1",
-        "Activate Scheduling System during peak period",
         "Implement Vibe Coding Prevention measures",
-        "Collect comprehensive semester feedback"
+        "Testing out automated Docs checker",
       ]
     },
     {
@@ -46,64 +34,18 @@ export default function SemesterOneDetailsSection() {
       activities: [
         "Execute TPA Desktop 26-1",
         "Conduct semester-end retrospective",
-        "Analyze metrics and prepare improvements",
         "Plan innovations for next semester"
       ]
-    }
-  ];
-
-  const responsibilities = [
-    {
-      area: "Team Management",
-      tasks: [
-        "Weekly 1-on-1 meetings with each assistant",
-        "Bi-weekly team sync meetings",
-        "Monthly training workshops",
-        "Quarterly performance evaluations"
-      ],
-      target: "90% assistant satisfaction"
-    },
-    {
-      area: "TPA Coordination",
-      tasks: [
-        "Pre-event planning (2 weeks before)",
-        "Real-time technical support during events",
-        "Post-event analysis and documentation",
-        "Stakeholder communication and reporting"
-      ],
-      target: "Zero critical incidents"
-    },
-    {
-      area: "Quality Assurance",
-      tasks: [
-        "Daily code review for submissions",
-        "Documentation completeness checks",
-        "Technical mentoring sessions",
-        "Best practices enforcement"
-      ],
-      target: "< 24hr review turnaround"
-    },
-    {
-      area: "Innovation Implementation",
-      tasks: [
-        "Deploy and monitor new systems",
-        "Gather usage metrics and feedback",
-        "Iterate based on data insights",
-        "Document lessons learned"
-      ],
-      target: "30% efficiency improvement"
     }
   ];
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50 py-20">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Unique large gradient orbs - different positions */}
         <div className="absolute top-10 right-20 w-[28rem] h-[28rem] rounded-full bg-gradient-to-br from-cyan-200/25 to-blue-200/20 blur-3xl animate-pulse-slow"></div>
         <div className="absolute bottom-20 left-20 w-[30rem] h-[30rem] rounded-full bg-gradient-to-br from-teal-200/22 to-emerald-200/18 blur-3xl animate-pulse-slow animation-delay-2000"></div>
         <div className="absolute top-1/2 left-1/3 w-[26rem] h-[26rem] rounded-full bg-gradient-to-br from-sky-200/20 to-cyan-200/15 blur-3xl animate-pulse-slow animation-delay-4000"></div>
 
-        {/* Diagonal traveling particles */}
         <motion.div
           className="absolute top-10 left-10 w-5 h-5 rounded-full bg-cyan-500/60"
           animate={{
@@ -431,24 +373,23 @@ export default function SemesterOneDetailsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-12"
+          className="text-center mb-10"
         >
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
-            Even Semester - Detailed Breakdown
+            Even Semester - Breakdown
           </h2>
           <p className="text-lg text-gray-600 mx-auto">
-            Strategic execution plan with monthly activities, specific responsibilities, and measurable targets
+            My execution plan for the next semester
           </p>
         </motion.div>
 
-        {/* Core Responsibilities */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h3 className="text-3xl font-bold text-gray-800 mb-8 text-center">Core Responsibilities & Activities</h3>
+          <h3 className="text-3xl font-bold text-gray-800 mb-8 text-center">Core Activities</h3>
           <div className="grid md:grid-cols-2 gap-6">
             {responsibilities.map((resp, index) => (
               <motion.div
@@ -462,12 +403,11 @@ export default function SemesterOneDetailsSection() {
                 onMouseLeave={() => setIsHovering(false)}
                 className="relative p-6 rounded-2xl bg-gradient-to-br from-indigo-100/80 to-purple-100/80 backdrop-blur-sm shadow-lg"
               >
-                <h4 className="text-xl font-bold text-gray-800 mb-2">{resp.area}</h4>
-                <div className="mb-4 text-sm font-semibold text-indigo-600">
-                  Target: {resp.target}
+                <div className="mb-4 text-lg font-semibold text-indigo-600">
+                  {resp.month}
                 </div>
                 <ul className="space-y-2">
-                  {resp.tasks.map((task, taskIndex) => (
+                  {resp.activities.map((task, taskIndex) => (
                     <li key={taskIndex} className="flex items-start gap-2 text-sm">
                       <span className="text-purple-500 mt-1">✓</span>
                       <span className="text-gray-700">{task}</span>

@@ -5,7 +5,7 @@ import { useCursor } from "../../../common/shared/custom-cursor";
 export default function HeroSection() {
   const { setIsHovering } = useCursor();
   const sectionRef = useRef<HTMLElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [_, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -148,7 +148,7 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             A comprehensive timeline detailing my approach to delivering great results
-            over the next 2 semesters as Assistant Development Officer
+            over the next 2 semesters as an Assistant Development Officer
           </motion.p>
 
           <motion.div
