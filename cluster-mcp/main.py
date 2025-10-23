@@ -214,5 +214,337 @@ def list_ingresses(namespace: str = "default") -> List[Dict[str, Any]]:
     except Exception as e:
         return [{"error": str(e)}]
 
+@mcp.tool()
+def restart_deployment(deployment_name: str, namespace: str = "default") -> Dict[str, Any]:
+    """Restart a deployment by updating its restart timestamp annotation."""
+    try:
+        from datetime import datetime
+        apps_v1 = client.AppsV1Api()
+        
+        deployment = apps_v1.read_namespaced_deployment(deployment_name, namespace)
+        
+        if deployment.spec.template.metadata.annotations is None:
+            deployment.spec.template.metadata.annotations = {}
+        
+        deployment.spec.template.metadata.annotations['kubectl.kubernetes.io/restartedAt'] = datetime.utcnow().isoformat()
+        
+        apps_v1.patch_namespaced_deployment(deployment_name, namespace, deployment)
+        
+        return {
+            "status": "success",
+            "deployment": deployment_name,
+            "namespace": namespace,
+            "message": f"Deployment {deployment_name} restarted successfully"
+        }
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+@mcp.tool()
+def delete_pod(pod_name: str, namespace: str = "default") -> Dict[str, Any]:
+    """Delete a specific pod (useful for forcing recreation)."""
+    try:
+        core_v1 = client.CoreV1Api()
+        core_v1.delete_namespaced_pod(name=pod_name, namespace=namespace)
+        
+        return {
+            "status": "success",
+            "pod": pod_name,
+            "namespace": namespace,
+            "message": f"Pod {pod_name} deleted successfully"
+        }
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+@mcp.tool()
+def cleanup_failed_pods(namespace: str = "default") -> Dict[str, Any]:
+    """Delete all pods in Failed, Evicted, or Error status."""
+    try:
+        core_v1 = client.CoreV1Api()
+        pods = core_v1.list_namespaced_pod(namespace=namespace)
+        
+        deleted_pods = []
+        failed_statuses = ["Failed", "Error", "Evicted", "Unknown"]
+        
+        for pod in pods.items:
+            if pod.status.phase in failed_statuses or (
+                pod.status.reason and pod.status.reason == "Evicted"
+            ):
+                try:
+                    core_v1.delete_namespaced_pod(
+                        name=pod.metadata.name,
+                        namespace=namespace
+                    )
+                    deleted_pods.append({
+                        "name": pod.metadata.name,
+                        "status": pod.status.phase,
+                        "reason": pod.status.reason
+                    })
+                except Exception as e:
+                    deleted_pods.append({
+                        "name": pod.metadata.name,
+                        "error": str(e)
+                    })
+        
+        return {
+            "status": "success",
+            "namespace": namespace,
+            "deleted_count": len(deleted_pods),
+            "deleted_pods": deleted_pods
+        }
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+@mcp.tool()
+def cleanup_completed_pods(namespace: str = "default", older_than_hours: int = 24) -> Dict[str, Any]:
+    """Delete pods in Succeeded status older than specified hours."""
+    try:
+        from datetime import datetime, timezone, timedelta
+        core_v1 = client.CoreV1Api()
+        pods = core_v1.list_namespaced_pod(namespace=namespace)
+        
+        deleted_pods = []
+        cutoff_time = datetime.now(timezone.utc) - timedelta(hours=older_than_hours)
+        
+        for pod in pods.items:
+            if pod.status.phase == "Succeeded":
+                pod_time = pod.metadata.creation_timestamp
+                if pod_time and pod_time < cutoff_time:
+                    try:
+                        core_v1.delete_namespaced_pod(
+                            name=pod.metadata.name,
+                            namespace=namespace
+                        )
+                        deleted_pods.append({
+                            "name": pod.metadata.name,
+                            "created": pod_time.isoformat()
+                        })
+                    except Exception as e:
+                        deleted_pods.append({
+                            "name": pod.metadata.name,
+                            "error": str(e)
+                        })
+        
+        return {
+            "status": "success",
+            "namespace": namespace,
+            "deleted_count": len(deleted_pods),
+            "deleted_pods": deleted_pods
+        }
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+@mcp.tool()
+def scale_deployment(deployment_name: str, replicas: int, namespace: str = "default") -> Dict[str, Any]:
+    """Scale a deployment to specified number of replicas."""
+    try:
+        apps_v1 = client.AppsV1Api()
+        
+        body = {"spec": {"replicas": replicas}}
+        apps_v1.patch_namespaced_deployment_scale(
+            name=deployment_name,
+            namespace=namespace,
+            body=body
+        )
+        
+        return {
+            "status": "success",
+            "deployment": deployment_name,
+            "namespace": namespace,
+            "replicas": replicas,
+            "message": f"Deployment {deployment_name} scaled to {replicas} replicas"
+        }
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+@mcp.tool()
+def get_deployment_status(deployment_name: str, namespace: str = "default") -> Dict[str, Any]:
+    """Get detailed status of a deployment including rollout status."""
+    try:
+        apps_v1 = client.AppsV1Api()
+        deployment = apps_v1.read_namespaced_deployment(deployment_name, namespace)
+        
+        status = deployment.status
+        conditions = []
+        if status.conditions:
+            conditions = [
+                {
+                    "type": cond.type,
+                    "status": cond.status,
+                    "reason": cond.reason,
+                    "message": cond.message,
+                    "last_update": cond.last_update_time.isoformat() if cond.last_update_time else None
+                }
+                for cond in status.conditions
+            ]
+        
+        return {
+            "name": deployment_name,
+            "namespace": namespace,
+            "replicas": {
+                "desired": deployment.spec.replicas,
+                "current": status.replicas or 0,
+                "ready": status.ready_replicas or 0,
+                "available": status.available_replicas or 0,
+                "unavailable": status.unavailable_replicas or 0,
+                "updated": status.updated_replicas or 0
+            },
+            "conditions": conditions,
+            "strategy": deployment.spec.strategy.type if deployment.spec.strategy else None,
+            "observed_generation": status.observed_generation
+        }
+    except Exception as e:
+        return {"error": str(e)}
+
+@mcp.tool()
+def get_resource_usage(namespace: str = "default") -> Dict[str, Any]:
+    """Get resource usage metrics for pods in a namespace."""
+    try:
+        core_v1 = client.CoreV1Api()
+        pods = core_v1.list_namespaced_pod(namespace=namespace)
+        
+        pod_resources = []
+        for pod in pods.items:
+            containers_info = []
+            for container in pod.spec.containers:
+                requests = container.resources.requests or {}
+                limits = container.resources.limits or {}
+                containers_info.append({
+                    "name": container.name,
+                    "requests": {
+                        "cpu": requests.get("cpu"),
+                        "memory": requests.get("memory")
+                    },
+                    "limits": {
+                        "cpu": limits.get("cpu"),
+                        "memory": limits.get("memory")
+                    }
+                })
+            
+            pod_resources.append({
+                "pod": pod.metadata.name,
+                "status": pod.status.phase,
+                "containers": containers_info
+            })
+        
+        return {
+            "namespace": namespace,
+            "pod_count": len(pod_resources),
+            "pods": pod_resources
+        }
+    except Exception as e:
+        return {"error": str(e)}
+
+@mcp.tool()
+def list_events(namespace: str = "default", limit: int = 50) -> List[Dict[str, Any]]:
+    """List recent events in a namespace for troubleshooting."""
+    try:
+        core_v1 = client.CoreV1Api()
+        events = core_v1.list_namespaced_event(namespace=namespace, limit=limit)
+        
+        sorted_events = sorted(
+            events.items,
+            key=lambda x: x.last_timestamp or x.event_time or x.metadata.creation_timestamp,
+            reverse=True
+        )
+        
+        return [
+            {
+                "type": event.type,
+                "reason": event.reason,
+                "message": event.message,
+                "object": f"{event.involved_object.kind}/{event.involved_object.name}",
+                "count": event.count,
+                "first_seen": event.first_timestamp.isoformat() if event.first_timestamp else None,
+                "last_seen": event.last_timestamp.isoformat() if event.last_timestamp else None
+            }
+            for event in sorted_events[:limit]
+        ]
+    except Exception as e:
+        return [{"error": str(e)}]
+
+@mcp.tool()
+def get_configmaps(namespace: str = "default") -> List[Dict[str, Any]]:
+    """List ConfigMaps in a namespace."""
+    try:
+        core_v1 = client.CoreV1Api()
+        configmaps = core_v1.list_namespaced_config_map(namespace=namespace)
+        
+        return [
+            {
+                "name": cm.metadata.name,
+                "namespace": cm.metadata.namespace,
+                "data_keys": list(cm.data.keys()) if cm.data else [],
+                "created": cm.metadata.creation_timestamp.isoformat() if cm.metadata.creation_timestamp else None
+            }
+            for cm in configmaps.items
+        ]
+    except Exception as e:
+        return [{"error": str(e)}]
+
+@mcp.tool()
+def get_secrets(namespace: str = "default") -> List[Dict[str, Any]]:
+    """List Secrets in a namespace (without revealing values)."""
+    try:
+        core_v1 = client.CoreV1Api()
+        secrets = core_v1.list_namespaced_secret(namespace=namespace)
+        
+        return [
+            {
+                "name": secret.metadata.name,
+                "namespace": secret.metadata.namespace,
+                "type": secret.type,
+                "data_keys": list(secret.data.keys()) if secret.data else [],
+                "created": secret.metadata.creation_timestamp.isoformat() if secret.metadata.creation_timestamp else None
+            }
+            for secret in secrets.items
+        ]
+    except Exception as e:
+        return [{"error": str(e)}]
+
+@mcp.tool()
+def get_persistent_volumes() -> List[Dict[str, Any]]:
+    """List all Persistent Volumes in the cluster."""
+    try:
+        core_v1 = client.CoreV1Api()
+        pvs = core_v1.list_persistent_volume()
+        
+        return [
+            {
+                "name": pv.metadata.name,
+                "capacity": pv.spec.capacity.get("storage") if pv.spec.capacity else None,
+                "access_modes": pv.spec.access_modes or [],
+                "status": pv.status.phase,
+                "claim": f"{pv.spec.claim_ref.namespace}/{pv.spec.claim_ref.name}" if pv.spec.claim_ref else None,
+                "storage_class": pv.spec.storage_class_name,
+                "created": pv.metadata.creation_timestamp.isoformat() if pv.metadata.creation_timestamp else None
+            }
+            for pv in pvs.items
+        ]
+    except Exception as e:
+        return [{"error": str(e)}]
+
+@mcp.tool()
+def get_persistent_volume_claims(namespace: str = "default") -> List[Dict[str, Any]]:
+    """List Persistent Volume Claims in a namespace."""
+    try:
+        core_v1 = client.CoreV1Api()
+        pvcs = core_v1.list_namespaced_persistent_volume_claim(namespace=namespace)
+        
+        return [
+            {
+                "name": pvc.metadata.name,
+                "namespace": pvc.metadata.namespace,
+                "status": pvc.status.phase,
+                "volume": pvc.spec.volume_name,
+                "capacity": pvc.status.capacity.get("storage") if pvc.status.capacity else None,
+                "access_modes": pvc.spec.access_modes or [],
+                "storage_class": pvc.spec.storage_class_name,
+                "created": pvc.metadata.creation_timestamp.isoformat() if pvc.metadata.creation_timestamp else None
+            }
+            for pvc in pvcs.items
+        ]
+    except Exception as e:
+        return [{"error": str(e)}]
+
 if __name__ == "__main__":
     mcp.run(transport="streamable-http")
