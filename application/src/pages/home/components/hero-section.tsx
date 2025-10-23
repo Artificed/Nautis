@@ -1,7 +1,7 @@
-import { PERSONAL_DATA } from "../interfaces/constants/constants";
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useCursor } from "../../../common/shared/custom-cursor";
+import meImage from "../../../assets/me.png";
 
 export default function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -246,7 +246,7 @@ export default function HeroSection() {
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
               >
-                {PERSONAL_DATA.name.split(' ')[0]}.
+                Paul.
               </motion.span>
               <br />
               <motion.span 
@@ -469,8 +469,8 @@ export default function HeroSection() {
                 ></div>
                 
                 <motion.img
-                  src={PERSONAL_DATA.profileImage}
-                  alt={PERSONAL_DATA.name}
+                  src={meImage}
+                  alt="Paul Tsai Adinata"
                   className="w-64 h-64 md:w-80 md:h-80 object-cover rounded-[2rem] relative z-10 transition-all duration-300 group-hover:brightness-110"
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
