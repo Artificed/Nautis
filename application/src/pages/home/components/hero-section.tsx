@@ -287,7 +287,7 @@ export default function HeroSection() {
               transition={{ duration: 0.8, delay: 1.3 }}
             >
               <motion.a
-                href="#contact"
+                href=""
                 className="group relative px-8 py-4 bg-gradient-to-r from-gray-900 to-gray-800 text-white rounded-full font-medium overflow-hidden"
                 whileHover={{ scale: 1.05, boxShadow: "0 10px 30px -10px rgba(0,0,0,0.3)" }}
                 whileTap={{ scale: 0.95 }}
@@ -305,7 +305,7 @@ export default function HeroSection() {
               </motion.a>
               
               <motion.a
-                href="#work"
+                href=""
                 className="group px-8 py-4 bg-white text-gray-900 rounded-full font-medium border-2 border-gray-200 hover:border-gray-900 relative overflow-hidden"
                 whileHover={{ scale: 1.05, boxShadow: "0 10px 30px -10px rgba(0,0,0,0.2)" }}
                 whileTap={{ scale: 0.95 }}

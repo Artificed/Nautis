@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useCursor } from "../../../common/shared/custom-cursor";
 import beeraileImg from "../../../assets/beeraile.png";
 import diagnoaiImg from "../../../assets/diagnoai.png";
+import awardImg from "../../../assets/slc_award.jpg";
 
 interface Achievement {
   title: string;
@@ -37,21 +38,21 @@ export default function AchievementSection() {
       title: "SLC Awards Even 2024/2025",
       year: "2024/25",
       description: "Best Assistant",
-      image: "https://picsum.photos/300?random=3",
+      image: awardImg,
       link: "https://www.instagram.com/p/DN5JpF9Etkl/?igsh=MXFyNmJoam43eDQzYw==",
     },
     {
       title: "SLC Awards Even 2024/2025",
       year: "2024/25",
       description: "Best TPA",
-      image: "https://picsum.photos/300?random=4",
+      image: awardImg,
       link: "https://www.instagram.com/p/DN5JpF9Etkl/?igsh=MXFyNmJoam43eDQzYw==",
     },
     {
       title: "SLC Awards Even 2024/2025",
       year: "2024/25",
       description: "Best Qualification",
-      image: "https://picsum.photos/300?random=5",
+      image: awardImg,
       link: "https://www.instagram.com/p/DN5JpF9Etkl/?igsh=MXFyNmJoam43eDQzYw==",
     },
   ];
