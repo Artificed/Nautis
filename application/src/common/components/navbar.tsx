@@ -27,24 +27,12 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         <div className="flex items-center justify-between">
           <motion.a
-            href="/research"
+            href="/"
             className="text-xl md:text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400 }}
           >
-            Paul Tsai A.
-          </motion.a>
-
-          <motion.a
-            href="/research"
-            className="px-5 py-2.5 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 shadow-sm"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            whileHover={{ scale: 1.05, boxShadow: "0 4px 12px rgba(0,0,0,0.15)" }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Research
+            Nautis
           </motion.a>
         </div>
       </div>

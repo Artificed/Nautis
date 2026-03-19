@@ -399,7 +399,7 @@ export default function ResearchHeroSection() {
               }}
             ></motion.div>
             <span className="relative px-6 py-2 rounded-full bg-gradient-to-r from-orange-400 to-rose-400 text-white font-semibold text-sm tracking-wide shadow-lg">
-              My Research
+              Research
             </span>
           </div>
         </motion.div>
