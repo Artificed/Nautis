@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: presentation-application
-  namespace: astdev-presentation
+  name: frontend
+  namespace: nautis
   labels:
-    app: presentation-application
+    app: frontend
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: presentation-application
+      app: frontend
   template:
     metadata:
       labels:
-        app: presentation-application
+        app: frontend
     spec:
       imagePullSecrets:
       - name: ghcr-secret
       containers:
       - name: application
-        image: ghcr.io/artificed/astdev-presentation/presentation-application:latest
+        image: ghcr.io/artificed/nautis/frontend:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80

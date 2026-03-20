@@ -1,8 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: presentation-application
-  namespace: astdev-presentation
+  name: frontend
+  namespace: nautis
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
     traefik.ingress.kubernetes.io/router.priority: "1"
@@ -14,6 +14,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: presentation-application
+            name: frontend
             port:
               number: 80

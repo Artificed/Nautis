@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: presentation-application
-  namespace: astdev-presentation
+  name: frontend
+  namespace: nautis
   labels:
-    app: presentation-application
+    app: frontend
 spec:
   type: ClusterIP
   selector:
-    app: presentation-application
+    app: frontend
   ports:
   - port: 80
     targetPort: 80

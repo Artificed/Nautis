@@ -20,7 +20,7 @@ spec:
       - name: ghcr-secret
       containers:
       - name: cluster-mcp
-        image: ghcr.io/artificed/astdev-presentation/cluster-mcp:latest
+        image: ghcr.io/artificed/nautis/cluster-mcp:latest
         imagePullPolicy: Always
         env:
         - name: PORT

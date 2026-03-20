@@ -8,13 +8,13 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME_APP: ghcr.io/artificed/astdev-presentation/presentation-application
-  IMAGE_NAME_MCP: ghcr.io/artificed/astdev-presentation/cluster-mcp
+  IMAGE_NAME_APP: ghcr.io/artificed/nautis/app
+  IMAGE_NAME_MCP: ghcr.io/artificed/nautis/cluster-mcp
   APPLICATION_DIR: ./application
   MCP_DIR: ./cluster-mcp
-  K8S_NAMESPACE: astdev-presentation
+  K8S_NAMESPACE: nautis
   K8S_NAMESPACE_MCP: cluster-mcp
-  DEPLOYMENT_NAME: presentation-application
+  DEPLOYMENT_NAME: app
 
 jobs:
   test:
@@ -152,7 +152,7 @@ jobs:
         sudo k3s kubectl get svc -n ${{ env.K8S_NAMESPACE }}
         
         echo "Application Pod Details:"
-        sudo k3s kubectl describe pods -n ${{ env.K8S_NAMESPACE }} -l app=presentation-application | tail -50
+        sudo k3s kubectl describe pods -n ${{ env.K8S_NAMESPACE }} -l app=app | tail -50
         
         echo "Health Check:"
         curl -f http://localhost:80 || echo "Warning: Health check failed"

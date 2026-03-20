@@ -135,7 +135,7 @@ The webhook feeds user input into an n8n AI agent that has access to all `cluste
 
 Two namespaces with their respective manifests:
 
-#### `astdev-presentation` namespace
+#### `nautis` namespace
 
 - **Deployment**: `presentation-application`, 3 replicas, image pulled from GHCR, resource limits `200m CPU / 128Mi memory`
 - **Service**: ClusterIP on port 80
@@ -183,8 +183,8 @@ Runs on `ubuntu-latest` against Node 20.x and 22.x in a matrix. Runs `npm ci`, `
 
 Runs after `test` passes, only on pushes to `main`. Logs into GHCR and builds+pushes two images using `docker/metadata-action` with tags for branch name, short commit SHA, and `latest`:
 
-- `ghcr.io/artificed/astdev-presentation/presentation-application`
-- `ghcr.io/artificed/astdev-presentation/cluster-mcp`
+- `ghcr.io/artificed/nautis/frontend`
+- `ghcr.io/artificed/nautis/cluster-mcp`
 
 #### `deploy`
 
@@ -192,7 +192,7 @@ Runs on the **self-hosted runner** (provisioned by Ansible) after `build`. Steps
 
 1. Applies namespace manifests for both namespaces
 2. Creates `ghcr-secret` image pull secrets in both namespaces
-3. Applies all K8s manifests for `presentation-application` and `cluster-mcp`
+3. Applies all K8s manifests for `frontend` and `cluster-mcp`
 4. Runs `kubectl rollout restart` + `kubectl rollout status --timeout=300s` for both deployments
 5. Verifies with `kubectl get pods/services` and a `curl http://localhost:80` health check
 
