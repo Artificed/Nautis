@@ -8,21 +8,21 @@ An AI-powered Kubernetes cluster automation platform that combines a custom MCP 
 
 ```
                      ┌────────────────────────────────┐
-                     │     n8n (Workflow Engine)      │
+                     │      n8n (Workflow Engine)     │
                      │                                │
                      │  ┌──────────────────────────┐  │
                      │  │    Daily Cron Trigger    │  │
-                     │  │           ↓              │  │
-                     │  │    Fetch Cluster Dat     │  │
-                     │  │    (via cluster-mcp)     │  │
-                     │  │           ↓              │  │
-                     │  │   OpenAI LLM Analysis    │  │
-                     │  │           ↓              │  │
-                     │  │     Execute Actions      │  │
-                     │  │    (via cluster-mcp)     │  │
-                     │  │           ↓              │  │
-                     │  │     Log to Notion        │  │
-                     │  │           ↓              │  │
+                     │  │            ↓             │  │
+                     │  │    Fetch Cluster Data    │  │
+                     │  │     via cluster-mcp)     │  │
+                     │  │            ↓             │  │
+                     │  │    OpenAI LLM Analysis   │  │
+                     │  │            ↓             │  │
+                     │  │      Execute Actions     │  │
+                     │  │     (via cluster-mcp)    │  │
+                     │  │            ↓             │  │
+                     │  │      Log to Notion       │  │
+                     │  │            ↓             │  │
                      │  │  Email Alert (critical)  │  │
                      │  └──────────────────────────┘  │
                      │                                │
@@ -30,15 +30,14 @@ An AI-powered Kubernetes cluster automation platform that combines a custom MCP 
                      └───────────────┬────────────────┘
                                      │
                      ┌───────────────▼────────────────┐
-                     │        cluster-mcp             │
-                     │   (MCP Server, Python)         │
-                     │   Exposes K8s ops as tools     │
+                     │          cluster-mcp           │
+                     │      (MCP Server, Python)      │
+                     │    Exposes K8s ops as tools    │
                      └───────────────┬────────────────┘
                                      │
               ┌──────────────────────▼───────────────────────┐
               │                 K3s Cluster                  │
-              │                                              │
-              │  astdev-presentation  │  cluster-mcp  │ n8n  │
+              │      application  │  cluster-mcp  │ n8n      │
               └──────────────────────────────────────────────┘
 ```
 
